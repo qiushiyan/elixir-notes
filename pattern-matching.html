@@ -181,10 +181,9 @@ the area function. The next listing adds a final clause that handles any invalid
 </h2>
 <p>Let’s say you want to write a function that accepts a number and returns an atom :negative, :zero, or :positive, depending on the number’s value. This isn’t possi- ble with the simple pattern matching you’ve seen so far. Elixir gives you a solution for this in the form of guards.</p>
 <p><em>Guards</em> are an extension of the basic pattern-matching mechanism. They allow you to state additional broader expectations that must be satisfied for the entire pattern to match.</p>
-<p>A guard can be specified by providing the when clause after the arguments list. This is best illustrated by example. The following code tests whether a given number is posi-
-tive, negative, or zero.</p>
+<p>A guard can be specified by providing the when clause after the arguments list. This is best illustrated by example. The following code tests whether a given number is positive, negative, or zero.</p>
 <div class="sourceCode" id="cb37"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb37-1"><a href="pattern-matching.html#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="kw">defmodule</span> <span class="cn">TestNum</span> <span class="kw">do</span></span>
-<span id="cb37-2"><a href="pattern-matching.html#cb37-2" aria-hidden="true" tabindex="-1"></a>         <span class="kw">def</span> test(x) <span class="kw">when</span> x <span class="op">&lt;</span> <span class="dv">0</span> <span class="kw">do</span></span>
+<span id="cb37-2"><a href="pattern-matching.html#cb37-2" aria-hidden="true" tabindex="-1"></a>        <span class="kw">def</span> test(x) <span class="kw">when</span> x <span class="op">&lt;</span> <span class="dv">0</span>, <span class="kw">do</span></span>
 <span id="cb37-3"><a href="pattern-matching.html#cb37-3" aria-hidden="true" tabindex="-1"></a>           <span class="va">:negative</span></span>
 <span id="cb37-4"><a href="pattern-matching.html#cb37-4" aria-hidden="true" tabindex="-1"></a>        <span class="kw">end</span></span>
 <span id="cb37-5"><a href="pattern-matching.html#cb37-5" aria-hidden="true" tabindex="-1"></a></span>
@@ -192,7 +191,7 @@ tive, negative, or zero.</p>
 <span id="cb37-7"><a href="pattern-matching.html#cb37-7" aria-hidden="true" tabindex="-1"></a>            <span class="va">:zero</span></span>
 <span id="cb37-8"><a href="pattern-matching.html#cb37-8" aria-hidden="true" tabindex="-1"></a>        <span class="kw">end</span></span>
 <span id="cb37-9"><a href="pattern-matching.html#cb37-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-10"><a href="pattern-matching.html#cb37-10" aria-hidden="true" tabindex="-1"></a>        <span class="kw">def</span> test(x) <span class="kw">when</span> x <span class="op">&gt;</span> <span class="dv">0</span> <span class="kw">do</span></span>
+<span id="cb37-10"><a href="pattern-matching.html#cb37-10" aria-hidden="true" tabindex="-1"></a>        <span class="kw">def</span> test(x) <span class="kw">when</span> x <span class="op">&gt;</span> <span class="dv">0</span>, <span class="kw">do</span></span>
 <span id="cb37-11"><a href="pattern-matching.html#cb37-11" aria-hidden="true" tabindex="-1"></a>           <span class="va">:positive</span></span>
 <span id="cb37-12"><a href="pattern-matching.html#cb37-12" aria-hidden="true" tabindex="-1"></a>        <span class="kw">end</span></span>
 <span id="cb37-13"><a href="pattern-matching.html#cb37-13" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div>
@@ -206,7 +205,7 @@ tive, negative, or zero.</p>
 <p>Surprisingly enough, calling this function with a non-number yields strange results:</p>
 <div class="sourceCode" id="cb39"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb39-1"><a href="pattern-matching.html#cb39-1" aria-hidden="true" tabindex="-1"></a>iex(<span class="dv">4</span>)<span class="op">&gt;</span> <span class="cn">TestNum</span><span class="op">.</span>test(<span class="va">:not_a_number</span>)</span>
 <span id="cb39-2"><a href="pattern-matching.html#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; :positive</span></span></code></pre></div>
-<p>What gives? The explanation lies in the fact that Elixir terms can be compared with the operators <code>&lt;</code> d <code>&gt;</code>, even if they’re not of the same type. In this case, the type ordering determines the result:</p>
+<p>The explanation lies in the fact that Elixir terms can be compared with the operators <code>&lt;</code> d <code>&gt;</code>, even if they’re not of the same type. In this case, the type ordering determines the result:</p>
 <pre><code>number &lt; atom &lt; reference &lt; fun &lt; port &lt; pid &lt; tuple &lt; map &lt; list &lt; bitstring (binary)</code></pre>
 <p>A number is smaller than any other type, which is why <code>TestNum.test/1</code> always returns <code>:positive</code> if you provide a non-number. To fix this, you have to extend the guard by testing whether the argument is a number, as illustrated next.</p>
 <div class="sourceCode" id="cb41"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb41-1"><a href="pattern-matching.html#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="kw">defmodule</span> <span class="cn">TestNum</span> <span class="kw">do</span></span>
@@ -219,26 +218,28 @@ tive, negative, or zero.</p>
 <span id="cb41-8"><a href="pattern-matching.html#cb41-8" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> test(x) <span class="kw">when</span> is_number(x) <span class="kw">and</span> x <span class="op">&gt;</span> <span class="dv">0</span> <span class="kw">do</span></span>
 <span id="cb41-9"><a href="pattern-matching.html#cb41-9" aria-hidden="true" tabindex="-1"></a>    <span class="va">:positive</span></span>
 <span id="cb41-10"><a href="pattern-matching.html#cb41-10" aria-hidden="true" tabindex="-1"></a>  <span class="kw">end</span></span>
-<span id="cb41-11"><a href="pattern-matching.html#cb41-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-12"><a href="pattern-matching.html#cb41-12" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div>
-<p>This code uses the function Kernel.is_number/1 to test whether the argument is a number. Now TestNum.test/1 raises an error if you pass a non-number:
-iex(1)&gt; TestNum.test(-1)
-:negative
-iex(2)&gt; TestNum.test(:not_a_number)
-** (FunctionClauseError) no function clause matching in TestNum.test/1</p>
+<span id="cb41-11"><a href="pattern-matching.html#cb41-11" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div>
+<p>This code uses the function <code>Kernel.is_number/1</code> to test whether the argument is a number. Now TestNum.test/1 raises an error if you pass a non-number:</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb42-1"><a href="pattern-matching.html#cb42-1" aria-hidden="true" tabindex="-1"></a>iex(<span class="dv">1</span>)<span class="op">&gt;</span> <span class="cn">TestNum</span><span class="op">.</span>test(<span class="op">-</span><span class="dv">1</span>)</span>
+<span id="cb42-2"><a href="pattern-matching.html#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; :negative</span></span>
+<span id="cb42-3"><a href="pattern-matching.html#cb42-3" aria-hidden="true" tabindex="-1"></a>iex(<span class="dv">2</span>)<span class="op">&gt;</span> <span class="cn">TestNum</span><span class="op">.</span>test(<span class="va">:not_a_number</span>)</span>
+<span id="cb42-4"><a href="pattern-matching.html#cb42-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ** (FunctionClauseError) no function clause matching in TestNum.test/1</span></span></code></pre></div>
+<p>When the function body contains only one line, its possible to exclude the <code>end</code> keyword with an empty guard</p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb43-1"><a href="pattern-matching.html#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> foo(term), <span class="kw">do</span>: term</span></code></pre></div>
+<p>Notice the comma behind <code>foo(term)</code> which represents an empty, catch-all guard.</p>
 <div id="lambda-functions" class="section level3" number="5.3.1">
 <h3>
 <span class="header-section-number">5.3.1</span> Lambda functions<a class="anchor" aria-label="anchor" href="#lambda-functions"><i class="fas fa-link"></i></a>
 </h3>
 <p>We can also have lambda functions with guards.</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb42-1"><a href="pattern-matching.html#cb42-1" aria-hidden="true" tabindex="-1"></a>test_num <span class="op">=</span></span>
-<span id="cb42-2"><a href="pattern-matching.html#cb42-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">fn</span></span>
-<span id="cb42-3"><a href="pattern-matching.html#cb42-3" aria-hidden="true" tabindex="-1"></a>        x <span class="kw">when</span> is_number(x) <span class="kw">and</span> x <span class="op">&lt;</span> <span class="dv">0</span> <span class="op">-&gt;</span> <span class="va">:negative</span></span>
-<span id="cb42-4"><a href="pattern-matching.html#cb42-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-5"><a href="pattern-matching.html#cb42-5" aria-hidden="true" tabindex="-1"></a>        <span class="dv">0</span> <span class="op">-&gt;</span> <span class="va">:zero</span></span>
-<span id="cb42-6"><a href="pattern-matching.html#cb42-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-7"><a href="pattern-matching.html#cb42-7" aria-hidden="true" tabindex="-1"></a>        x <span class="kw">when</span> is_number(x) <span class="kw">and</span> x <span class="op">&gt;</span> <span class="dv">0</span> <span class="op">-&gt;</span> <span class="va">:positive</span></span>
-<span id="cb42-8"><a href="pattern-matching.html#cb42-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">end</span></span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb44-1"><a href="pattern-matching.html#cb44-1" aria-hidden="true" tabindex="-1"></a>test_num <span class="op">=</span></span>
+<span id="cb44-2"><a href="pattern-matching.html#cb44-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">fn</span></span>
+<span id="cb44-3"><a href="pattern-matching.html#cb44-3" aria-hidden="true" tabindex="-1"></a>        x <span class="kw">when</span> is_number(x) <span class="kw">and</span> x <span class="op">&lt;</span> <span class="dv">0</span> <span class="op">-&gt;</span> <span class="va">:negative</span></span>
+<span id="cb44-4"><a href="pattern-matching.html#cb44-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-5"><a href="pattern-matching.html#cb44-5" aria-hidden="true" tabindex="-1"></a>        <span class="dv">0</span> <span class="op">-&gt;</span> <span class="va">:zero</span></span>
+<span id="cb44-6"><a href="pattern-matching.html#cb44-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-7"><a href="pattern-matching.html#cb44-7" aria-hidden="true" tabindex="-1"></a>        x <span class="kw">when</span> is_number(x) <span class="kw">and</span> x <span class="op">&gt;</span> <span class="dv">0</span> <span class="op">-&gt;</span> <span class="va">:positive</span></span>
+<span id="cb44-8"><a href="pattern-matching.html#cb44-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">end</span></span></code></pre></div>
 
 </div>
 </div>
