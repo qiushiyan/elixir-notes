@@ -16,5 +16,7 @@ rmd_files: [
 
   "pattern-matching.Rmd",
 
+  "control-flow.Rmd",
+
   "mix.Rmd",
 ]
