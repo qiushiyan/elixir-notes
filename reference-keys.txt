@@ -14,4 +14,6 @@ enum-module
 pattern-matching
 matching-tuples-lists-maps-and-strings
 multiclause-functions
+guards
+lambda-functions
 project-management-with-mix

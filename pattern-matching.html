@@ -119,22 +119,128 @@
 <h2>
 <span class="header-section-number">5.2</span> Multiclause functions<a class="anchor" aria-label="anchor" href="#multiclause-functions"><i class="fas fa-link"></i></a>
 </h2>
-<p>lixir allows you to overload a function by specifying multiple clauses. A clause is a func- tion definition specified by the def construct. If you provide multiple definitions of the same function with the same arity, it’s said that the function has multiple clauses.</p>
+<p>The pattern-matching mechanism is used in the specification of function arguments. Recall the basic function definition:</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb32-1"><a href="pattern-matching.html#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> my_fun(arg1, arg2) <span class="kw">do</span></span>
+<span id="cb32-2"><a href="pattern-matching.html#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="op">...</span></span>
+<span id="cb32-3"><a href="pattern-matching.html#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div>
+<p>The argument specifiers <code>arg1</code> and <code>arg2</code> are patterns, and you can use standard matching techniques.</p>
+<p>For example, if you do a geometry manipulation, you can represent a rectangle with a tuple, <code>{a, b}</code>, containing the rectangle’s sides. The following listing shows a function that calculates a rectangle’s area.</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb33-1"><a href="pattern-matching.html#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="kw">defmodule</span> <span class="cn">Rectangle</span> <span class="kw">do</span></span>
+<span id="cb33-2"><a href="pattern-matching.html#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> area( { a, b } ) <span class="kw">do</span></span>
+<span id="cb33-3"><a href="pattern-matching.html#cb33-3" aria-hidden="true" tabindex="-1"></a>    a<span class="op">*</span> b</span>
+<span id="cb33-4"><a href="pattern-matching.html#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb33-5"><a href="pattern-matching.html#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb33-6"><a href="pattern-matching.html#cb33-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-7"><a href="pattern-matching.html#cb33-7" aria-hidden="true" tabindex="-1"></a><span class="cn">Rectangle</span><span class="op">.</span>area({<span class="dv">2</span>, <span class="dv">3</span>})</span>
+<span id="cb33-8"><a href="pattern-matching.html#cb33-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6</span></span></code></pre></div>
+<p>With pattern matching of function arguments, Elixir allows you to overload a function by specifying multiple clauses. A <em>clause</em> is a function definition specified by the def construct. If you provide multiple definitions of the same function with the same arity, it’s said that the function has multiple clauses.</p>
 <p>Let’s see this in action. Extending the previous example, let’s say you need to develop a Geometry module that can handle various shapes. You’ll represent shapes with tuples and use the first element of each tuple to indicate which shape it represents:</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb32-1"><a href="pattern-matching.html#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="kw">defmodule</span> <span class="cn">Geometry</span> <span class="kw">do</span></span>
-<span id="cb32-2"><a href="pattern-matching.html#cb32-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> area({<span class="va">:rectangle</span>, a, b}) <span class="kw">do</span></span>
-<span id="cb32-3"><a href="pattern-matching.html#cb32-3" aria-hidden="true" tabindex="-1"></a>        a<span class="op">*</span> b</span>
-<span id="cb32-4"><a href="pattern-matching.html#cb32-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">end</span></span>
-<span id="cb32-5"><a href="pattern-matching.html#cb32-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-6"><a href="pattern-matching.html#cb32-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> area({<span class="va">:square</span>, a}) <span class="kw">do</span></span>
-<span id="cb32-7"><a href="pattern-matching.html#cb32-7" aria-hidden="true" tabindex="-1"></a>        a<span class="op">*</span> a</span>
-<span id="cb32-8"><a href="pattern-matching.html#cb32-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">end</span></span>
-<span id="cb32-9"><a href="pattern-matching.html#cb32-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-10"><a href="pattern-matching.html#cb32-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> area({<span class="va">:circle</span>, r}) <span class="kw">do</span></span>
-<span id="cb32-11"><a href="pattern-matching.html#cb32-11" aria-hidden="true" tabindex="-1"></a>        r <span class="op">*</span> r <span class="op">*</span> <span class="fl">3.14</span></span>
-<span id="cb32-12"><a href="pattern-matching.html#cb32-12" aria-hidden="true" tabindex="-1"></a>    <span class="kw">end</span></span>
-<span id="cb32-13"><a href="pattern-matching.html#cb32-13" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb34-1"><a href="pattern-matching.html#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="kw">defmodule</span> <span class="cn">Geometry</span> <span class="kw">do</span></span>
+<span id="cb34-2"><a href="pattern-matching.html#cb34-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> area({<span class="va">:rectangle</span>, a, b}) <span class="kw">do</span></span>
+<span id="cb34-3"><a href="pattern-matching.html#cb34-3" aria-hidden="true" tabindex="-1"></a>        a<span class="op">*</span> b</span>
+<span id="cb34-4"><a href="pattern-matching.html#cb34-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">end</span></span>
+<span id="cb34-5"><a href="pattern-matching.html#cb34-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-6"><a href="pattern-matching.html#cb34-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> area({<span class="va">:square</span>, a}) <span class="kw">do</span></span>
+<span id="cb34-7"><a href="pattern-matching.html#cb34-7" aria-hidden="true" tabindex="-1"></a>        a<span class="op">*</span> a</span>
+<span id="cb34-8"><a href="pattern-matching.html#cb34-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">end</span></span>
+<span id="cb34-9"><a href="pattern-matching.html#cb34-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-10"><a href="pattern-matching.html#cb34-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> area({<span class="va">:circle</span>, r}) <span class="kw">do</span></span>
+<span id="cb34-11"><a href="pattern-matching.html#cb34-11" aria-hidden="true" tabindex="-1"></a>        r <span class="op">*</span> r <span class="op">*</span> <span class="fl">3.14</span></span>
+<span id="cb34-12"><a href="pattern-matching.html#cb34-12" aria-hidden="true" tabindex="-1"></a>    <span class="kw">end</span></span>
+<span id="cb34-13"><a href="pattern-matching.html#cb34-13" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb35-1"><a href="pattern-matching.html#cb35-1" aria-hidden="true" tabindex="-1"></a>iex(<span class="dv">1</span>)<span class="op">&gt;</span> <span class="cn">Geometry</span><span class="op">.</span>area({<span class="va">:rectangle</span>, <span class="dv">4</span>, <span class="dv">5</span>})</span>
+<span id="cb35-2"><a href="pattern-matching.html#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 20</span></span>
+<span id="cb35-3"><a href="pattern-matching.html#cb35-3" aria-hidden="true" tabindex="-1"></a>iex(<span class="dv">2</span>)<span class="op">&gt;</span> <span class="cn">Geometry</span><span class="op">.</span>area({<span class="va">:square</span>, <span class="dv">5</span>})</span>
+<span id="cb35-4"><a href="pattern-matching.html#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 25</span></span>
+<span id="cb35-5"><a href="pattern-matching.html#cb35-5" aria-hidden="true" tabindex="-1"></a>iex(<span class="dv">3</span>)<span class="op">&gt;</span> <span class="cn">Geometry</span><span class="op">.</span>area({<span class="va">:circle</span>, <span class="dv">4</span>})</span>
+<span id="cb35-6"><a href="pattern-matching.html#cb35-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 50.24</span></span></code></pre></div>
+<p>Sometimes you’ll want a function to return a term indicating a failure, rather than raising an error. You can introduce a default clause that always matches. Let’s do this for
+the area function. The next listing adds a final clause that handles any invalid input.</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb36-1"><a href="pattern-matching.html#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="kw">defmodule</span> <span class="cn">Geometry</span> <span class="kw">do</span></span>
+<span id="cb36-2"><a href="pattern-matching.html#cb36-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> area({<span class="va">:rectangle</span>, a, b}) <span class="kw">do</span></span>
+<span id="cb36-3"><a href="pattern-matching.html#cb36-3" aria-hidden="true" tabindex="-1"></a>        a<span class="op">*</span> b</span>
+<span id="cb36-4"><a href="pattern-matching.html#cb36-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">end</span></span>
+<span id="cb36-5"><a href="pattern-matching.html#cb36-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-6"><a href="pattern-matching.html#cb36-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> area({<span class="va">:square</span>, a}) <span class="kw">do</span></span>
+<span id="cb36-7"><a href="pattern-matching.html#cb36-7" aria-hidden="true" tabindex="-1"></a>        a<span class="op">*</span> a</span>
+<span id="cb36-8"><a href="pattern-matching.html#cb36-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">end</span></span>
+<span id="cb36-9"><a href="pattern-matching.html#cb36-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-10"><a href="pattern-matching.html#cb36-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> area({<span class="va">:circle</span>, r}) <span class="kw">do</span></span>
+<span id="cb36-11"><a href="pattern-matching.html#cb36-11" aria-hidden="true" tabindex="-1"></a>        r <span class="op">*</span> r <span class="op">*</span> <span class="fl">3.14</span></span>
+<span id="cb36-12"><a href="pattern-matching.html#cb36-12" aria-hidden="true" tabindex="-1"></a>    <span class="kw">end</span></span>
+<span id="cb36-13"><a href="pattern-matching.html#cb36-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-14"><a href="pattern-matching.html#cb36-14" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> area(unknown) <span class="kw">do</span></span>
+<span id="cb36-15"><a href="pattern-matching.html#cb36-15" aria-hidden="true" tabindex="-1"></a>        {<span class="va">:error</span>, {<span class="va">:unknown</span>, unknown}}</span>
+<span id="cb36-16"><a href="pattern-matching.html#cb36-16" aria-hidden="true" tabindex="-1"></a>    <span class="kw">end</span></span>
+<span id="cb36-17"><a href="pattern-matching.html#cb36-17" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div>
+<p>If none of the first three clauses match, the final clause is called. This is because a variable pattern always matches the corresponding term. In this case, you return a two-element tuple <code>{:error, reason}</code>, to indicate that something has gone wrong.</p>
+</div>
+<div id="guards" class="section level2" number="5.3">
+<h2>
+<span class="header-section-number">5.3</span> Guards<a class="anchor" aria-label="anchor" href="#guards"><i class="fas fa-link"></i></a>
+</h2>
+<p>Let’s say you want to write a function that accepts a number and returns an atom :negative, :zero, or :positive, depending on the number’s value. This isn’t possi- ble with the simple pattern matching you’ve seen so far. Elixir gives you a solution for this in the form of guards.</p>
+<p><em>Guards</em> are an extension of the basic pattern-matching mechanism. They allow you to state additional broader expectations that must be satisfied for the entire pattern to match.</p>
+<p>A guard can be specified by providing the when clause after the arguments list. This is best illustrated by example. The following code tests whether a given number is posi-
+tive, negative, or zero.</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb37-1"><a href="pattern-matching.html#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="kw">defmodule</span> <span class="cn">TestNum</span> <span class="kw">do</span></span>
+<span id="cb37-2"><a href="pattern-matching.html#cb37-2" aria-hidden="true" tabindex="-1"></a>         <span class="kw">def</span> test(x) <span class="kw">when</span> x <span class="op">&lt;</span> <span class="dv">0</span> <span class="kw">do</span></span>
+<span id="cb37-3"><a href="pattern-matching.html#cb37-3" aria-hidden="true" tabindex="-1"></a>           <span class="va">:negative</span></span>
+<span id="cb37-4"><a href="pattern-matching.html#cb37-4" aria-hidden="true" tabindex="-1"></a>        <span class="kw">end</span></span>
+<span id="cb37-5"><a href="pattern-matching.html#cb37-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-6"><a href="pattern-matching.html#cb37-6" aria-hidden="true" tabindex="-1"></a>        <span class="kw">def</span> test(<span class="dv">0</span>), <span class="kw">do</span>:</span>
+<span id="cb37-7"><a href="pattern-matching.html#cb37-7" aria-hidden="true" tabindex="-1"></a>            <span class="va">:zero</span></span>
+<span id="cb37-8"><a href="pattern-matching.html#cb37-8" aria-hidden="true" tabindex="-1"></a>        <span class="kw">end</span></span>
+<span id="cb37-9"><a href="pattern-matching.html#cb37-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-10"><a href="pattern-matching.html#cb37-10" aria-hidden="true" tabindex="-1"></a>        <span class="kw">def</span> test(x) <span class="kw">when</span> x <span class="op">&gt;</span> <span class="dv">0</span> <span class="kw">do</span></span>
+<span id="cb37-11"><a href="pattern-matching.html#cb37-11" aria-hidden="true" tabindex="-1"></a>           <span class="va">:positive</span></span>
+<span id="cb37-12"><a href="pattern-matching.html#cb37-12" aria-hidden="true" tabindex="-1"></a>        <span class="kw">end</span></span>
+<span id="cb37-13"><a href="pattern-matching.html#cb37-13" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div>
+<p>The guard is a logical expression that places further conditions on a clause. The first clause will be called only if you pass a negative number, and the last one will be called only if you pass a positive number, as demonstrated in this shell session:</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb38-1"><a href="pattern-matching.html#cb38-1" aria-hidden="true" tabindex="-1"></a>iex(<span class="dv">1</span>)<span class="op">&gt;</span> <span class="cn">TestNum</span><span class="op">.</span>test(<span class="op">-</span><span class="dv">1</span>)</span>
+<span id="cb38-2"><a href="pattern-matching.html#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; :negative</span></span>
+<span id="cb38-3"><a href="pattern-matching.html#cb38-3" aria-hidden="true" tabindex="-1"></a>iex(<span class="dv">2</span>)<span class="op">&gt;</span> <span class="cn">TestNum</span><span class="op">.</span>test(<span class="dv">0</span>)</span>
+<span id="cb38-4"><a href="pattern-matching.html#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; :zero</span></span>
+<span id="cb38-5"><a href="pattern-matching.html#cb38-5" aria-hidden="true" tabindex="-1"></a>iex(<span class="dv">3</span>)<span class="op">&gt;</span> <span class="cn">TestNum</span><span class="op">.</span>test(<span class="dv">1</span>)</span>
+<span id="cb38-6"><a href="pattern-matching.html#cb38-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; :positive</span></span></code></pre></div>
+<p>Surprisingly enough, calling this function with a non-number yields strange results:</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb39-1"><a href="pattern-matching.html#cb39-1" aria-hidden="true" tabindex="-1"></a>iex(<span class="dv">4</span>)<span class="op">&gt;</span> <span class="cn">TestNum</span><span class="op">.</span>test(<span class="va">:not_a_number</span>)</span>
+<span id="cb39-2"><a href="pattern-matching.html#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; :positive</span></span></code></pre></div>
+<p>What gives? The explanation lies in the fact that Elixir terms can be compared with the operators <code>&lt;</code> d <code>&gt;</code>, even if they’re not of the same type. In this case, the type ordering determines the result:</p>
+<pre><code>number &lt; atom &lt; reference &lt; fun &lt; port &lt; pid &lt; tuple &lt; map &lt; list &lt; bitstring (binary)</code></pre>
+<p>A number is smaller than any other type, which is why <code>TestNum.test/1</code> always returns <code>:positive</code> if you provide a non-number. To fix this, you have to extend the guard by testing whether the argument is a number, as illustrated next.</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb41-1"><a href="pattern-matching.html#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="kw">defmodule</span> <span class="cn">TestNum</span> <span class="kw">do</span></span>
+<span id="cb41-2"><a href="pattern-matching.html#cb41-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> test(x) <span class="kw">when</span> is_number(x) <span class="kw">and</span> x <span class="op">&lt;</span> <span class="dv">0</span> <span class="kw">do</span></span>
+<span id="cb41-3"><a href="pattern-matching.html#cb41-3" aria-hidden="true" tabindex="-1"></a>    <span class="va">:negative</span></span>
+<span id="cb41-4"><a href="pattern-matching.html#cb41-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">end</span></span>
+<span id="cb41-5"><a href="pattern-matching.html#cb41-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-6"><a href="pattern-matching.html#cb41-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> test(<span class="dv">0</span>), <span class="kw">do</span>: zero</span>
+<span id="cb41-7"><a href="pattern-matching.html#cb41-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-8"><a href="pattern-matching.html#cb41-8" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> test(x) <span class="kw">when</span> is_number(x) <span class="kw">and</span> x <span class="op">&gt;</span> <span class="dv">0</span> <span class="kw">do</span></span>
+<span id="cb41-9"><a href="pattern-matching.html#cb41-9" aria-hidden="true" tabindex="-1"></a>    <span class="va">:positive</span></span>
+<span id="cb41-10"><a href="pattern-matching.html#cb41-10" aria-hidden="true" tabindex="-1"></a>  <span class="kw">end</span></span>
+<span id="cb41-11"><a href="pattern-matching.html#cb41-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-12"><a href="pattern-matching.html#cb41-12" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div>
+<p>This code uses the function Kernel.is_number/1 to test whether the argument is a number. Now TestNum.test/1 raises an error if you pass a non-number:
+iex(1)&gt; TestNum.test(-1)
+:negative
+iex(2)&gt; TestNum.test(:not_a_number)
+** (FunctionClauseError) no function clause matching in TestNum.test/1</p>
+<div id="lambda-functions" class="section level3" number="5.3.1">
+<h3>
+<span class="header-section-number">5.3.1</span> Lambda functions<a class="anchor" aria-label="anchor" href="#lambda-functions"><i class="fas fa-link"></i></a>
+</h3>
+<p>We can also have lambda functions with guards.</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb42-1"><a href="pattern-matching.html#cb42-1" aria-hidden="true" tabindex="-1"></a>test_num <span class="op">=</span></span>
+<span id="cb42-2"><a href="pattern-matching.html#cb42-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">fn</span></span>
+<span id="cb42-3"><a href="pattern-matching.html#cb42-3" aria-hidden="true" tabindex="-1"></a>        x <span class="kw">when</span> is_number(x) <span class="kw">and</span> x <span class="op">&lt;</span> <span class="dv">0</span> <span class="op">-&gt;</span> <span class="va">:negative</span></span>
+<span id="cb42-4"><a href="pattern-matching.html#cb42-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-5"><a href="pattern-matching.html#cb42-5" aria-hidden="true" tabindex="-1"></a>        <span class="dv">0</span> <span class="op">-&gt;</span> <span class="va">:zero</span></span>
+<span id="cb42-6"><a href="pattern-matching.html#cb42-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-7"><a href="pattern-matching.html#cb42-7" aria-hidden="true" tabindex="-1"></a>        x <span class="kw">when</span> is_number(x) <span class="kw">and</span> x <span class="op">&gt;</span> <span class="dv">0</span> <span class="op">-&gt;</span> <span class="va">:positive</span></span>
+<span id="cb42-8"><a href="pattern-matching.html#cb42-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">end</span></span></code></pre></div>
 
+</div>
 </div>
 </div>
   <div class="chapter-nav">
@@ -146,6 +252,9 @@
 <li><a class="nav-link" href="#pattern-matching"><span class="header-section-number">5</span> Pattern Matching</a></li>
 <li><a class="nav-link" href="#matching-tuples-lists-maps-and-strings"><span class="header-section-number">5.1</span> Matching Tuples, Lists, Maps and Strings</a></li>
 <li><a class="nav-link" href="#multiclause-functions"><span class="header-section-number">5.2</span> Multiclause functions</a></li>
+<li>
+<a class="nav-link" href="#guards"><span class="header-section-number">5.3</span> Guards</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#lambda-functions"><span class="header-section-number">5.3.1</span> Lambda functions</a></li></ul>
+</li>
 </ul>
 
       <div class="book-extra">
