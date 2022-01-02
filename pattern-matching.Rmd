@@ -99,7 +99,30 @@ iex(9)> {^expected_name, _} = {"Alice", 30}
 
 ## Multiclause functions
 
-lixir allows you to overload a function by specifying multiple clauses. A clause is a func- tion definition specified by the def construct. If you provide multiple definitions of the same function with the same arity, it’s said that the function has multiple clauses.
+The pattern-matching mechanism is used in the specification of function arguments. Recall the basic function definition:
+
+```elixir
+def my_fun(arg1, arg2) do
+  ...
+end
+```
+
+The argument specifiers `arg1` and `arg2` are patterns, and you can use standard matching techniques.
+
+For example, if you do a geometry manipulation, you can represent a rectangle with a tuple, `{a, b}`, containing the rectangle’s sides. The following listing shows a function that calculates a rectangle’s area.
+
+```elixir
+defmodule Rectangle do
+  def area( { a, b } ) do
+    a* b
+end
+end
+
+Rectangle.area({2, 3})
+#> 6
+```
+
+With pattern matching of function arguments, Elixir allows you to overload a function by specifying multiple clauses. A *clause* is a function definition specified by the def construct. If you provide multiple definitions of the same function with the same arity, it’s said that the function has multiple clauses.
 
 Let’s see this in action. Extending the previous example, let’s say you need to develop a Geometry module that can handle various shapes. You’ll represent shapes with tuples and use the first element of each tuple to indicate which shape it represents:
 
@@ -117,4 +140,127 @@ defmodule Geometry do
         r * r * 3.14
     end
 end
+```
+
+
+```elixir
+iex(1)> Geometry.area({:rectangle, 4, 5})
+#> 20
+iex(2)> Geometry.area({:square, 5})
+#> 25
+iex(3)> Geometry.area({:circle, 4})
+#> 50.24
+```
+
+Sometimes you’ll want a function to return a term indicating a failure, rather than raising an error. You can introduce a default clause that always matches. Let’s do this for
+the area function. The next listing adds a final clause that handles any invalid input.
+
+```elixir
+defmodule Geometry do
+    def area({:rectangle, a, b}) do
+        a* b
+    end
+
+    def area({:square, a}) do
+        a* a
+    end
+
+    def area({:circle, r}) do
+        r * r * 3.14
+    end
+
+    def area(unknown) do
+        {:error, {:unknown, unknown}}
+    end
+end
+```
+If none of the first three clauses match, the final clause is called. This is because a variable pattern always matches the corresponding term. In this case, you return a two-element tuple `{:error, reason}`, to indicate that something has gone wrong.
+
+## Guards
+
+Let’s say you want to write a function that accepts a number and returns an atom :negative, :zero, or :positive, depending on the number’s value. This isn’t possi- ble with the simple pattern matching you’ve seen so far. Elixir gives you a solution for this in the form of guards.
+
+*Guards* are an extension of the basic pattern-matching mechanism. They allow you to state additional broader expectations that must be satisfied for the entire pattern to match.
+
+A guard can be specified by providing the when clause after the arguments list. This is best illustrated by example. The following code tests whether a given number is posi-
+tive, negative, or zero.
+
+```elixir
+defmodule TestNum do
+         def test(x) when x < 0 do
+           :negative
+        end
+
+        def test(0), do:
+            :zero
+        end
+
+        def test(x) when x > 0 do
+           :positive
+        end
+end
+```
+
+The guard is a logical expression that places further conditions on a clause. The first clause will be called only if you pass a negative number, and the last one will be called only if you pass a positive number, as demonstrated in this shell session:
+
+```elixir
+iex(1)> TestNum.test(-1)
+#> :negative
+iex(2)> TestNum.test(0)
+#> :zero
+iex(3)> TestNum.test(1)
+#> :positive
+```
+
+Surprisingly enough, calling this function with a non-number yields strange results:
+
+```elixir
+iex(4)> TestNum.test(:not_a_number)
+#> :positive
+```
+
+What gives? The explanation lies in the fact that Elixir terms can be compared with the operators `<` d `>`, even if they’re not of the same type. In this case, the type ordering determines the result:
+
+```
+number < atom < reference < fun < port < pid < tuple < map < list < bitstring (binary)
+```
+
+A number is smaller than any other type, which is why `TestNum.test/1` always returns `:positive` if you provide a non-number. To fix this, you have to extend the guard by testing whether the argument is a number, as illustrated next.
+
+```elixir
+defmodule TestNum do
+  def test(x) when is_number(x) and x < 0 do
+    :negative
+  end
+
+  def test(0), do: zero
+
+  def test(x) when is_number(x) and x > 0 do
+    :positive
+  end
+
+end
+```
+
+
+This code uses the function Kernel.is_number/1 to test whether the argument is a number. Now TestNum.test/1 raises an error if you pass a non-number:
+iex(1)> TestNum.test(-1)
+:negative
+iex(2)> TestNum.test(:not_a_number)
+** (FunctionClauseError) no function clause matching in TestNum.test/1
+
+
+### Lambda functions
+
+We can also have lambda functions with guards.
+
+```elixir
+test_num =
+    fn
+        x when is_number(x) and x < 0 -> :negative
+
+        0 -> :zero
+
+        x when is_number(x) and x > 0 -> :positive
+    end
 ```
