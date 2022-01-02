@@ -10,5 +10,7 @@ rmd_files: [
 
   "data-types.Rmd",
 
-  "pattern-matching.Rmd"
+  "functions-modules.Rmd",
+
+  "pattern-matching.Rmd",
 ]
