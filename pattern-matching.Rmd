@@ -182,12 +182,11 @@ Let’s say you want to write a function that accepts a number and returns an at
 
 *Guards* are an extension of the basic pattern-matching mechanism. They allow you to state additional broader expectations that must be satisfied for the entire pattern to match.
 
-A guard can be specified by providing the when clause after the arguments list. This is best illustrated by example. The following code tests whether a given number is posi-
-tive, negative, or zero.
+A guard can be specified by providing the when clause after the arguments list. This is best illustrated by example. The following code tests whether a given number is positive, negative, or zero.
 
 ```elixir
 defmodule TestNum do
-         def test(x) when x < 0 do
+        def test(x) when x < 0, do
            :negative
         end
 
@@ -195,7 +194,7 @@ defmodule TestNum do
             :zero
         end
 
-        def test(x) when x > 0 do
+        def test(x) when x > 0, do
            :positive
         end
 end
@@ -219,7 +218,7 @@ iex(4)> TestNum.test(:not_a_number)
 #> :positive
 ```
 
-What gives? The explanation lies in the fact that Elixir terms can be compared with the operators `<` d `>`, even if they’re not of the same type. In this case, the type ordering determines the result:
+The explanation lies in the fact that Elixir terms can be compared with the operators `<` d `>`, even if they’re not of the same type. In this case, the type ordering determines the result:
 
 ```
 number < atom < reference < fun < port < pid < tuple < map < list < bitstring (binary)
@@ -238,17 +237,26 @@ defmodule TestNum do
   def test(x) when is_number(x) and x > 0 do
     :positive
   end
-
 end
 ```
 
 
-This code uses the function Kernel.is_number/1 to test whether the argument is a number. Now TestNum.test/1 raises an error if you pass a non-number:
-iex(1)> TestNum.test(-1)
-:negative
-iex(2)> TestNum.test(:not_a_number)
-** (FunctionClauseError) no function clause matching in TestNum.test/1
+This code uses the function `Kernel.is_number/1` to test whether the argument is a number. Now TestNum.test/1 raises an error if you pass a non-number:
 
+```elixir
+iex(1)> TestNum.test(-1)
+#> :negative
+iex(2)> TestNum.test(:not_a_number)
+#> ** (FunctionClauseError) no function clause matching in TestNum.test/1
+```
+
+When the function body contains only one line, its possible to exclude the `end` keyword with an empty guard
+
+```elixir
+def foo(term), do: term
+```
+
+Notice the comma behind `foo(term)` which represents an empty, catch-all guard.
 
 ### Lambda functions
 
