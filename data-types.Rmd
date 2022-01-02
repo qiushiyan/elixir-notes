@@ -1,0 +1,107 @@
+# Data Types
+
+
+
+
+## (Linked) List
+
+## Map
+
+Whenever you need a key-value store, maps are the “go to” data structure in Elixir. A map is created using the %{} syntax:
+
+```elixir
+iex> map = %{:a => 1, 2 => :b}
+%{2 => :b, :a => 1}
+iex> map[:a]
+1
+iex> map[2]
+:b
+iex> map[:c]
+nil
+```
+
+Compared to keyword lists, we can already see two differences:
+
+- Maps allow any value as a key.
+
+- Maps’ keys do not follow any ordering.
+
+## Keyword List
+
+Keyword lists are lists of **2-item tuples** as the representation of a key-value data structure.
+
+``` elixir
+[{:name, "qiushi"}, {:age, 1}]
+```
+
+ Elixir supports a special syntax for defining such lists: `[key: value]`. Underneath it maps to the same list of tuples as above.
+
+ ```elixir
+[name: "qiushi", age: 1] # shortcut for [{:name, "qiushi"}, {:age, 1}]
+ ```
+
+ e can use ++ to add new values to a keyword list:
+
+
+```elixir
+list = [{:a, 1}, {:b, 2}]
+list ++ [c: 3]
+#> [a: 1, b: 2, c: 3]
+[a: 0] ++ list
+#> [a: 0, a: 1, b: 2]
+```
+
+
+Many useful functions are available in the `Keyword` module (https://hexdocs.pm/ elixir/Keyword.html). For example, you can use the bracket operator `[]` or `Keyword.get/2` to fetch the value for a key
+
+```elixir
+days = [monday: 1, tuesday: 2, wednesday: 3]
+
+days[:monday]
+#> 1
+Keyword.get(days, :monday)
+#> 1
+Keyword.get(days, :noday)
+#> nil
+```
+
+Don’t let that fool you, though. Because you’re dealing with a list, the complexity of a lookup operation is O(n).
+
+Keyword lists are most often useful for allowing clients to pass an arbitrary number of
+optional arguments. For example, the result of the function `IO.inspect`, which prints
+a string representation of a term to the console, can be controlled by providing addi-
+tional options through a keyword list:
+
+```elixir
+iex(6)> IO.inspect([100, 200, 300]) # Default behavior
+#> [100, 200, 300]
+IO.inspect([100, 200, 300], [width: 3]) # passing a keyword list as options
+#> [100,
+#> 200,
+#> 300]
+```
+
+In fact, this pattern is so frequent that Elixir allows you to omit the square brackets if the last argument is a keyword list:
+
+```elixir
+IO.inspect([100, 200, 300], width: 3, limit: 1)
+# pass the second argument as [width: 3, limit: 1]
+# not having a third argument
+```
+
+
+Keyword lists are important because they have three special characteristics:
+
+- Keys must be **atoms**.
+
+- Keys are **ordered**, as specified by the developer.
+
+- Keys can be given **more than once**
+
+For example, keyword lists are useful in database queries because we can have the same key in different positions.
+
+```elixir
+db.find_user([where: age > 18, where: subscribed == true])
+```
+
+If we are using a map instead, we cannot have `where` twice.
