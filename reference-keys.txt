@@ -16,4 +16,5 @@ matching-tuples-lists-maps-and-strings
 multiclause-functions
 guards
 lambda-functions
+control-flow
 project-management-with-mix
