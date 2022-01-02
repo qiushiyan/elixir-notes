@@ -109,6 +109,14 @@ Compared to keyword lists, we can already see two differences:
 
 - Maps’ keys do not follow any ordering.
 
+Maps have the following syntax for **updating** a key’s value:
+
+```elixir
+map = %{a: 1, b: 2}
+%{map | a: 3}
+#> %{a: 3, b: 2}
+```
+
 ## Keyword List
 
 Keyword lists are lists of **2-item tuples** as the representation of a key-value data structure.

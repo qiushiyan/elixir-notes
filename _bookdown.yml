@@ -12,5 +12,9 @@ rmd_files: [
 
   "functions-modules.Rmd",
 
+  "enum.Rmd",
+
   "pattern-matching.Rmd",
+
+  "mix.Rmd",
 ]

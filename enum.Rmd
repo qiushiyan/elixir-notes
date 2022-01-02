@@ -1,0 +1,22 @@
+
+# `Enum` Module
+
+```elixir
+Enum.each(
+    [1, 2, 3],
+    fn (x) -> IO.puts(x) end
+)
+#> 1
+#> 2
+#> 3
+#> :ok
+```
+
+Use the **capture operator** `&` as a shortcut, it takes the full function qualifier — a module name, a function name, and an arity — and turns that function into a lambda that can be assigned to a variable. You can use the capture operator to simplify the call to Enum.each:
+
+```elixir
+Enum.each(
+    [1, 2, 3],
+    &IO.puts/1
+)
+```

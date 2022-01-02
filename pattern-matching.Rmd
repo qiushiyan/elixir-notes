@@ -1,0 +1,120 @@
+# Pattern Matching
+
+## Matching Tuples, Lists, Maps and Strings
+
+**Matching tuples**
+
+```elixir
+{date, time} = :calendar.local_time()
+
+date
+#> {2022, 1, 2}
+time
+#> {14, 44, 35}
+```
+
+**Nested match**
+
+```elixir
+{_, {hour, _, _}} = :calendar.local_time()
+hour
+#> 14
+```
+
+**Matching lists**
+
+```elixir
+[first, second, third] = [1, 2, 3]
+```
+
+Matching lists is more often done by relying on their recursive nature. Recall  that each non-empty list is a recursive structure that can be expressed in the form `[head | tail]`. You can use pattern matching to put each of these two elements into separate variables:
+
+```elixir
+iex(3)> [head | tail] = [1, 2, 3]
+#> [1, 2, 3]
+iex(4)> head
+#> 1
+iex(5)> tail
+#> [2, 3]
+```
+
+
+If you need only one element of the [head, tail] pair, you can use the anonymous variable. Here’s an inefficient way of calculating the smallest element in the list:
+
+```elixir
+iex(6)> [min | _] = Enum.sort([3, 2, 1])
+iex(7)> min
+#> 1
+```
+
+**Match maps**
+
+```elixir
+%{age: age2} =  %{name: "Bob", age: 25}
+age2
+#> 25
+```
+
+Of course, a match will fail if the pattern contains a key that’s not in the matched term:
+
+```elixir
+%{age: age, works_at: works_at} = %{name: "Bob", age: 25}
+#> ** (MatchError) no match of right hand side value
+```
+
+**Match strings**
+
+```elixir
+iex(13)> <<b1, b2, b3>> = "ABC"
+#> "ABC"
+iex(13)> b1
+#> 65
+iex(14)> b2
+#> 66
+iex(15)> b3
+#> 67
+```
+
+```elixir
+command = "ping www.google.com"
+"ping " <> url = command
+
+url
+#> www.google.com
+```
+
+Occasionally, you’ll need to match against the contents of the variable. For this pur- pose, the pin operator (^) is provided.
+
+```elixir
+iex(7)> expected_name = "Bob"
+
+# Matches to the content of the variable expected_name
+iex(8)> {^expected_name, _} = {"Bob", 25}
+#> {"Bob", 25}
+
+iex(9)> {^expected_name, _} = {"Alice", 30}
+#> ** (MatchError) no match of right hand side value: {"Alice", 30}
+```
+
+
+## Multiclause functions
+
+lixir allows you to overload a function by specifying multiple clauses. A clause is a func- tion definition specified by the def construct. If you provide multiple definitions of the same function with the same arity, it’s said that the function has multiple clauses.
+
+Let’s see this in action. Extending the previous example, let’s say you need to develop a Geometry module that can handle various shapes. You’ll represent shapes with tuples and use the first element of each tuple to indicate which shape it represents:
+
+```elixir
+defmodule Geometry do
+    def area({:rectangle, a, b}) do
+        a* b
+    end
+
+    def area({:square, a}) do
+        a* a
+    end
+
+    def area({:circle, r}) do
+        r * r * 3.14
+    end
+end
+```
