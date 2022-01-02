@@ -10,3 +10,8 @@ functions-and-modules
 modules
 struct
 anoynmous-functions
+enum-module
+pattern-matching
+matching-tuples-lists-maps-and-strings
+multiclause-functions
+project-management-with-mix

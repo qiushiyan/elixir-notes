@@ -42,6 +42,9 @@
 <li><a class="" href="index.html"><span class="header-section-number">1</span> Preface</a></li>
 <li><a class="" href="data-types.html"><span class="header-section-number">2</span> Data Types</a></li>
 <li><a class="active" href="functions-and-modules.html"><span class="header-section-number">3</span> Functions and Modules</a></li>
+<li><a class="" href="enum-module.html"><span class="header-section-number">4</span> Enum Module</a></li>
+<li><a class="" href="pattern-matching.html"><span class="header-section-number">5</span> Pattern Matching</a></li>
+<li><a class="" href="project-management-with-mix.html"><span class="header-section-number">6</span> Project Management with Mix</a></li>
 </ul>
 
         <div class="book-extra">
@@ -57,37 +60,36 @@
 <h2>
 <span class="header-section-number">3.1</span> Modules<a class="anchor" aria-label="anchor" href="#modules"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb16"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb16-1"><a href="functions-and-modules.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">defmodule</span> <span class="cn">MyModule</span> <span class="kw">do</span></span>
-<span id="cb16-2"><a href="functions-and-modules.html#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> my_function(arg1, arg2) <span class="kw">do</span></span>
-<span id="cb16-3"><a href="functions-and-modules.html#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># ...</span></span>
-<span id="cb16-4"><a href="functions-and-modules.html#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">end</span></span>
-<span id="cb16-5"><a href="functions-and-modules.html#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb17-1"><a href="functions-and-modules.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">defmodule</span> <span class="cn">MyModule</span> <span class="kw">do</span></span>
+<span id="cb17-2"><a href="functions-and-modules.html#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> my_function(arg1, arg2) <span class="kw">do</span></span>
+<span id="cb17-3"><a href="functions-and-modules.html#cb17-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># ...</span></span>
+<span id="cb17-4"><a href="functions-and-modules.html#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">end</span></span>
+<span id="cb17-5"><a href="functions-and-modules.html#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div>
 </div>
 <div id="struct" class="section level2" number="3.2">
 <h2>
 <span class="header-section-number">3.2</span> Struct<a class="anchor" aria-label="anchor" href="#struct"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb17"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb17-1"><a href="functions-and-modules.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">defmodule</span> <span class="cn">Candidate</span> <span class="kw">do</span></span>
-<span id="cb17-2"><a href="functions-and-modules.html#cb17-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">defstruct</span> [<span class="va">name:</span> <span class="st">"qiushi"</span>, <span class="va">age:</span> <span class="dv">18</span>]</span>
-<span id="cb17-3"><a href="functions-and-modules.html#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
-<span id="cb17-4"><a href="functions-and-modules.html#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-5"><a href="functions-and-modules.html#cb17-5" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> %<span class="cn">Candidate</span>{<span class="va">name:</span> <span class="st">"tom"</span>}</span>
-<span id="cb17-6"><a href="functions-and-modules.html#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; %Candidate{name: "tom", age: 18}</span></span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb18-1"><a href="functions-and-modules.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">defmodule</span> <span class="cn">Candidate</span> <span class="kw">do</span></span>
+<span id="cb18-2"><a href="functions-and-modules.html#cb18-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">defstruct</span> [<span class="va">name:</span> <span class="st">"qiushi"</span>, <span class="va">age:</span> <span class="dv">18</span>]</span>
+<span id="cb18-3"><a href="functions-and-modules.html#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb18-4"><a href="functions-and-modules.html#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-5"><a href="functions-and-modules.html#cb18-5" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> %<span class="cn">Candidate</span>{<span class="va">name:</span> <span class="st">"tom"</span>}</span>
+<span id="cb18-6"><a href="functions-and-modules.html#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; %Candidate{name: "tom", age: 18}</span></span></code></pre></div>
 </div>
 <div id="anoynmous-functions" class="section level2" number="3.3">
 <h2>
 <span class="header-section-number">3.3</span> Anoynmous Functions<a class="anchor" aria-label="anchor" href="#anoynmous-functions"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb18"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb18-1"><a href="functions-and-modules.html#cb18-1" aria-hidden="true" tabindex="-1"></a>square <span class="op">=</span> <span class="kw">fn</span> x <span class="op">-&gt;</span> x <span class="op">*</span> x <span class="kw">end</span></span>
-<span id="cb18-2"><a href="functions-and-modules.html#cb18-2" aria-hidden="true" tabindex="-1"></a>square<span class="op">.</span>(<span class="dv">5</span>)</span>
-<span id="cb18-3"><a href="functions-and-modules.html#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 25</span></span></code></pre></div>
-
+<div class="sourceCode" id="cb19"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb19-1"><a href="functions-and-modules.html#cb19-1" aria-hidden="true" tabindex="-1"></a>square <span class="op">=</span> <span class="kw">fn</span> x <span class="op">-&gt;</span> x <span class="op">*</span> x <span class="kw">end</span></span>
+<span id="cb19-2"><a href="functions-and-modules.html#cb19-2" aria-hidden="true" tabindex="-1"></a>square<span class="op">.</span>(<span class="dv">5</span>)</span>
+<span id="cb19-3"><a href="functions-and-modules.html#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 25</span></span></code></pre></div>
 
 </div>
 </div>
   <div class="chapter-nav">
 <div class="prev"><a href="data-types.html"><span class="header-section-number">2</span> Data Types</a></div>
-<div class="empty"></div>
+<div class="next"><a href="enum-module.html"><span class="header-section-number">4</span> Enum Module</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">

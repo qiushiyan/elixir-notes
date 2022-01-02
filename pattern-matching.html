@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>5 Pattern Matching | elixir-notes</title>
+<meta name="author" content="Qiushi">
+<meta name="generator" content="bookdown 0.24 with bs4_book()">
+<meta property="og:title" content="5 Pattern Matching | elixir-notes">
+<meta property="og:type" content="book">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="5 Pattern Matching | elixir-notes">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="style.css">
+<meta name="description" content="5.1 Matching Tuples, Lists, Maps and Strings Matching tuples {date, time} = :calendar.local_time() date #&gt; {2022, 1, 2} time #&gt; {14, 44, 35} Nested match {_, {hour, _, _}} = :calendar.local_time()...">
+<meta property="og:description" content="5.1 Matching Tuples, Lists, Maps and Strings Matching tuples {date, time} = :calendar.local_time() date #&gt; {2022, 1, 2} time #&gt; {14, 44, 35} Nested match {_, {hour, _, _}} = :calendar.local_time()...">
+<meta name="twitter:description" content="5.1 Matching Tuples, Lists, Maps and Strings Matching tuples {date, time} = :calendar.local_time() date #&gt; {2022, 1, 2} time #&gt; {14, 44, 35} Nested match {_, {hour, _, _}} = :calendar.local_time()...">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">elixir-notes</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html"><span class="header-section-number">1</span> Preface</a></li>
+<li><a class="" href="data-types.html"><span class="header-section-number">2</span> Data Types</a></li>
+<li><a class="" href="functions-and-modules.html"><span class="header-section-number">3</span> Functions and Modules</a></li>
+<li><a class="" href="enum-module.html"><span class="header-section-number">4</span> Enum Module</a></li>
+<li><a class="active" href="pattern-matching.html"><span class="header-section-number">5</span> Pattern Matching</a></li>
+<li><a class="" href="project-management-with-mix.html"><span class="header-section-number">6</span> Project Management with Mix</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/qiushiyan/elixir-notes">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="pattern-matching" class="section level1" number="5">
+<h1>
+<span class="header-section-number">5</span> Pattern Matching<a class="anchor" aria-label="anchor" href="#pattern-matching"><i class="fas fa-link"></i></a>
+</h1>
+<div id="matching-tuples-lists-maps-and-strings" class="section level2" number="5.1">
+<h2>
+<span class="header-section-number">5.1</span> Matching Tuples, Lists, Maps and Strings<a class="anchor" aria-label="anchor" href="#matching-tuples-lists-maps-and-strings"><i class="fas fa-link"></i></a>
+</h2>
+<p><strong>Matching tuples</strong></p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb22-1"><a href="pattern-matching.html#cb22-1" aria-hidden="true" tabindex="-1"></a>{date, time} <span class="op">=</span> <span class="va">:calendar</span><span class="op">.</span>local_time()</span>
+<span id="cb22-2"><a href="pattern-matching.html#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="pattern-matching.html#cb22-3" aria-hidden="true" tabindex="-1"></a>date</span>
+<span id="cb22-4"><a href="pattern-matching.html#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; {2022, 1, 2}</span></span>
+<span id="cb22-5"><a href="pattern-matching.html#cb22-5" aria-hidden="true" tabindex="-1"></a>time</span>
+<span id="cb22-6"><a href="pattern-matching.html#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; {14, 44, 35}</span></span></code></pre></div>
+<p><strong>Nested match</strong></p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb23-1"><a href="pattern-matching.html#cb23-1" aria-hidden="true" tabindex="-1"></a>{_, {hour, _, _}} <span class="op">=</span> <span class="va">:calendar</span><span class="op">.</span>local_time()</span>
+<span id="cb23-2"><a href="pattern-matching.html#cb23-2" aria-hidden="true" tabindex="-1"></a>hour</span>
+<span id="cb23-3"><a href="pattern-matching.html#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 14</span></span></code></pre></div>
+<p><strong>Matching lists</strong></p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb24-1"><a href="pattern-matching.html#cb24-1" aria-hidden="true" tabindex="-1"></a>[first, second, third] <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]</span></code></pre></div>
+<p>Matching lists is more often done by relying on their recursive nature. Recall that each non-empty list is a recursive structure that can be expressed in the form <code>[head | tail]</code>. You can use pattern matching to put each of these two elements into separate variables:</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb25-1"><a href="pattern-matching.html#cb25-1" aria-hidden="true" tabindex="-1"></a>iex(<span class="dv">3</span>)<span class="op">&gt;</span> [head <span class="op">|</span> tail] <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]</span>
+<span id="cb25-2"><a href="pattern-matching.html#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1, 2, 3]</span></span>
+<span id="cb25-3"><a href="pattern-matching.html#cb25-3" aria-hidden="true" tabindex="-1"></a>iex(<span class="dv">4</span>)<span class="op">&gt;</span> head</span>
+<span id="cb25-4"><a href="pattern-matching.html#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1</span></span>
+<span id="cb25-5"><a href="pattern-matching.html#cb25-5" aria-hidden="true" tabindex="-1"></a>iex(<span class="dv">5</span>)<span class="op">&gt;</span> tail</span>
+<span id="cb25-6"><a href="pattern-matching.html#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [2, 3]</span></span></code></pre></div>
+<p>If you need only one element of the [head, tail] pair, you can use the anonymous variable. Here’s an inefficient way of calculating the smallest element in the list:</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb26-1"><a href="pattern-matching.html#cb26-1" aria-hidden="true" tabindex="-1"></a>iex(<span class="dv">6</span>)<span class="op">&gt;</span> [min <span class="op">|</span> _] <span class="op">=</span> <span class="cn">Enum</span><span class="op">.</span>sort([<span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">1</span>])</span>
+<span id="cb26-2"><a href="pattern-matching.html#cb26-2" aria-hidden="true" tabindex="-1"></a>iex(<span class="dv">7</span>)<span class="op">&gt;</span> min</span>
+<span id="cb26-3"><a href="pattern-matching.html#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1</span></span></code></pre></div>
+<p><strong>Match maps</strong></p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb27-1"><a href="pattern-matching.html#cb27-1" aria-hidden="true" tabindex="-1"></a>%{<span class="va">age:</span> age2} <span class="op">=</span>  %{<span class="va">name:</span> <span class="st">"Bob"</span>, <span class="va">age:</span> <span class="dv">25</span>}</span>
+<span id="cb27-2"><a href="pattern-matching.html#cb27-2" aria-hidden="true" tabindex="-1"></a>age2</span>
+<span id="cb27-3"><a href="pattern-matching.html#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 25</span></span></code></pre></div>
+<p>Of course, a match will fail if the pattern contains a key that’s not in the matched term:</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb28-1"><a href="pattern-matching.html#cb28-1" aria-hidden="true" tabindex="-1"></a>%{<span class="va">age:</span> age, <span class="va">works_at:</span> works_at} <span class="op">=</span> %{<span class="va">name:</span> <span class="st">"Bob"</span>, <span class="va">age:</span> <span class="dv">25</span>}</span>
+<span id="cb28-2"><a href="pattern-matching.html#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ** (MatchError) no match of right hand side value</span></span></code></pre></div>
+<p><strong>Match strings</strong></p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb29-1"><a href="pattern-matching.html#cb29-1" aria-hidden="true" tabindex="-1"></a>iex(<span class="dv">13</span>)<span class="op">&gt;</span> <span class="op">&lt;&lt;</span>b1, b2, b3<span class="op">&gt;&gt;</span> <span class="op">=</span> <span class="st">"ABC"</span></span>
+<span id="cb29-2"><a href="pattern-matching.html#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; "ABC"</span></span>
+<span id="cb29-3"><a href="pattern-matching.html#cb29-3" aria-hidden="true" tabindex="-1"></a>iex(<span class="dv">13</span>)<span class="op">&gt;</span> b1</span>
+<span id="cb29-4"><a href="pattern-matching.html#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 65</span></span>
+<span id="cb29-5"><a href="pattern-matching.html#cb29-5" aria-hidden="true" tabindex="-1"></a>iex(<span class="dv">14</span>)<span class="op">&gt;</span> b2</span>
+<span id="cb29-6"><a href="pattern-matching.html#cb29-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 66</span></span>
+<span id="cb29-7"><a href="pattern-matching.html#cb29-7" aria-hidden="true" tabindex="-1"></a>iex(<span class="dv">15</span>)<span class="op">&gt;</span> b3</span>
+<span id="cb29-8"><a href="pattern-matching.html#cb29-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 67</span></span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb30-1"><a href="pattern-matching.html#cb30-1" aria-hidden="true" tabindex="-1"></a>command <span class="op">=</span> <span class="st">"ping www.google.com"</span></span>
+<span id="cb30-2"><a href="pattern-matching.html#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="st">"ping "</span> <span class="op">&lt;&gt;</span> url <span class="op">=</span> command</span>
+<span id="cb30-3"><a href="pattern-matching.html#cb30-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-4"><a href="pattern-matching.html#cb30-4" aria-hidden="true" tabindex="-1"></a>url</span>
+<span id="cb30-5"><a href="pattern-matching.html#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; www.google.com</span></span></code></pre></div>
+<p>Occasionally, you’ll need to match against the contents of the variable. For this pur- pose, the pin operator (^) is provided.</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb31-1"><a href="pattern-matching.html#cb31-1" aria-hidden="true" tabindex="-1"></a>iex(<span class="dv">7</span>)<span class="op">&gt;</span> expected_name <span class="op">=</span> <span class="st">"Bob"</span></span>
+<span id="cb31-2"><a href="pattern-matching.html#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-3"><a href="pattern-matching.html#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Matches to the content of the variable expected_name</span></span>
+<span id="cb31-4"><a href="pattern-matching.html#cb31-4" aria-hidden="true" tabindex="-1"></a>iex(<span class="dv">8</span>)<span class="op">&gt;</span> {<span class="op">^</span>expected_name, _} <span class="op">=</span> {<span class="st">"Bob"</span>, <span class="dv">25</span>}</span>
+<span id="cb31-5"><a href="pattern-matching.html#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; {"Bob", 25}</span></span>
+<span id="cb31-6"><a href="pattern-matching.html#cb31-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-7"><a href="pattern-matching.html#cb31-7" aria-hidden="true" tabindex="-1"></a>iex(<span class="dv">9</span>)<span class="op">&gt;</span> {<span class="op">^</span>expected_name, _} <span class="op">=</span> {<span class="st">"Alice"</span>, <span class="dv">30</span>}</span>
+<span id="cb31-8"><a href="pattern-matching.html#cb31-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ** (MatchError) no match of right hand side value: {"Alice", 30}</span></span></code></pre></div>
+</div>
+<div id="multiclause-functions" class="section level2" number="5.2">
+<h2>
+<span class="header-section-number">5.2</span> Multiclause functions<a class="anchor" aria-label="anchor" href="#multiclause-functions"><i class="fas fa-link"></i></a>
+</h2>
+<p>lixir allows you to overload a function by specifying multiple clauses. A clause is a func- tion definition specified by the def construct. If you provide multiple definitions of the same function with the same arity, it’s said that the function has multiple clauses.</p>
+<p>Let’s see this in action. Extending the previous example, let’s say you need to develop a Geometry module that can handle various shapes. You’ll represent shapes with tuples and use the first element of each tuple to indicate which shape it represents:</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb32-1"><a href="pattern-matching.html#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="kw">defmodule</span> <span class="cn">Geometry</span> <span class="kw">do</span></span>
+<span id="cb32-2"><a href="pattern-matching.html#cb32-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> area({<span class="va">:rectangle</span>, a, b}) <span class="kw">do</span></span>
+<span id="cb32-3"><a href="pattern-matching.html#cb32-3" aria-hidden="true" tabindex="-1"></a>        a<span class="op">*</span> b</span>
+<span id="cb32-4"><a href="pattern-matching.html#cb32-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">end</span></span>
+<span id="cb32-5"><a href="pattern-matching.html#cb32-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-6"><a href="pattern-matching.html#cb32-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> area({<span class="va">:square</span>, a}) <span class="kw">do</span></span>
+<span id="cb32-7"><a href="pattern-matching.html#cb32-7" aria-hidden="true" tabindex="-1"></a>        a<span class="op">*</span> a</span>
+<span id="cb32-8"><a href="pattern-matching.html#cb32-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">end</span></span>
+<span id="cb32-9"><a href="pattern-matching.html#cb32-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-10"><a href="pattern-matching.html#cb32-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> area({<span class="va">:circle</span>, r}) <span class="kw">do</span></span>
+<span id="cb32-11"><a href="pattern-matching.html#cb32-11" aria-hidden="true" tabindex="-1"></a>        r <span class="op">*</span> r <span class="op">*</span> <span class="fl">3.14</span></span>
+<span id="cb32-12"><a href="pattern-matching.html#cb32-12" aria-hidden="true" tabindex="-1"></a>    <span class="kw">end</span></span>
+<span id="cb32-13"><a href="pattern-matching.html#cb32-13" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div>
+
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="enum-module.html"><span class="header-section-number">4</span> Enum Module</a></div>
+<div class="next"><a href="project-management-with-mix.html"><span class="header-section-number">6</span> Project Management with Mix</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#pattern-matching"><span class="header-section-number">5</span> Pattern Matching</a></li>
+<li><a class="nav-link" href="#matching-tuples-lists-maps-and-strings"><span class="header-section-number">5.1</span> Matching Tuples, Lists, Maps and Strings</a></li>
+<li><a class="nav-link" href="#multiclause-functions"><span class="header-section-number">5.2</span> Multiclause functions</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/qiushiyan/elixir-notes/blob/master/pattern-matching.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/qiushiyan/elixir-notes/edit/master/pattern-matching.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>elixir-notes</strong>" was written by Qiushi. It was last built on 2022-01-02.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer>
+</body>
+</html>

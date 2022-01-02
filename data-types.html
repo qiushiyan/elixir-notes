@@ -42,6 +42,9 @@
 <li><a class="" href="index.html"><span class="header-section-number">1</span> Preface</a></li>
 <li><a class="active" href="data-types.html"><span class="header-section-number">2</span> Data Types</a></li>
 <li><a class="" href="functions-and-modules.html"><span class="header-section-number">3</span> Functions and Modules</a></li>
+<li><a class="" href="enum-module.html"><span class="header-section-number">4</span> Enum Module</a></li>
+<li><a class="" href="pattern-matching.html"><span class="header-section-number">5</span> Pattern Matching</a></li>
+<li><a class="" href="project-management-with-mix.html"><span class="header-section-number">6</span> Project Management with Mix</a></li>
 </ul>
 
         <div class="book-extra">
@@ -135,45 +138,49 @@
 <li><p>Maps allow any value as a key.</p></li>
 <li><p>Maps’ keys do not follow any ordering.</p></li>
 </ul>
+<p>Maps have the following syntax for <strong>updating</strong> a key’s value:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb9-1"><a href="data-types.html#cb9-1" aria-hidden="true" tabindex="-1"></a>map <span class="op">=</span> %{<span class="va">a:</span> <span class="dv">1</span>, <span class="va">b:</span> <span class="dv">2</span>}</span>
+<span id="cb9-2"><a href="data-types.html#cb9-2" aria-hidden="true" tabindex="-1"></a>%{map <span class="op">|</span> <span class="va">a:</span> <span class="dv">3</span>}</span>
+<span id="cb9-3"><a href="data-types.html#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; %{a: 3, b: 2}</span></span></code></pre></div>
 </div>
 <div id="keyword-list" class="section level2" number="2.5">
 <h2>
 <span class="header-section-number">2.5</span> Keyword List<a class="anchor" aria-label="anchor" href="#keyword-list"><i class="fas fa-link"></i></a>
 </h2>
 <p>Keyword lists are lists of <strong>2-item tuples</strong> as the representation of a key-value data structure.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb9-1"><a href="data-types.html#cb9-1" aria-hidden="true" tabindex="-1"></a>[{<span class="va">:name</span>, <span class="st">"qiushi"</span>}, {<span class="va">:age</span>, <span class="dv">1</span>}]</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb10-1"><a href="data-types.html#cb10-1" aria-hidden="true" tabindex="-1"></a>[{<span class="va">:name</span>, <span class="st">"qiushi"</span>}, {<span class="va">:age</span>, <span class="dv">1</span>}]</span></code></pre></div>
 <p>Elixir supports a special syntax for defining such lists: <code>[key: value]</code>. Underneath it maps to the same list of tuples as above.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb10-1"><a href="data-types.html#cb10-1" aria-hidden="true" tabindex="-1"></a>[<span class="va">name:</span> <span class="st">"qiushi"</span>, <span class="va">age:</span> <span class="dv">1</span>] <span class="co"># shortcut for [{:name, "qiushi"}, {:age, 1}]</span></span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb11-1"><a href="data-types.html#cb11-1" aria-hidden="true" tabindex="-1"></a>[<span class="va">name:</span> <span class="st">"qiushi"</span>, <span class="va">age:</span> <span class="dv">1</span>] <span class="co"># shortcut for [{:name, "qiushi"}, {:age, 1}]</span></span></code></pre></div>
 <p>e can use ++ to add new values to a keyword list:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb11-1"><a href="data-types.html#cb11-1" aria-hidden="true" tabindex="-1"></a>list <span class="op">=</span> [{<span class="va">:a</span>, <span class="dv">1</span>}, {<span class="va">:b</span>, <span class="dv">2</span>}]</span>
-<span id="cb11-2"><a href="data-types.html#cb11-2" aria-hidden="true" tabindex="-1"></a>list <span class="op">++</span> [<span class="va">c:</span> <span class="dv">3</span>]</span>
-<span id="cb11-3"><a href="data-types.html#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [a: 1, b: 2, c: 3]</span></span>
-<span id="cb11-4"><a href="data-types.html#cb11-4" aria-hidden="true" tabindex="-1"></a>[<span class="va">a:</span> <span class="dv">0</span>] <span class="op">++</span> list</span>
-<span id="cb11-5"><a href="data-types.html#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [a: 0, a: 1, b: 2]</span></span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb12-1"><a href="data-types.html#cb12-1" aria-hidden="true" tabindex="-1"></a>list <span class="op">=</span> [{<span class="va">:a</span>, <span class="dv">1</span>}, {<span class="va">:b</span>, <span class="dv">2</span>}]</span>
+<span id="cb12-2"><a href="data-types.html#cb12-2" aria-hidden="true" tabindex="-1"></a>list <span class="op">++</span> [<span class="va">c:</span> <span class="dv">3</span>]</span>
+<span id="cb12-3"><a href="data-types.html#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [a: 1, b: 2, c: 3]</span></span>
+<span id="cb12-4"><a href="data-types.html#cb12-4" aria-hidden="true" tabindex="-1"></a>[<span class="va">a:</span> <span class="dv">0</span>] <span class="op">++</span> list</span>
+<span id="cb12-5"><a href="data-types.html#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [a: 0, a: 1, b: 2]</span></span></code></pre></div>
 <p>Many useful functions are available in the <code>Keyword</code> module (<a href="https://hexdocs.pm/" class="uri">https://hexdocs.pm/</a> elixir/Keyword.html). For example, you can use the bracket operator <code>[]</code> or <code>Keyword.get/2</code> to fetch the value for a key</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb12-1"><a href="data-types.html#cb12-1" aria-hidden="true" tabindex="-1"></a>days <span class="op">=</span> [<span class="va">monday:</span> <span class="dv">1</span>, <span class="va">tuesday:</span> <span class="dv">2</span>, <span class="va">wednesday:</span> <span class="dv">3</span>]</span>
-<span id="cb12-2"><a href="data-types.html#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-3"><a href="data-types.html#cb12-3" aria-hidden="true" tabindex="-1"></a>days[<span class="va">:monday</span>]</span>
-<span id="cb12-4"><a href="data-types.html#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1</span></span>
-<span id="cb12-5"><a href="data-types.html#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="cn">Keyword</span><span class="op">.</span>get(days, <span class="va">:monday</span>)</span>
-<span id="cb12-6"><a href="data-types.html#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1</span></span>
-<span id="cb12-7"><a href="data-types.html#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="cn">Keyword</span><span class="op">.</span>get(days, <span class="va">:noday</span>)</span>
-<span id="cb12-8"><a href="data-types.html#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; nil</span></span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb13-1"><a href="data-types.html#cb13-1" aria-hidden="true" tabindex="-1"></a>days <span class="op">=</span> [<span class="va">monday:</span> <span class="dv">1</span>, <span class="va">tuesday:</span> <span class="dv">2</span>, <span class="va">wednesday:</span> <span class="dv">3</span>]</span>
+<span id="cb13-2"><a href="data-types.html#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="data-types.html#cb13-3" aria-hidden="true" tabindex="-1"></a>days[<span class="va">:monday</span>]</span>
+<span id="cb13-4"><a href="data-types.html#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1</span></span>
+<span id="cb13-5"><a href="data-types.html#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="cn">Keyword</span><span class="op">.</span>get(days, <span class="va">:monday</span>)</span>
+<span id="cb13-6"><a href="data-types.html#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1</span></span>
+<span id="cb13-7"><a href="data-types.html#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="cn">Keyword</span><span class="op">.</span>get(days, <span class="va">:noday</span>)</span>
+<span id="cb13-8"><a href="data-types.html#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; nil</span></span></code></pre></div>
 <p>Don’t let that fool you, though. Because you’re dealing with a list, the complexity of a lookup operation is O(n).</p>
 <p>Keyword lists are most often useful for allowing clients to pass an arbitrary number of
 optional arguments. For example, the result of the function <code>IO.inspect</code>, which prints
 a string representation of a term to the console, can be controlled by providing addi-
 tional options through a keyword list:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb13-1"><a href="data-types.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="cn">IO</span><span class="op">.</span>inspect([<span class="dv">100</span>, <span class="dv">200</span>, <span class="dv">300</span>]) <span class="co"># Default behavior</span></span>
-<span id="cb13-2"><a href="data-types.html#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [100, 200, 300]</span></span>
-<span id="cb13-3"><a href="data-types.html#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="cn">IO</span><span class="op">.</span>inspect([<span class="dv">100</span>, <span class="dv">200</span>, <span class="dv">300</span>], [<span class="va">width:</span> <span class="dv">3</span>]) <span class="co"># passing a keyword list as options</span></span>
-<span id="cb13-4"><a href="data-types.html#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [100,</span></span>
-<span id="cb13-5"><a href="data-types.html#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 200,</span></span>
-<span id="cb13-6"><a href="data-types.html#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 300]</span></span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb14-1"><a href="data-types.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="cn">IO</span><span class="op">.</span>inspect([<span class="dv">100</span>, <span class="dv">200</span>, <span class="dv">300</span>]) <span class="co"># Default behavior</span></span>
+<span id="cb14-2"><a href="data-types.html#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [100, 200, 300]</span></span>
+<span id="cb14-3"><a href="data-types.html#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="cn">IO</span><span class="op">.</span>inspect([<span class="dv">100</span>, <span class="dv">200</span>, <span class="dv">300</span>], [<span class="va">width:</span> <span class="dv">3</span>]) <span class="co"># passing a keyword list as options</span></span>
+<span id="cb14-4"><a href="data-types.html#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [100,</span></span>
+<span id="cb14-5"><a href="data-types.html#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 200,</span></span>
+<span id="cb14-6"><a href="data-types.html#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 300]</span></span></code></pre></div>
 <p>In fact, this pattern is so frequent that Elixir allows you to omit the square brackets if the last argument is a keyword list:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb14-1"><a href="data-types.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="cn">IO</span><span class="op">.</span>inspect([<span class="dv">100</span>, <span class="dv">200</span>, <span class="dv">300</span>], <span class="va">width:</span> <span class="dv">3</span>, <span class="va">limit:</span> <span class="dv">1</span>)</span>
-<span id="cb14-2"><a href="data-types.html#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co"># pass the second argument as [width: 3, limit: 1]</span></span>
-<span id="cb14-3"><a href="data-types.html#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co"># not having a third argument</span></span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb15-1"><a href="data-types.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="cn">IO</span><span class="op">.</span>inspect([<span class="dv">100</span>, <span class="dv">200</span>, <span class="dv">300</span>], <span class="va">width:</span> <span class="dv">3</span>, <span class="va">limit:</span> <span class="dv">1</span>)</span>
+<span id="cb15-2"><a href="data-types.html#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co"># pass the second argument as [width: 3, limit: 1]</span></span>
+<span id="cb15-3"><a href="data-types.html#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co"># not having a third argument</span></span></code></pre></div>
 <p>Keyword lists are important because they have three special characteristics:</p>
 <ul>
 <li><p>Keys must be <strong>atoms</strong>.</p></li>
@@ -181,7 +188,7 @@ tional options through a keyword list:</p>
 <li><p>Keys can be given <strong>more than once</strong></p></li>
 </ul>
 <p>For example, keyword lists are useful in database queries because we can have the same key in different positions.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb15-1"><a href="data-types.html#cb15-1" aria-hidden="true" tabindex="-1"></a>db<span class="op">.</span>find_user([<span class="va">where:</span> age <span class="op">&gt;</span> <span class="dv">18</span>, <span class="va">where:</span> subscribed <span class="op">==</span> <span class="cn">true</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb16-1"><a href="data-types.html#cb16-1" aria-hidden="true" tabindex="-1"></a>db<span class="op">.</span>find_user([<span class="va">where:</span> age <span class="op">&gt;</span> <span class="dv">18</span>, <span class="va">where:</span> subscribed <span class="op">==</span> <span class="cn">true</span>])</span></code></pre></div>
 <p>If we are using a map instead, we cannot have <code>where</code> twice.</p>
 
 </div>
