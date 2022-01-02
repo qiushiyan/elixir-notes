@@ -1,5 +1,12 @@
 preface
 data-types
+strings
+tuples
 linked-list
+comparing-lists-and-tuples
 map
 keyword-list
+functions-and-modules
+modules
+struct
+anoynmous-functions
