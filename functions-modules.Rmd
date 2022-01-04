@@ -32,3 +32,6 @@ square = fn x -> x * x end
 square.(5)
 #> 25
 ```
+
+## Protocols
+

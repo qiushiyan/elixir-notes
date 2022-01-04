@@ -10,11 +10,12 @@ rmd_files: [
 
   "data-types.Rmd",
 
+  "pattern-matching.Rmd",
+
   "functions-modules.Rmd",
 
   "enum.Rmd",
 
-  "pattern-matching.Rmd",
 
   "control-flow.Rmd",
 
