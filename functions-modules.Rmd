@@ -33,5 +33,55 @@ square.(5)
 #> 25
 ```
 
+### Anoynmous Functions with Pattern Matching
+
+```elixir
+logo_file = fn
+  (:democratic) -> "donkey.png"
+  (:republican) -> "elephant.png"
+  (:green) -> "flower.png"
+  (:other) -> "other.png"
+end
+
+logo_file.(:green)
+#> "flower.png"
+```
+
+## Module attributes
+
+Module attributes are computed at compile time.
+
+```elixir
+defmodule Mascot do
+  @mascots %{
+    democratic: "monkey",
+    republican: "elephant",
+    green: "plant",
+  }
+
+  @parties Map.keys(@mascots)
+
+  def mascot(party) do
+    @mascots[party]
+  end
+
+
+  def logo(party, size) when party in @parties do
+    m = mascot(party)
+    do_logo_size(m, size)
+  end
+
+  def logo(party, size) do
+    {:error, :unknown_party}
+  end
+
+  defp do_logo_size(mascot, :small), do: "#{mascot}_small.png"
+  defp do_logo_size(mascot, :normal), do: "#{mascot}_normal.png"
+  defp do_logo_size(mascot, :large), do: "#{mascot}_large.png"
+  defp do_logo_size(mascot, unknown), do: {:error, :unknown_size}
+
+end
+```
+
 ## Protocols
 

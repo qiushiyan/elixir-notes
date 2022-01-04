@@ -1,1 +1,34 @@
 # Control Flow
+
+## if-else block
+
+## cond: multiple if-else blocks
+
+```elixir
+cond do
+  expression_1 -> do_1
+  expression_2 -> do_2
+  ...
+end
+```
+
+## case: case when with pattern matching
+
+```elixir
+case expression do
+  pattern_1 -> do_1
+  pattern_2 -> do_2
+    ...
+end
+```
+
+```elixir
+def max(a,b) do
+  case a >= b do
+    true -> a
+    false -> b
+  end
+end
+```
+
+## with

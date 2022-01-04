@@ -109,13 +109,38 @@ Compared to keyword lists, we can already see two differences:
 
 - Maps’ keys do not follow any ordering.
 
-Maps have the following syntax for **updating** a key’s value:
+Maps (as well as structs) have a shortcut syntax for **updating** a key’s value:
 
 ```elixir
 map = %{a: 1, b: 2}
 %{map | a: 3}
 #> %{a: 3, b: 2}
 ```
+
+### Map Utilities
+
+get a key's value
+
+```elixir
+Map.get(map, key, default_value)
+```
+
+puts the given value under key in map (an alternative to the `|` syntax)
+
+```elixir
+Map.put(map, key, value)
+```
+
+Updates the key in map with the given function.
+
+```elixir
+Map.update(map, key, default, fun)
+```
+
+If key is present in map then the existing value is passed to `fun` and its
+result is used as the updated value of key. If key is not present in map,
+`default` is inserted as the value of key. The default value will not be passed
+through the update function.
 
 ## Keyword List
 
