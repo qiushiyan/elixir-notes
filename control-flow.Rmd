@@ -70,6 +70,22 @@ end
 #> :error
 ```
 
+We can perform intermediate calculation during each pattern matching during `with`, and the matched pattern won't affect global state
+
+```elixir
+width = nil
+opts = %{width: 10, height: 15}
+
+with {:ok, width} <- Map.fetch(opts, :width),
+     double_width = width * 2, # intermediate calculation
+     {:ok, height} <- Map.fetch(opts, :height) do
+  {:ok, double_width * height}
+end
+#> {:ok, 300}
+width
+#> nil
+```
+
 Alternative way of using comprehension with pattern matching
 
 ```elixir
@@ -154,4 +170,26 @@ for %{active: true, name: name} <- people do
   name
 end
 # => ["John"]
+```
+
+We can also use pattern matching alongside with the individual looping element, suppose we need to loop through the following two list for state "CA" and get joined maps that looks like `%{id, state, description, address}`:
+
+```elixir
+propositions = [
+  %{id: 1, state: "CA", description: "highway bond"},
+  %{id: 2, state: "WA", description: "Fuel Tax"}
+]
+
+locations = [
+  %{id: 1, state: "CA", address: "123 Main St"},
+  %{id: 2, state: "WA", address: "321 Main St"}
+]
+
+for x = %{state: stateA} <- propositions,
+      y = %{state: stateB} <- locations,
+      stateA === "CA" && stateB === "CA" do
+    Map.put(x, :address, y.address)
+end
+
+[%{address: "123 Main St", description: "highway bond", id: 1, state: "CA"}]
 ```
