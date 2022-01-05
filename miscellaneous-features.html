@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>7 Miscellaneous Features | elixir-notes</title>
+<meta name="author" content="Qiushi">
+<meta name="generator" content="bookdown 0.24 with bs4_book()">
+<meta property="og:title" content="7 Miscellaneous Features | elixir-notes">
+<meta property="og:type" content="book">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="7 Miscellaneous Features | elixir-notes">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="style.css">
+<meta name="description" content='7.1 Sigils  7.1.1 ~r: regular expressions iex &gt; regex &lt;- ~ r/foo|bar/ iex &gt; "foo" &lt;- ~regex #&gt; true iex &gt; "bat" &lt;- ~regex #&gt; false  7.1.2 Strings, char lists and word list sigils  7.1.2.1 Strings...'>
+<meta property="og:description" content='7.1 Sigils  7.1.1 ~r: regular expressions iex &gt; regex &lt;- ~ r/foo|bar/ iex &gt; "foo" &lt;- ~regex #&gt; true iex &gt; "bat" &lt;- ~regex #&gt; false  7.1.2 Strings, char lists and word list sigils  7.1.2.1 Strings...'>
+<meta name="twitter:description" content='7.1 Sigils  7.1.1 ~r: regular expressions iex &gt; regex &lt;- ~ r/foo|bar/ iex &gt; "foo" &lt;- ~regex #&gt; true iex &gt; "bat" &lt;- ~regex #&gt; false  7.1.2 Strings, char lists and word list sigils  7.1.2.1 Strings...'>
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">elixir-notes</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html"><span class="header-section-number">1</span> Preface</a></li>
+<li><a class="" href="data-types.html"><span class="header-section-number">2</span> Data Types</a></li>
+<li><a class="" href="pattern-matching.html"><span class="header-section-number">3</span> Pattern Matching</a></li>
+<li><a class="" href="functions-and-modules.html"><span class="header-section-number">4</span> Functions and Modules</a></li>
+<li><a class="" href="enum-module.html"><span class="header-section-number">5</span> Enum Module</a></li>
+<li><a class="" href="control-flow.html"><span class="header-section-number">6</span> Control Flow</a></li>
+<li><a class="active" href="miscellaneous-features.html"><span class="header-section-number">7</span> Miscellaneous Features</a></li>
+<li><a class="" href="project-management-with-mix.html"><span class="header-section-number">8</span> Project Management with Mix</a></li>
+<li class="book-part">Phoenix</li>
+<li><a class="" href="phoenix-basics.html"><span class="header-section-number">9</span> Phoenix Basics</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/qiushiyan/elixir-notes">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="miscellaneous-features" class="section level1" number="7">
+<h1>
+<span class="header-section-number">7</span> Miscellaneous Features<a class="anchor" aria-label="anchor" href="#miscellaneous-features"><i class="fas fa-link"></i></a>
+</h1>
+<div id="sigils" class="section level2" number="7.1">
+<h2>
+<span class="header-section-number">7.1</span> Sigils<a class="anchor" aria-label="anchor" href="#sigils"><i class="fas fa-link"></i></a>
+</h2>
+<div id="r-regular-expressions" class="section level3" number="7.1.1">
+<h3>
+<span class="header-section-number">7.1.1</span> ~r: regular expressions<a class="anchor" aria-label="anchor" href="#r-regular-expressions"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb53"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb53-1"><a href="miscellaneous-features.html#cb53-1" aria-hidden="true" tabindex="-1"></a>iex <span class="op">&gt;</span> regex <span class="op">&lt;-</span> <span class="op">~</span> r<span class="op">/</span>foo<span class="op">|</span>bar<span class="op">/</span></span>
+<span id="cb53-2"><a href="miscellaneous-features.html#cb53-2" aria-hidden="true" tabindex="-1"></a>iex <span class="op">&gt;</span> <span class="st">"foo"</span> <span class="op">&lt;-</span> <span class="op">~</span>regex</span>
+<span id="cb53-3"><a href="miscellaneous-features.html#cb53-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; true</span></span>
+<span id="cb53-4"><a href="miscellaneous-features.html#cb53-4" aria-hidden="true" tabindex="-1"></a>iex <span class="op">&gt;</span> <span class="st">"bat"</span> <span class="op">&lt;-</span> <span class="op">~</span>regex</span>
+<span id="cb53-5"><a href="miscellaneous-features.html#cb53-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; false</span></span></code></pre></div>
+</div>
+<div id="strings-char-lists-and-word-list-sigils" class="section level3" number="7.1.2">
+<h3>
+<span class="header-section-number">7.1.2</span> Strings, char lists and word list sigils<a class="anchor" aria-label="anchor" href="#strings-char-lists-and-word-list-sigils"><i class="fas fa-link"></i></a>
+</h3>
+<div id="strings-1" class="section level4" number="7.1.2.1">
+<h4>
+<span class="header-section-number">7.1.2.1</span> Strings<a class="anchor" aria-label="anchor" href="#strings-1"><i class="fas fa-link"></i></a>
+</h4>
+<p>The <code>~s</code> sigil is used to generate strings, like double quotes are. The ~s sigil is useful when a string contains double quotes:</p>
+<div class="sourceCode" id="cb54"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb54-1"><a href="miscellaneous-features.html#cb54-1" aria-hidden="true" tabindex="-1"></a>iex<span class="op">&gt;</span> <span class="op">~</span>s(this is a string with <span class="st">"double"</span> quotes, <span class="kw">not</span> <span class="vs">'single'</span> ones)</span>
+<span id="cb54-2"><a href="miscellaneous-features.html#cb54-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; "this is a string with \"double\" quotes, not 'single' ones"</span></span></code></pre></div>
+</div>
+<div id="char-lists" class="section level4" number="7.1.2.2">
+<h4>
+<span class="header-section-number">7.1.2.2</span> Char lists<a class="anchor" aria-label="anchor" href="#char-lists"><i class="fas fa-link"></i></a>
+</h4>
+<p>The <code>~c</code> sigil is useful for generating char lists that contain single quotes:</p>
+<div class="sourceCode" id="cb55"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb55-1"><a href="miscellaneous-features.html#cb55-1" aria-hidden="true" tabindex="-1"></a>iex<span class="op">&gt;</span> <span class="op">~</span>c(this is a char list containing <span class="vs">'single quotes'</span>)</span>
+<span id="cb55-2"><a href="miscellaneous-features.html#cb55-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 'this is a char list containing \'single quotes\''</span></span></code></pre></div>
+</div>
+<div id="word-lists" class="section level4" number="7.1.2.3">
+<h4>
+<span class="header-section-number">7.1.2.3</span> Word lists<a class="anchor" aria-label="anchor" href="#word-lists"><i class="fas fa-link"></i></a>
+</h4>
+<p>The <code>~w</code> sigil is used to generate lists of words (words are just regular strings). Inside the <code>~w</code> sigil, words are separated by whitespace.</p>
+<div class="sourceCode" id="cb56"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb56-1"><a href="miscellaneous-features.html#cb56-1" aria-hidden="true" tabindex="-1"></a>iex<span class="op">&gt;</span> <span class="op">~</span>w(foo bar bat)</span>
+<span id="cb56-2"><a href="miscellaneous-features.html#cb56-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ["foo", "bar", "bat"]</span></span></code></pre></div>
+<p>The <code>~w</code> sigil also accepts the c, s and a modifiers (for char lists, strings, and atoms, respectively), which specify the data type of the elements of the resulting list:</p>
+<div class="sourceCode" id="cb57"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb57-1"><a href="miscellaneous-features.html#cb57-1" aria-hidden="true" tabindex="-1"></a>iex<span class="op">&gt;</span> <span class="op">~</span>w(foo bar bat)a</span>
+<span id="cb57-2"><a href="miscellaneous-features.html#cb57-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [:foo, :bar, :bat]</span></span></code></pre></div>
+</div>
+</div>
+<div id="calendar-sigils" class="section level3" number="7.1.3">
+<h3>
+<span class="header-section-number">7.1.3</span> Calendar Sigils<a class="anchor" aria-label="anchor" href="#calendar-sigils"><i class="fas fa-link"></i></a>
+</h3>
+<div id="date" class="section level4" number="7.1.3.1">
+<h4>
+<span class="header-section-number">7.1.3.1</span> Date<a class="anchor" aria-label="anchor" href="#date"><i class="fas fa-link"></i></a>
+</h4>
+<p>A <code>%Date{}</code> struct contains the fields year, month, day, and calendar. You can create one using the <code>~D</code> sigil:</p>
+<div class="sourceCode" id="cb58"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb58-1"><a href="miscellaneous-features.html#cb58-1" aria-hidden="true" tabindex="-1"></a>iex<span class="op">&gt;</span> d <span class="op">=</span> <span class="op">~</span>D[<span class="dv">2019-10-31</span>]</span>
+<span id="cb58-2"><a href="miscellaneous-features.html#cb58-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ~D[2019-10-31]</span></span>
+<span id="cb58-3"><a href="miscellaneous-features.html#cb58-3" aria-hidden="true" tabindex="-1"></a>iex<span class="op">&gt;</span> d<span class="op">.</span>day</span>
+<span id="cb58-4"><a href="miscellaneous-features.html#cb58-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 31</span></span></code></pre></div>
+</div>
+<div id="time" class="section level4" number="7.1.3.2">
+<h4>
+<span class="header-section-number">7.1.3.2</span> Time<a class="anchor" aria-label="anchor" href="#time"><i class="fas fa-link"></i></a>
+</h4>
+<p>The <code>%Time{}</code> struct contains the fields hour, minute, second, microsecond, and calendar. You can create one using the <code>~T</code> sigil:</p>
+<div class="sourceCode" id="cb59"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb59-1"><a href="miscellaneous-features.html#cb59-1" aria-hidden="true" tabindex="-1"></a>iex<span class="op">&gt;</span> t <span class="op">=</span> <span class="op">~</span>T[<span class="dv">23</span>:<span class="dv">00</span>:<span class="bn">07</span><span class="op">.</span><span class="dv">0</span>]</span>
+<span id="cb59-2"><a href="miscellaneous-features.html#cb59-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ~T[23:00:07.0]</span></span>
+<span id="cb59-3"><a href="miscellaneous-features.html#cb59-3" aria-hidden="true" tabindex="-1"></a>iex<span class="op">&gt;</span> t<span class="op">.</span>second</span>
+<span id="cb59-4"><a href="miscellaneous-features.html#cb59-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7</span></span></code></pre></div>
+</div>
+</div>
+<div id="custom-sigiils" class="section level3" number="7.1.4">
+<h3>
+<span class="header-section-number">7.1.4</span> Custom Sigiils<a class="anchor" aria-label="anchor" href="#custom-sigiils"><i class="fas fa-link"></i></a>
+</h3>
+<p>As hinted at the beginning of this chapter, sigils in Elixir are extensible. In fact, using the sigil <code>~r/foo/i</code> is equivalent to calling <code>sigil_r</code> with a binary and a char list as the argument:</p>
+<div class="sourceCode" id="cb60"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb60-1"><a href="miscellaneous-features.html#cb60-1" aria-hidden="true" tabindex="-1"></a>iex<span class="op">&gt;</span> sigil_r(<span class="op">&lt;&lt;</span><span class="st">"foo"</span><span class="op">&gt;&gt;</span>, <span class="ch">'i'</span>)</span>
+<span id="cb60-2"><a href="miscellaneous-features.html#cb60-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ~r"foo"i</span></span></code></pre></div>
+<p>We can also provide our own sigils by implementing functions that follow the <code>sigil_{character}</code> pattern. For example, let’s implement the <code>~i</code> sigil that returns an integer (with the optional <code>n</code> modifier to make it negative):</p>
+<div class="sourceCode" id="cb61"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb61-1"><a href="miscellaneous-features.html#cb61-1" aria-hidden="true" tabindex="-1"></a>iex<span class="op">&gt;</span> <span class="kw">defmodule</span> <span class="cn">MySigils</span> <span class="kw">do</span></span>
+<span id="cb61-2"><a href="miscellaneous-features.html#cb61-2" aria-hidden="true" tabindex="-1"></a><span class="op">...&gt;</span>   <span class="kw">def</span> sigil_i(string, []), <span class="kw">do</span>: <span class="cn">String</span><span class="op">.</span>to_integer(string)</span>
+<span id="cb61-3"><a href="miscellaneous-features.html#cb61-3" aria-hidden="true" tabindex="-1"></a><span class="op">...&gt;</span>   <span class="kw">def</span> sigil_i(string, [?n]), <span class="kw">do</span>: <span class="op">-</span><span class="cn">String</span><span class="op">.</span>to_integer(string)</span>
+<span id="cb61-4"><a href="miscellaneous-features.html#cb61-4" aria-hidden="true" tabindex="-1"></a><span class="op">...&gt;</span> <span class="kw">end</span></span>
+<span id="cb61-5"><a href="miscellaneous-features.html#cb61-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-6"><a href="miscellaneous-features.html#cb61-6" aria-hidden="true" tabindex="-1"></a>iex<span class="op">&gt;</span> <span class="im">import</span> <span class="cn">MySigils</span></span>
+<span id="cb61-7"><a href="miscellaneous-features.html#cb61-7" aria-hidden="true" tabindex="-1"></a>iex<span class="op">&gt;</span> <span class="op">~</span>i(<span class="dv">13</span>)</span>
+<span id="cb61-8"><a href="miscellaneous-features.html#cb61-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 13</span></span>
+<span id="cb61-9"><a href="miscellaneous-features.html#cb61-9" aria-hidden="true" tabindex="-1"></a>iex<span class="op">&gt;</span> <span class="op">~</span>i(<span class="dv">42</span>)n</span>
+<span id="cb61-10"><a href="miscellaneous-features.html#cb61-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; -42</span></span></code></pre></div>
+<p>Sigils can also be used to do compile-time work with the help of macros. For example, regular expressions in Elixir are compiled into an efficient representation during compilation of the source code, therefore skipping this step at runtime. If you’re interested in the subject, we recommend you learn more about macros and check out how sigils are implemented in the Kernel module (where the sigil_* functions are defined).</p>
+
+</div>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="control-flow.html"><span class="header-section-number">6</span> Control Flow</a></div>
+<div class="next"><a href="project-management-with-mix.html"><span class="header-section-number">8</span> Project Management with Mix</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#miscellaneous-features"><span class="header-section-number">7</span> Miscellaneous Features</a></li>
+<li>
+<a class="nav-link" href="#sigils"><span class="header-section-number">7.1</span> Sigils</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#r-regular-expressions"><span class="header-section-number">7.1.1</span> ~r: regular expressions</a></li>
+<li><a class="nav-link" href="#strings-char-lists-and-word-list-sigils"><span class="header-section-number">7.1.2</span> Strings, char lists and word list sigils</a></li>
+<li><a class="nav-link" href="#calendar-sigils"><span class="header-section-number">7.1.3</span> Calendar Sigils</a></li>
+<li><a class="nav-link" href="#custom-sigiils"><span class="header-section-number">7.1.4</span> Custom Sigiils</a></li>
+</ul>
+</li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/qiushiyan/elixir-notes/blob/master/misc.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/qiushiyan/elixir-notes/edit/master/misc.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>elixir-notes</strong>" was written by Qiushi. It was last built on 2022-01-05.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer>
+</body>
+</html>
