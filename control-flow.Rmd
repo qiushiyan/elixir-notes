@@ -2,12 +2,27 @@
 
 ## if-else block
 
+```elixir
+if condition do
+    ...
+else
+    ...
+end
+```
+
+condense into one line (notice the comma `,` after condition, similar to oneline function `def fun(), do: expresion`)
+
+```elixir
+if condition, do: true_value, else: false_value
+```
+
+
 ## cond: multiple if-else blocks
 
 ```elixir
 cond do
-  expression_1 -> do_1
-  expression_2 -> do_2
+  expression_1 -> return_1
+  expression_2 -> return_2
   ...
 end
 ```
@@ -16,8 +31,8 @@ end
 
 ```elixir
 case expression do
-  pattern_1 -> do_1
-  pattern_2 -> do_2
+  pattern_1 -> return_1
+  pattern_2 -> return_2
     ...
 end
 ```
@@ -31,7 +46,38 @@ def max(a,b) do
 end
 ```
 
-## with
+## with: combine multiple clauses
+
+Used to combine matching clauses. Let's start with an example:
+
+```elixir
+opts = %{width: 10, height: 15}
+with {:ok, width} <- Map.fetch(opts, :width),
+     {:ok, height} <- Map.fetch(opts, :height) do
+  {:ok, width * height}
+end
+#> {:ok, 150}
+```
+
+If all clauses match, the do block is executed, returning its result. Otherwise the chain is aborted and the non-matched value is returned:
+
+```elixir
+opts = %{width: 10}
+with {:ok, width} <- Map.fetch(opts, :width),
+     {:ok, height} <- Map.fetch(opts, :height) do
+  {:ok, width * height}
+end
+#> :error
+```
+
+Alternative way of using comprehension with pattern matching
+
+```elixir
+for %{width: width, height: height} <- [opts] do
+  width * height
+end
+#> [150]
+```
 
 ## comprehensions
 
@@ -44,7 +90,7 @@ iex> for n <- [1, 2, 3, 4], do: n * n
 #> [1, 4, 9, 16]
 ```
 
-A comprehension is made of three parts: **generators**, **filters**, and **collectables**.
+A comprehension is made of three parts: **generators**, **filters**, and **collectables**. Comprension is most useful when **multiple enumerables** are involved and `Enum.map` can't do its job.
 
 ```elixir
 multiplication_table = for x <- 1..9, y <- 1..9, # generaotr
@@ -72,4 +118,40 @@ multiplication_table
 #   {5, 4} => 20,
 #   {9, 9} => 81
 # }
+```
+
+As you can see, when multiple generators are used, the result is a cartesian product of the enumerables.
+
+```elixir
+names = ~w[James John Patricia]
+surnames = ~w[Johnson Smith Williams]
+
+for name <- names,
+    surname <- surnames do
+  "#{name} #{surname}"
+end
+# => [
+# =>   "James Johnson",
+# =>   "James Smith",
+# =>   "James Williams",
+# =>   "John Johnson",
+# =>   "John Smith",
+# =>   "John Williams",
+# =>   "Patricia Johnson",
+# =>   "Patricia Smith",
+# =>   "Patricia Williams"
+# => ]
+```
+
+We can also use pattern matching in a generator to do filtering. If the left side of the generator does not match, then the for-loop will just ignore that value and continue to process.
+
+```elixir
+people = [
+  %{name: "John", active: true},
+  %{name: "Patricia", active: false}
+]
+for %{active: true, name: name} <- people do
+  name
+end
+# => ["John"]
 ```

@@ -85,3 +85,88 @@ end
 
 ## Protocols
 
+
+
+## Use, Import and Alias
+
+### Import
+
+If we want to import functions rather than aliasing the module we can use `import`:
+
+
+```elixir
+iex> import List
+#> nil
+iex> last([1, 2, 3])
+#> 3
+```
+
+
+By default all functions and macros are imported but we can filter them using the `:only` and `:except` options.
+
+To import specific functions and macros, we must provide the name/arity pairs to `:only` and `:except`. Let’s start by importing only the `last/1` function:
+
+```elixir
+iex> import List, only: [last: 1]
+iex> first([1, 2, 3])
+#> ** (CompileError) iex:13: undefined function first/1
+iex> last([1, 2, 3])
+#> 3
+```
+
+If we import everything except `last/1` and try the same functions as before:
+
+```elixir
+iex> import List, except: [last: 1]
+iex> first([1, 2, 3])
+#> 1
+iex> last([1, 2, 3])
+#> ** (CompileError) iex:3: undefined function last/1
+```
+
+In addition to the name/arity pairs there are two special atoms, :functions and :macros, which import only functions and macros respectively:
+
+import List, only: :functions
+import List, only: :macros
+
+### Alias
+
+Allows us to alias module names; used quite frequently in Elixir code:
+
+```elixir
+defmodule Sayings.Greetings do
+  def basic(name), do: "Hi, #{name}"
+end
+
+defmodule Example do
+  alias Sayings.Greetings
+
+  def greeting(name), do: Greetings.basic(name)
+end
+```
+
+Without alias
+
+```elixir
+defmodule Example do
+  def greeting(name), do: Sayings.Greetings.basic(name)
+end
+```
+
+If there’s a conflict between two aliases or we just wish to alias to a different name entirely, we can use the `:as` option:
+
+```elixir
+defmodule Example do
+  alias Sayings.Greetings, as: Hi
+
+  def print_message(name), do: Hi.basic(name)
+end
+```
+
+It’s even possible to alias multiple modules at once:
+
+```elixir
+defmodule Example do
+  alias Sayings.{Greetings, Farewells}
+end
+```
