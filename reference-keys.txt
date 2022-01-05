@@ -21,12 +21,15 @@ anoynmous-functions
 anoynmous-functions-with-pattern-matching
 module-attributes
 protocols
+use-import-and-alias
+import
+alias
 enum-module
 control-flow
 if-else-block
 cond-multiple-if-else-blocks
 case-case-when-with-pattern-matching
-with
+with-combine-multiple-clauses
 comprehensions
 miscellaneous-features
 sigils

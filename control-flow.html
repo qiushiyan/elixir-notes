@@ -15,9 +15,9 @@
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="style.css">
-<meta name="description" content="6.1 if-else block   6.2 cond: multiple if-else blocks cond do  expression_1 -&gt; do_1  expression_2 -&gt; do_2  ... end  6.3 case: case when with pattern matching case expression do  pattern_1 -&gt; do_1 ...">
-<meta property="og:description" content="6.1 if-else block   6.2 cond: multiple if-else blocks cond do  expression_1 -&gt; do_1  expression_2 -&gt; do_2  ... end  6.3 case: case when with pattern matching case expression do  pattern_1 -&gt; do_1 ...">
-<meta name="twitter:description" content="6.1 if-else block   6.2 cond: multiple if-else blocks cond do  expression_1 -&gt; do_1  expression_2 -&gt; do_2  ... end  6.3 case: case when with pattern matching case expression do  pattern_1 -&gt; do_1 ...">
+<meta name="description" content="6.1 if-else block if condition do   ... else   ... end condense into one line (notice the comma , after condition, similar to oneline function def fun(), do: expresion) if condition, do:...">
+<meta property="og:description" content="6.1 if-else block if condition do   ... else   ... end condense into one line (notice the comma , after condition, similar to oneline function def fun(), do: expresion) if condition, do:...">
+<meta name="twitter:description" content="6.1 if-else block if condition do   ... else   ... end condense into one line (notice the comma , after condition, similar to oneline function def fun(), do: expresion) if condition, do:...">
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -64,37 +64,63 @@
 <h2>
 <span class="header-section-number">6.1</span> if-else block<a class="anchor" aria-label="anchor" href="#if-else-block"><i class="fas fa-link"></i></a>
 </h2>
+<div class="sourceCode" id="cb57"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb57-1"><a href="control-flow.html#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> condition <span class="kw">do</span></span>
+<span id="cb57-2"><a href="control-flow.html#cb57-2" aria-hidden="true" tabindex="-1"></a>    <span class="op">...</span></span>
+<span id="cb57-3"><a href="control-flow.html#cb57-3" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span></span>
+<span id="cb57-4"><a href="control-flow.html#cb57-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">...</span></span>
+<span id="cb57-5"><a href="control-flow.html#cb57-5" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div>
+<p>condense into one line (notice the comma <code>,</code> after condition, similar to oneline function <code>def fun(), do: expresion</code>)</p>
+<div class="sourceCode" id="cb58"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb58-1"><a href="control-flow.html#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> condition, <span class="kw">do</span>: true_value, <span class="cf">else</span>: false_value</span></code></pre></div>
 </div>
 <div id="cond-multiple-if-else-blocks" class="section level2" number="6.2">
 <h2>
 <span class="header-section-number">6.2</span> cond: multiple if-else blocks<a class="anchor" aria-label="anchor" href="#cond-multiple-if-else-blocks"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb50"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb50-1"><a href="control-flow.html#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="cf">cond</span> <span class="kw">do</span></span>
-<span id="cb50-2"><a href="control-flow.html#cb50-2" aria-hidden="true" tabindex="-1"></a>  expression_1 <span class="op">-&gt;</span> do_1</span>
-<span id="cb50-3"><a href="control-flow.html#cb50-3" aria-hidden="true" tabindex="-1"></a>  expression_2 <span class="op">-&gt;</span> do_2</span>
-<span id="cb50-4"><a href="control-flow.html#cb50-4" aria-hidden="true" tabindex="-1"></a>  <span class="op">...</span></span>
-<span id="cb50-5"><a href="control-flow.html#cb50-5" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb59-1"><a href="control-flow.html#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="cf">cond</span> <span class="kw">do</span></span>
+<span id="cb59-2"><a href="control-flow.html#cb59-2" aria-hidden="true" tabindex="-1"></a>  expression_1 <span class="op">-&gt;</span> return_1</span>
+<span id="cb59-3"><a href="control-flow.html#cb59-3" aria-hidden="true" tabindex="-1"></a>  expression_2 <span class="op">-&gt;</span> return_2</span>
+<span id="cb59-4"><a href="control-flow.html#cb59-4" aria-hidden="true" tabindex="-1"></a>  <span class="op">...</span></span>
+<span id="cb59-5"><a href="control-flow.html#cb59-5" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div>
 </div>
 <div id="case-case-when-with-pattern-matching" class="section level2" number="6.3">
 <h2>
 <span class="header-section-number">6.3</span> case: case when with pattern matching<a class="anchor" aria-label="anchor" href="#case-case-when-with-pattern-matching"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb51"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb51-1"><a href="control-flow.html#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="kw">case</span> expression <span class="kw">do</span></span>
-<span id="cb51-2"><a href="control-flow.html#cb51-2" aria-hidden="true" tabindex="-1"></a>  pattern_1 <span class="op">-&gt;</span> do_1</span>
-<span id="cb51-3"><a href="control-flow.html#cb51-3" aria-hidden="true" tabindex="-1"></a>  pattern_2 <span class="op">-&gt;</span> do_2</span>
-<span id="cb51-4"><a href="control-flow.html#cb51-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">...</span></span>
-<span id="cb51-5"><a href="control-flow.html#cb51-5" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div>
-<div class="sourceCode" id="cb52"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb52-1"><a href="control-flow.html#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> max(a,b) <span class="kw">do</span></span>
-<span id="cb52-2"><a href="control-flow.html#cb52-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">case</span> a <span class="op">&gt;=</span> b <span class="kw">do</span></span>
-<span id="cb52-3"><a href="control-flow.html#cb52-3" aria-hidden="true" tabindex="-1"></a>    <span class="cn">true</span> <span class="op">-&gt;</span> a</span>
-<span id="cb52-4"><a href="control-flow.html#cb52-4" aria-hidden="true" tabindex="-1"></a>    <span class="cn">false</span> <span class="op">-&gt;</span> b</span>
-<span id="cb52-5"><a href="control-flow.html#cb52-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">end</span></span>
-<span id="cb52-6"><a href="control-flow.html#cb52-6" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb60-1"><a href="control-flow.html#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="kw">case</span> expression <span class="kw">do</span></span>
+<span id="cb60-2"><a href="control-flow.html#cb60-2" aria-hidden="true" tabindex="-1"></a>  pattern_1 <span class="op">-&gt;</span> return_1</span>
+<span id="cb60-3"><a href="control-flow.html#cb60-3" aria-hidden="true" tabindex="-1"></a>  pattern_2 <span class="op">-&gt;</span> return_2</span>
+<span id="cb60-4"><a href="control-flow.html#cb60-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">...</span></span>
+<span id="cb60-5"><a href="control-flow.html#cb60-5" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div>
+<div class="sourceCode" id="cb61"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb61-1"><a href="control-flow.html#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> max(a,b) <span class="kw">do</span></span>
+<span id="cb61-2"><a href="control-flow.html#cb61-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">case</span> a <span class="op">&gt;=</span> b <span class="kw">do</span></span>
+<span id="cb61-3"><a href="control-flow.html#cb61-3" aria-hidden="true" tabindex="-1"></a>    <span class="cn">true</span> <span class="op">-&gt;</span> a</span>
+<span id="cb61-4"><a href="control-flow.html#cb61-4" aria-hidden="true" tabindex="-1"></a>    <span class="cn">false</span> <span class="op">-&gt;</span> b</span>
+<span id="cb61-5"><a href="control-flow.html#cb61-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">end</span></span>
+<span id="cb61-6"><a href="control-flow.html#cb61-6" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div>
 </div>
-<div id="with" class="section level2" number="6.4">
+<div id="with-combine-multiple-clauses" class="section level2" number="6.4">
 <h2>
-<span class="header-section-number">6.4</span> with<a class="anchor" aria-label="anchor" href="#with"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.4</span> with: combine multiple clauses<a class="anchor" aria-label="anchor" href="#with-combine-multiple-clauses"><i class="fas fa-link"></i></a>
 </h2>
+<p>Used to combine matching clauses. Let’s start with an example:</p>
+<div class="sourceCode" id="cb62"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb62-1"><a href="control-flow.html#cb62-1" aria-hidden="true" tabindex="-1"></a>opts <span class="op">=</span> %{<span class="va">width:</span> <span class="dv">10</span>, <span class="va">height:</span> <span class="dv">15</span>}</span>
+<span id="cb62-2"><a href="control-flow.html#cb62-2" aria-hidden="true" tabindex="-1"></a>with {<span class="va">:ok</span>, width} <span class="op">&lt;-</span> <span class="cn">Map</span><span class="op">.</span>fetch(opts, <span class="va">:width</span>),</span>
+<span id="cb62-3"><a href="control-flow.html#cb62-3" aria-hidden="true" tabindex="-1"></a>     {<span class="va">:ok</span>, height} <span class="op">&lt;-</span> <span class="cn">Map</span><span class="op">.</span>fetch(opts, <span class="va">:height</span>) <span class="kw">do</span></span>
+<span id="cb62-4"><a href="control-flow.html#cb62-4" aria-hidden="true" tabindex="-1"></a>  {<span class="va">:ok</span>, width <span class="op">*</span> height}</span>
+<span id="cb62-5"><a href="control-flow.html#cb62-5" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb62-6"><a href="control-flow.html#cb62-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; {:ok, 150}</span></span></code></pre></div>
+<p>If all clauses match, the do block is executed, returning its result. Otherwise the chain is aborted and the non-matched value is returned:</p>
+<div class="sourceCode" id="cb63"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb63-1"><a href="control-flow.html#cb63-1" aria-hidden="true" tabindex="-1"></a>opts <span class="op">=</span> %{<span class="va">width:</span> <span class="dv">10</span>}</span>
+<span id="cb63-2"><a href="control-flow.html#cb63-2" aria-hidden="true" tabindex="-1"></a>with {<span class="va">:ok</span>, width} <span class="op">&lt;-</span> <span class="cn">Map</span><span class="op">.</span>fetch(opts, <span class="va">:width</span>),</span>
+<span id="cb63-3"><a href="control-flow.html#cb63-3" aria-hidden="true" tabindex="-1"></a>     {<span class="va">:ok</span>, height} <span class="op">&lt;-</span> <span class="cn">Map</span><span class="op">.</span>fetch(opts, <span class="va">:height</span>) <span class="kw">do</span></span>
+<span id="cb63-4"><a href="control-flow.html#cb63-4" aria-hidden="true" tabindex="-1"></a>  {<span class="va">:ok</span>, width <span class="op">*</span> height}</span>
+<span id="cb63-5"><a href="control-flow.html#cb63-5" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb63-6"><a href="control-flow.html#cb63-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; :error</span></span></code></pre></div>
+<p>Alternative way of using comprehension with pattern matching</p>
+<div class="sourceCode" id="cb64"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb64-1"><a href="control-flow.html#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="kw">for</span> %{<span class="va">width:</span> width, <span class="va">height:</span> height} <span class="op">&lt;-</span> [opts] <span class="kw">do</span></span>
+<span id="cb64-2"><a href="control-flow.html#cb64-2" aria-hidden="true" tabindex="-1"></a>  width <span class="op">*</span> height</span>
+<span id="cb64-3"><a href="control-flow.html#cb64-3" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb64-4"><a href="control-flow.html#cb64-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [150]</span></span></code></pre></div>
 </div>
 <div id="comprehensions" class="section level2" number="6.5">
 <h2>
@@ -102,34 +128,62 @@
 </h2>
 <p>In Elixir, it is common to loop over an Enumerable, often filtering out some results and mapping values into another list. Comprehensions are syntactic sugar for such constructs: they group those common tasks into the for special form.</p>
 <p>For example, we can map a list of integers into their squared values:</p>
-<div class="sourceCode" id="cb53"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb53-1"><a href="control-flow.html#cb53-1" aria-hidden="true" tabindex="-1"></a>iex<span class="op">&gt;</span> <span class="kw">for</span> n <span class="op">&lt;-</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>], <span class="kw">do</span>: n <span class="op">*</span> n</span>
-<span id="cb53-2"><a href="control-flow.html#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1, 4, 9, 16]</span></span></code></pre></div>
-<p>A comprehension is made of three parts: <strong>generators</strong>, <strong>filters</strong>, and <strong>collectables</strong>.</p>
-<div class="sourceCode" id="cb54"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb54-1"><a href="control-flow.html#cb54-1" aria-hidden="true" tabindex="-1"></a>multiplication_table <span class="op">=</span> <span class="kw">for</span> x <span class="op">&lt;-</span> <span class="dv">1</span><span class="op">..</span><span class="dv">9</span>, y <span class="op">&lt;-</span> <span class="dv">1</span><span class="op">..</span><span class="dv">9</span>, <span class="co"># generaotr</span></span>
-<span id="cb54-2"><a href="control-flow.html#cb54-2" aria-hidden="true" tabindex="-1"></a>              x <span class="op">&gt;=</span> y, <span class="co"># filter</span></span>
-<span id="cb54-3"><a href="control-flow.html#cb54-3" aria-hidden="true" tabindex="-1"></a>              <span class="va">into:</span> %{} <span class="kw">do</span> <span class="co"># collectable</span></span>
-<span id="cb54-4"><a href="control-flow.html#cb54-4" aria-hidden="true" tabindex="-1"></a>              {{x, y}, x<span class="op">*</span>y}</span>
-<span id="cb54-5"><a href="control-flow.html#cb54-5" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
-<span id="cb54-6"><a href="control-flow.html#cb54-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb54-7"><a href="control-flow.html#cb54-7" aria-hidden="true" tabindex="-1"></a>multiplication_table</span>
-<span id="cb54-8"><a href="control-flow.html#cb54-8" aria-hidden="true" tabindex="-1"></a><span class="co"># %{</span></span>
-<span id="cb54-9"><a href="control-flow.html#cb54-9" aria-hidden="true" tabindex="-1"></a><span class="co">#   {8, 5} =&gt; 40,</span></span>
-<span id="cb54-10"><a href="control-flow.html#cb54-10" aria-hidden="true" tabindex="-1"></a><span class="co">#   {8, 6} =&gt; 48,</span></span>
-<span id="cb54-11"><a href="control-flow.html#cb54-11" aria-hidden="true" tabindex="-1"></a><span class="co">#   {5, 2} =&gt; 10,</span></span>
-<span id="cb54-12"><a href="control-flow.html#cb54-12" aria-hidden="true" tabindex="-1"></a><span class="co">#   {6, 5} =&gt; 30,</span></span>
-<span id="cb54-13"><a href="control-flow.html#cb54-13" aria-hidden="true" tabindex="-1"></a><span class="co">#   {1, 1} =&gt; 1,</span></span>
-<span id="cb54-14"><a href="control-flow.html#cb54-14" aria-hidden="true" tabindex="-1"></a><span class="co">#   {9, 6} =&gt; 54,</span></span>
-<span id="cb54-15"><a href="control-flow.html#cb54-15" aria-hidden="true" tabindex="-1"></a><span class="co">#   {4, 3} =&gt; 12,</span></span>
-<span id="cb54-16"><a href="control-flow.html#cb54-16" aria-hidden="true" tabindex="-1"></a><span class="co">#   ...</span></span>
-<span id="cb54-17"><a href="control-flow.html#cb54-17" aria-hidden="true" tabindex="-1"></a><span class="co">#   {9, 7} =&gt; 63,</span></span>
-<span id="cb54-18"><a href="control-flow.html#cb54-18" aria-hidden="true" tabindex="-1"></a><span class="co">#   {5, 1} =&gt; 5,</span></span>
-<span id="cb54-19"><a href="control-flow.html#cb54-19" aria-hidden="true" tabindex="-1"></a><span class="co">#   {2, 2} =&gt; 4,</span></span>
-<span id="cb54-20"><a href="control-flow.html#cb54-20" aria-hidden="true" tabindex="-1"></a><span class="co">#   {4, 4} =&gt; 16,</span></span>
-<span id="cb54-21"><a href="control-flow.html#cb54-21" aria-hidden="true" tabindex="-1"></a><span class="co">#   {7, 4} =&gt; 28,</span></span>
-<span id="cb54-22"><a href="control-flow.html#cb54-22" aria-hidden="true" tabindex="-1"></a><span class="co">#   {6, 3} =&gt; 18,</span></span>
-<span id="cb54-23"><a href="control-flow.html#cb54-23" aria-hidden="true" tabindex="-1"></a><span class="co">#   {5, 4} =&gt; 20,</span></span>
-<span id="cb54-24"><a href="control-flow.html#cb54-24" aria-hidden="true" tabindex="-1"></a><span class="co">#   {9, 9} =&gt; 81</span></span>
-<span id="cb54-25"><a href="control-flow.html#cb54-25" aria-hidden="true" tabindex="-1"></a><span class="co"># }</span></span></code></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb65-1"><a href="control-flow.html#cb65-1" aria-hidden="true" tabindex="-1"></a>iex<span class="op">&gt;</span> <span class="kw">for</span> n <span class="op">&lt;-</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>], <span class="kw">do</span>: n <span class="op">*</span> n</span>
+<span id="cb65-2"><a href="control-flow.html#cb65-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1, 4, 9, 16]</span></span></code></pre></div>
+<p>A comprehension is made of three parts: <strong>generators</strong>, <strong>filters</strong>, and <strong>collectables</strong>. Comprension is most useful when <strong>multiple enumerables</strong> are involved and <code>Enum.map</code> can’t do its job.</p>
+<div class="sourceCode" id="cb66"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb66-1"><a href="control-flow.html#cb66-1" aria-hidden="true" tabindex="-1"></a>multiplication_table <span class="op">=</span> <span class="kw">for</span> x <span class="op">&lt;-</span> <span class="dv">1</span><span class="op">..</span><span class="dv">9</span>, y <span class="op">&lt;-</span> <span class="dv">1</span><span class="op">..</span><span class="dv">9</span>, <span class="co"># generaotr</span></span>
+<span id="cb66-2"><a href="control-flow.html#cb66-2" aria-hidden="true" tabindex="-1"></a>              x <span class="op">&gt;=</span> y, <span class="co"># filter</span></span>
+<span id="cb66-3"><a href="control-flow.html#cb66-3" aria-hidden="true" tabindex="-1"></a>              <span class="va">into:</span> %{} <span class="kw">do</span> <span class="co"># collectable</span></span>
+<span id="cb66-4"><a href="control-flow.html#cb66-4" aria-hidden="true" tabindex="-1"></a>              {{x, y}, x<span class="op">*</span>y}</span>
+<span id="cb66-5"><a href="control-flow.html#cb66-5" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb66-6"><a href="control-flow.html#cb66-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-7"><a href="control-flow.html#cb66-7" aria-hidden="true" tabindex="-1"></a>multiplication_table</span>
+<span id="cb66-8"><a href="control-flow.html#cb66-8" aria-hidden="true" tabindex="-1"></a><span class="co"># %{</span></span>
+<span id="cb66-9"><a href="control-flow.html#cb66-9" aria-hidden="true" tabindex="-1"></a><span class="co">#   {8, 5} =&gt; 40,</span></span>
+<span id="cb66-10"><a href="control-flow.html#cb66-10" aria-hidden="true" tabindex="-1"></a><span class="co">#   {8, 6} =&gt; 48,</span></span>
+<span id="cb66-11"><a href="control-flow.html#cb66-11" aria-hidden="true" tabindex="-1"></a><span class="co">#   {5, 2} =&gt; 10,</span></span>
+<span id="cb66-12"><a href="control-flow.html#cb66-12" aria-hidden="true" tabindex="-1"></a><span class="co">#   {6, 5} =&gt; 30,</span></span>
+<span id="cb66-13"><a href="control-flow.html#cb66-13" aria-hidden="true" tabindex="-1"></a><span class="co">#   {1, 1} =&gt; 1,</span></span>
+<span id="cb66-14"><a href="control-flow.html#cb66-14" aria-hidden="true" tabindex="-1"></a><span class="co">#   {9, 6} =&gt; 54,</span></span>
+<span id="cb66-15"><a href="control-flow.html#cb66-15" aria-hidden="true" tabindex="-1"></a><span class="co">#   {4, 3} =&gt; 12,</span></span>
+<span id="cb66-16"><a href="control-flow.html#cb66-16" aria-hidden="true" tabindex="-1"></a><span class="co">#   ...</span></span>
+<span id="cb66-17"><a href="control-flow.html#cb66-17" aria-hidden="true" tabindex="-1"></a><span class="co">#   {9, 7} =&gt; 63,</span></span>
+<span id="cb66-18"><a href="control-flow.html#cb66-18" aria-hidden="true" tabindex="-1"></a><span class="co">#   {5, 1} =&gt; 5,</span></span>
+<span id="cb66-19"><a href="control-flow.html#cb66-19" aria-hidden="true" tabindex="-1"></a><span class="co">#   {2, 2} =&gt; 4,</span></span>
+<span id="cb66-20"><a href="control-flow.html#cb66-20" aria-hidden="true" tabindex="-1"></a><span class="co">#   {4, 4} =&gt; 16,</span></span>
+<span id="cb66-21"><a href="control-flow.html#cb66-21" aria-hidden="true" tabindex="-1"></a><span class="co">#   {7, 4} =&gt; 28,</span></span>
+<span id="cb66-22"><a href="control-flow.html#cb66-22" aria-hidden="true" tabindex="-1"></a><span class="co">#   {6, 3} =&gt; 18,</span></span>
+<span id="cb66-23"><a href="control-flow.html#cb66-23" aria-hidden="true" tabindex="-1"></a><span class="co">#   {5, 4} =&gt; 20,</span></span>
+<span id="cb66-24"><a href="control-flow.html#cb66-24" aria-hidden="true" tabindex="-1"></a><span class="co">#   {9, 9} =&gt; 81</span></span>
+<span id="cb66-25"><a href="control-flow.html#cb66-25" aria-hidden="true" tabindex="-1"></a><span class="co"># }</span></span></code></pre></div>
+<p>As you can see, when multiple generators are used, the result is a cartesian product of the enumerables.</p>
+<div class="sourceCode" id="cb67"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb67-1"><a href="control-flow.html#cb67-1" aria-hidden="true" tabindex="-1"></a>names <span class="op">=</span> <span class="op">~</span>w[<span class="cn">James</span> <span class="cn">John</span> <span class="cn">Patricia</span>]</span>
+<span id="cb67-2"><a href="control-flow.html#cb67-2" aria-hidden="true" tabindex="-1"></a>surnames <span class="op">=</span> <span class="op">~</span>w[<span class="cn">Johnson</span> <span class="cn">Smith</span> <span class="cn">Williams</span>]</span>
+<span id="cb67-3"><a href="control-flow.html#cb67-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb67-4"><a href="control-flow.html#cb67-4" aria-hidden="true" tabindex="-1"></a><span class="kw">for</span> name <span class="op">&lt;-</span> names,</span>
+<span id="cb67-5"><a href="control-flow.html#cb67-5" aria-hidden="true" tabindex="-1"></a>    surname <span class="op">&lt;-</span> surnames <span class="kw">do</span></span>
+<span id="cb67-6"><a href="control-flow.html#cb67-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">"</span><span class="ot">#{</span>name<span class="ot">}</span><span class="st"> </span><span class="ot">#{</span>surname<span class="ot">}</span><span class="st">"</span></span>
+<span id="cb67-7"><a href="control-flow.html#cb67-7" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb67-8"><a href="control-flow.html#cb67-8" aria-hidden="true" tabindex="-1"></a><span class="co"># =&gt; [</span></span>
+<span id="cb67-9"><a href="control-flow.html#cb67-9" aria-hidden="true" tabindex="-1"></a><span class="co"># =&gt;   "James Johnson",</span></span>
+<span id="cb67-10"><a href="control-flow.html#cb67-10" aria-hidden="true" tabindex="-1"></a><span class="co"># =&gt;   "James Smith",</span></span>
+<span id="cb67-11"><a href="control-flow.html#cb67-11" aria-hidden="true" tabindex="-1"></a><span class="co"># =&gt;   "James Williams",</span></span>
+<span id="cb67-12"><a href="control-flow.html#cb67-12" aria-hidden="true" tabindex="-1"></a><span class="co"># =&gt;   "John Johnson",</span></span>
+<span id="cb67-13"><a href="control-flow.html#cb67-13" aria-hidden="true" tabindex="-1"></a><span class="co"># =&gt;   "John Smith",</span></span>
+<span id="cb67-14"><a href="control-flow.html#cb67-14" aria-hidden="true" tabindex="-1"></a><span class="co"># =&gt;   "John Williams",</span></span>
+<span id="cb67-15"><a href="control-flow.html#cb67-15" aria-hidden="true" tabindex="-1"></a><span class="co"># =&gt;   "Patricia Johnson",</span></span>
+<span id="cb67-16"><a href="control-flow.html#cb67-16" aria-hidden="true" tabindex="-1"></a><span class="co"># =&gt;   "Patricia Smith",</span></span>
+<span id="cb67-17"><a href="control-flow.html#cb67-17" aria-hidden="true" tabindex="-1"></a><span class="co"># =&gt;   "Patricia Williams"</span></span>
+<span id="cb67-18"><a href="control-flow.html#cb67-18" aria-hidden="true" tabindex="-1"></a><span class="co"># =&gt; ]</span></span></code></pre></div>
+<p>We can also use pattern matching in a generator to do filtering. If the left side of the generator does not match, then the for-loop will just ignore that value and continue to process.</p>
+<div class="sourceCode" id="cb68"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb68-1"><a href="control-flow.html#cb68-1" aria-hidden="true" tabindex="-1"></a>people <span class="op">=</span> [</span>
+<span id="cb68-2"><a href="control-flow.html#cb68-2" aria-hidden="true" tabindex="-1"></a>  %{<span class="va">name:</span> <span class="st">"John"</span>, <span class="va">active:</span> <span class="cn">true</span>},</span>
+<span id="cb68-3"><a href="control-flow.html#cb68-3" aria-hidden="true" tabindex="-1"></a>  %{<span class="va">name:</span> <span class="st">"Patricia"</span>, <span class="va">active:</span> <span class="cn">false</span>}</span>
+<span id="cb68-4"><a href="control-flow.html#cb68-4" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb68-5"><a href="control-flow.html#cb68-5" aria-hidden="true" tabindex="-1"></a><span class="kw">for</span> %{<span class="va">active:</span> <span class="cn">true</span>, <span class="va">name:</span> name} <span class="op">&lt;-</span> people <span class="kw">do</span></span>
+<span id="cb68-6"><a href="control-flow.html#cb68-6" aria-hidden="true" tabindex="-1"></a>  name</span>
+<span id="cb68-7"><a href="control-flow.html#cb68-7" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb68-8"><a href="control-flow.html#cb68-8" aria-hidden="true" tabindex="-1"></a><span class="co"># =&gt; ["John"]</span></span></code></pre></div>
 
 </div>
 </div>
@@ -143,7 +197,7 @@
 <li><a class="nav-link" href="#if-else-block"><span class="header-section-number">6.1</span> if-else block</a></li>
 <li><a class="nav-link" href="#cond-multiple-if-else-blocks"><span class="header-section-number">6.2</span> cond: multiple if-else blocks</a></li>
 <li><a class="nav-link" href="#case-case-when-with-pattern-matching"><span class="header-section-number">6.3</span> case: case when with pattern matching</a></li>
-<li><a class="nav-link" href="#with"><span class="header-section-number">6.4</span> with</a></li>
+<li><a class="nav-link" href="#with-combine-multiple-clauses"><span class="header-section-number">6.4</span> with: combine multiple clauses</a></li>
 <li><a class="nav-link" href="#comprehensions"><span class="header-section-number">6.5</span> comprehensions</a></li>
 </ul>
 

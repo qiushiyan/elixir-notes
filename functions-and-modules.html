@@ -142,7 +142,67 @@
 <h2>
 <span class="header-section-number">4.5</span> Protocols<a class="anchor" aria-label="anchor" href="#protocols"><i class="fas fa-link"></i></a>
 </h2>
+</div>
+<div id="use-import-and-alias" class="section level2" number="4.6">
+<h2>
+<span class="header-section-number">4.6</span> Use, Import and Alias<a class="anchor" aria-label="anchor" href="#use-import-and-alias"><i class="fas fa-link"></i></a>
+</h2>
+<div id="import" class="section level3" number="4.6.1">
+<h3>
+<span class="header-section-number">4.6.1</span> Import<a class="anchor" aria-label="anchor" href="#import"><i class="fas fa-link"></i></a>
+</h3>
+<p>If we want to import functions rather than aliasing the module we can use <code>import</code>:</p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb48-1"><a href="functions-and-modules.html#cb48-1" aria-hidden="true" tabindex="-1"></a>iex<span class="op">&gt;</span> <span class="im">import</span> <span class="cn">List</span></span>
+<span id="cb48-2"><a href="functions-and-modules.html#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; nil</span></span>
+<span id="cb48-3"><a href="functions-and-modules.html#cb48-3" aria-hidden="true" tabindex="-1"></a>iex<span class="op">&gt;</span> last([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>])</span>
+<span id="cb48-4"><a href="functions-and-modules.html#cb48-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3</span></span></code></pre></div>
+<p>By default all functions and macros are imported but we can filter them using the <code>:only</code> and <code>:except</code> options.</p>
+<p>To import specific functions and macros, we must provide the name/arity pairs to <code>:only</code> and <code>:except</code>. Let’s start by importing only the <code>last/1</code> function:</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb49-1"><a href="functions-and-modules.html#cb49-1" aria-hidden="true" tabindex="-1"></a>iex<span class="op">&gt;</span> <span class="im">import</span> <span class="cn">List</span>, <span class="va">only:</span> [<span class="va">last:</span> <span class="dv">1</span>]</span>
+<span id="cb49-2"><a href="functions-and-modules.html#cb49-2" aria-hidden="true" tabindex="-1"></a>iex<span class="op">&gt;</span> first([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>])</span>
+<span id="cb49-3"><a href="functions-and-modules.html#cb49-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ** (CompileError) iex:13: undefined function first/1</span></span>
+<span id="cb49-4"><a href="functions-and-modules.html#cb49-4" aria-hidden="true" tabindex="-1"></a>iex<span class="op">&gt;</span> last([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>])</span>
+<span id="cb49-5"><a href="functions-and-modules.html#cb49-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3</span></span></code></pre></div>
+<p>If we import everything except <code>last/1</code> and try the same functions as before:</p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb50-1"><a href="functions-and-modules.html#cb50-1" aria-hidden="true" tabindex="-1"></a>iex<span class="op">&gt;</span> <span class="im">import</span> <span class="cn">List</span>, <span class="va">except:</span> [<span class="va">last:</span> <span class="dv">1</span>]</span>
+<span id="cb50-2"><a href="functions-and-modules.html#cb50-2" aria-hidden="true" tabindex="-1"></a>iex<span class="op">&gt;</span> first([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>])</span>
+<span id="cb50-3"><a href="functions-and-modules.html#cb50-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1</span></span>
+<span id="cb50-4"><a href="functions-and-modules.html#cb50-4" aria-hidden="true" tabindex="-1"></a>iex<span class="op">&gt;</span> last([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>])</span>
+<span id="cb50-5"><a href="functions-and-modules.html#cb50-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ** (CompileError) iex:3: undefined function last/1</span></span></code></pre></div>
+<p>In addition to the name/arity pairs there are two special atoms, :functions and :macros, which import only functions and macros respectively:</p>
+<p>import List, only: :functions
+import List, only: :macros</p>
+</div>
+<div id="alias" class="section level3" number="4.6.2">
+<h3>
+<span class="header-section-number">4.6.2</span> Alias<a class="anchor" aria-label="anchor" href="#alias"><i class="fas fa-link"></i></a>
+</h3>
+<p>Allows us to alias module names; used quite frequently in Elixir code:</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb51-1"><a href="functions-and-modules.html#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="kw">defmodule</span> <span class="cn">Sayings</span><span class="op">.</span><span class="cn">Greetings</span> <span class="kw">do</span></span>
+<span id="cb51-2"><a href="functions-and-modules.html#cb51-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> basic(name), <span class="kw">do</span>: <span class="st">"Hi, </span><span class="ot">#{</span>name<span class="ot">}</span><span class="st">"</span></span>
+<span id="cb51-3"><a href="functions-and-modules.html#cb51-3" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb51-4"><a href="functions-and-modules.html#cb51-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-5"><a href="functions-and-modules.html#cb51-5" aria-hidden="true" tabindex="-1"></a><span class="kw">defmodule</span> <span class="cn">Example</span> <span class="kw">do</span></span>
+<span id="cb51-6"><a href="functions-and-modules.html#cb51-6" aria-hidden="true" tabindex="-1"></a>  <span class="im">alias</span> <span class="cn">Sayings</span><span class="op">.</span><span class="cn">Greetings</span></span>
+<span id="cb51-7"><a href="functions-and-modules.html#cb51-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-8"><a href="functions-and-modules.html#cb51-8" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> greeting(name), <span class="kw">do</span>: <span class="cn">Greetings</span><span class="op">.</span>basic(name)</span>
+<span id="cb51-9"><a href="functions-and-modules.html#cb51-9" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div>
+<p>Without alias</p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb52-1"><a href="functions-and-modules.html#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="kw">defmodule</span> <span class="cn">Example</span> <span class="kw">do</span></span>
+<span id="cb52-2"><a href="functions-and-modules.html#cb52-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> greeting(name), <span class="kw">do</span>: <span class="cn">Sayings</span><span class="op">.</span><span class="cn">Greetings</span><span class="op">.</span>basic(name)</span>
+<span id="cb52-3"><a href="functions-and-modules.html#cb52-3" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div>
+<p>If there’s a conflict between two aliases or we just wish to alias to a different name entirely, we can use the <code>:as</code> option:</p>
+<div class="sourceCode" id="cb53"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb53-1"><a href="functions-and-modules.html#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="kw">defmodule</span> <span class="cn">Example</span> <span class="kw">do</span></span>
+<span id="cb53-2"><a href="functions-and-modules.html#cb53-2" aria-hidden="true" tabindex="-1"></a>  <span class="im">alias</span> <span class="cn">Sayings</span><span class="op">.</span><span class="cn">Greetings</span>, <span class="va">as:</span> <span class="cn">Hi</span></span>
+<span id="cb53-3"><a href="functions-and-modules.html#cb53-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-4"><a href="functions-and-modules.html#cb53-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> print_message(name), <span class="kw">do</span>: <span class="cn">Hi</span><span class="op">.</span>basic(name)</span>
+<span id="cb53-5"><a href="functions-and-modules.html#cb53-5" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div>
+<p>It’s even possible to alias multiple modules at once:</p>
+<div class="sourceCode" id="cb54"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb54-1"><a href="functions-and-modules.html#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="kw">defmodule</span> <span class="cn">Example</span> <span class="kw">do</span></span>
+<span id="cb54-2"><a href="functions-and-modules.html#cb54-2" aria-hidden="true" tabindex="-1"></a>  <span class="im">alias</span> <span class="cn">Sayings</span><span class="op">.</span>{<span class="cn">Greetings</span>, <span class="cn">Farewells</span>}</span>
+<span id="cb54-3"><a href="functions-and-modules.html#cb54-3" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div>
 
+</div>
 </div>
 </div>
   <div class="chapter-nav">
@@ -159,6 +219,12 @@
 </li>
 <li><a class="nav-link" href="#module-attributes"><span class="header-section-number">4.4</span> Module attributes</a></li>
 <li><a class="nav-link" href="#protocols"><span class="header-section-number">4.5</span> Protocols</a></li>
+<li>
+<a class="nav-link" href="#use-import-and-alias"><span class="header-section-number">4.6</span> Use, Import and Alias</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#import"><span class="header-section-number">4.6.1</span> Import</a></li>
+<li><a class="nav-link" href="#alias"><span class="header-section-number">4.6.2</span> Alias</a></li>
+</ul>
+</li>
 </ul>
 
       <div class="book-extra">
