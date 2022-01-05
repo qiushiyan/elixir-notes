@@ -1,6 +1,8 @@
 
 # `Enum` Module
 
+## Looping
+
 ```elixir
 Enum.each(
     [1, 2, 3],
@@ -20,3 +22,16 @@ Enum.each(
     &IO.puts/1
 )
 ```
+
+## Counting
+
+`Enum.count`
+
+```elixir
+iex(6)> Enum.count([1, 2, 3])
+#> 3
+iex(7)> Enum.count({a: 1, b: 2})
+#> 2
+```
+
+## Using `Stream`
