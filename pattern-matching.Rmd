@@ -49,6 +49,8 @@ iex(7)> min
 
 **Match maps**
 
+Note that pattern matching with maps **does not require listing all the keys**. You can match on any key in the map.
+
 ```elixir
 %{age: age2} =  %{name: "Bob", age: 25}
 age2
@@ -61,6 +63,24 @@ Of course, a match will fail if the pattern contains a key that’s not in the m
 %{age: age, works_at: works_at} = %{name: "Bob", age: 25}
 #> ** (MatchError) no match of right hand side value
 ```
+
+In the following example, we can just pattern match with the key you need. Also order of the clauses are important e.g. if you are trying to match `%{"b" => 2}` but you have the following map `%{"a" => 1, "b" => 2}`, the key `"a"` will match first, because is in the first clause:
+
+```elixir
+defmodule Test do
+  def my_func(%{"a" => value}), do: {:a, value}
+  def my_func(%{"b" => value}), do: {:b, value}
+  def my_func(_), do: :error
+end
+
+iex(1)> Test.my_func(%{"a" => 1})
+#> {:a, 1}
+iex(2)> Test.my_func(%{"b" => 2})
+#> {:b, 2}
+iex(3)> Test.my_func(%{"a" => 1, "b" => 2})
+#> {:a, 1}
+```
+
 
 **Match strings**
 

@@ -119,19 +119,19 @@ map = %{a: 1, b: 2}
 
 ### Map Utilities
 
-get a key's value
+get a key's value `Map.get`
 
 ```elixir
 Map.get(map, key, default_value)
 ```
 
-puts the given value under key in map (an alternative to the `|` syntax)
+puts the given value under key in map (an alternative to the `|` syntax) `Map.put`
 
 ```elixir
 Map.put(map, key, value)
 ```
 
-Updates the key in map with the given function.
+Updates the key in map with the given function. `Map.update`
 
 ```elixir
 Map.update(map, key, default, fun)
@@ -141,6 +141,28 @@ If key is present in map then the existing value is passed to `fun` and its
 result is used as the updated value of key. If key is not present in map,
 `default` is inserted as the value of key. The default value will not be passed
 through the update function.
+
+List all keys `Map.keys`
+
+```elixir
+Map.keys(%{name: "qiushi", age: 18})
+#> [:name, :age]
+```
+
+List all values `Map.values`
+
+```elixir
+Map.values(%{name: "qiushi", age: 18})
+```
+
+Check if a key is in the map `Map.has_key?`
+
+```elixir
+Map.has_key?(%{name: "qiushi", age: 18}, :hobby)
+#> false
+```
+
+
 
 ## Keyword List
 

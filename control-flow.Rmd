@@ -193,3 +193,15 @@ end
 
 [%{address: "123 Main St", description: "highway bond", id: 1, state: "CA"}]
 ```
+
+
+A shorter syntax using pattern matching to filter directly
+
+```elixir
+state = "CA"
+
+for x = %{state: ^state} <- propositions,
+      y = %{state: ^state} <- locations, do
+    Map.put(x, :address, y.address)
+end
+```
