@@ -95,6 +95,41 @@
 <h2>
 <span class="header-section-number">6.4</span> with<a class="anchor" aria-label="anchor" href="#with"><i class="fas fa-link"></i></a>
 </h2>
+</div>
+<div id="comprehensions" class="section level2" number="6.5">
+<h2>
+<span class="header-section-number">6.5</span> comprehensions<a class="anchor" aria-label="anchor" href="#comprehensions"><i class="fas fa-link"></i></a>
+</h2>
+<p>In Elixir, it is common to loop over an Enumerable, often filtering out some results and mapping values into another list. Comprehensions are syntactic sugar for such constructs: they group those common tasks into the for special form.</p>
+<p>For example, we can map a list of integers into their squared values:</p>
+<div class="sourceCode" id="cb53"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb53-1"><a href="control-flow.html#cb53-1" aria-hidden="true" tabindex="-1"></a>iex<span class="op">&gt;</span> <span class="kw">for</span> n <span class="op">&lt;-</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>], <span class="kw">do</span>: n <span class="op">*</span> n</span>
+<span id="cb53-2"><a href="control-flow.html#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1, 4, 9, 16]</span></span></code></pre></div>
+<p>A comprehension is made of three parts: <strong>generators</strong>, <strong>filters</strong>, and <strong>collectables</strong>.</p>
+<div class="sourceCode" id="cb54"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb54-1"><a href="control-flow.html#cb54-1" aria-hidden="true" tabindex="-1"></a>multiplication_table <span class="op">=</span> <span class="kw">for</span> x <span class="op">&lt;-</span> <span class="dv">1</span><span class="op">..</span><span class="dv">9</span>, y <span class="op">&lt;-</span> <span class="dv">1</span><span class="op">..</span><span class="dv">9</span>, <span class="co"># generaotr</span></span>
+<span id="cb54-2"><a href="control-flow.html#cb54-2" aria-hidden="true" tabindex="-1"></a>              x <span class="op">&gt;=</span> y, <span class="co"># filter</span></span>
+<span id="cb54-3"><a href="control-flow.html#cb54-3" aria-hidden="true" tabindex="-1"></a>              <span class="va">into:</span> %{} <span class="kw">do</span> <span class="co"># collectable</span></span>
+<span id="cb54-4"><a href="control-flow.html#cb54-4" aria-hidden="true" tabindex="-1"></a>              {{x, y}, x<span class="op">*</span>y}</span>
+<span id="cb54-5"><a href="control-flow.html#cb54-5" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb54-6"><a href="control-flow.html#cb54-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-7"><a href="control-flow.html#cb54-7" aria-hidden="true" tabindex="-1"></a>multiplication_table</span>
+<span id="cb54-8"><a href="control-flow.html#cb54-8" aria-hidden="true" tabindex="-1"></a><span class="co"># %{</span></span>
+<span id="cb54-9"><a href="control-flow.html#cb54-9" aria-hidden="true" tabindex="-1"></a><span class="co">#   {8, 5} =&gt; 40,</span></span>
+<span id="cb54-10"><a href="control-flow.html#cb54-10" aria-hidden="true" tabindex="-1"></a><span class="co">#   {8, 6} =&gt; 48,</span></span>
+<span id="cb54-11"><a href="control-flow.html#cb54-11" aria-hidden="true" tabindex="-1"></a><span class="co">#   {5, 2} =&gt; 10,</span></span>
+<span id="cb54-12"><a href="control-flow.html#cb54-12" aria-hidden="true" tabindex="-1"></a><span class="co">#   {6, 5} =&gt; 30,</span></span>
+<span id="cb54-13"><a href="control-flow.html#cb54-13" aria-hidden="true" tabindex="-1"></a><span class="co">#   {1, 1} =&gt; 1,</span></span>
+<span id="cb54-14"><a href="control-flow.html#cb54-14" aria-hidden="true" tabindex="-1"></a><span class="co">#   {9, 6} =&gt; 54,</span></span>
+<span id="cb54-15"><a href="control-flow.html#cb54-15" aria-hidden="true" tabindex="-1"></a><span class="co">#   {4, 3} =&gt; 12,</span></span>
+<span id="cb54-16"><a href="control-flow.html#cb54-16" aria-hidden="true" tabindex="-1"></a><span class="co">#   ...</span></span>
+<span id="cb54-17"><a href="control-flow.html#cb54-17" aria-hidden="true" tabindex="-1"></a><span class="co">#   {9, 7} =&gt; 63,</span></span>
+<span id="cb54-18"><a href="control-flow.html#cb54-18" aria-hidden="true" tabindex="-1"></a><span class="co">#   {5, 1} =&gt; 5,</span></span>
+<span id="cb54-19"><a href="control-flow.html#cb54-19" aria-hidden="true" tabindex="-1"></a><span class="co">#   {2, 2} =&gt; 4,</span></span>
+<span id="cb54-20"><a href="control-flow.html#cb54-20" aria-hidden="true" tabindex="-1"></a><span class="co">#   {4, 4} =&gt; 16,</span></span>
+<span id="cb54-21"><a href="control-flow.html#cb54-21" aria-hidden="true" tabindex="-1"></a><span class="co">#   {7, 4} =&gt; 28,</span></span>
+<span id="cb54-22"><a href="control-flow.html#cb54-22" aria-hidden="true" tabindex="-1"></a><span class="co">#   {6, 3} =&gt; 18,</span></span>
+<span id="cb54-23"><a href="control-flow.html#cb54-23" aria-hidden="true" tabindex="-1"></a><span class="co">#   {5, 4} =&gt; 20,</span></span>
+<span id="cb54-24"><a href="control-flow.html#cb54-24" aria-hidden="true" tabindex="-1"></a><span class="co">#   {9, 9} =&gt; 81</span></span>
+<span id="cb54-25"><a href="control-flow.html#cb54-25" aria-hidden="true" tabindex="-1"></a><span class="co"># }</span></span></code></pre></div>
 
 </div>
 </div>
@@ -109,6 +144,7 @@
 <li><a class="nav-link" href="#cond-multiple-if-else-blocks"><span class="header-section-number">6.2</span> cond: multiple if-else blocks</a></li>
 <li><a class="nav-link" href="#case-case-when-with-pattern-matching"><span class="header-section-number">6.3</span> case: case when with pattern matching</a></li>
 <li><a class="nav-link" href="#with"><span class="header-section-number">6.4</span> with</a></li>
+<li><a class="nav-link" href="#comprehensions"><span class="header-section-number">6.5</span> comprehensions</a></li>
 </ul>
 
       <div class="book-extra">

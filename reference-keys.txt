@@ -27,6 +27,7 @@ if-else-block
 cond-multiple-if-else-blocks
 case-case-when-with-pattern-matching
 with
+comprehensions
 miscellaneous-features
 sigils
 r-regular-expressions
