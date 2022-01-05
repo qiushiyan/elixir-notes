@@ -60,19 +60,19 @@
 <h1>
 <span class="header-section-number">5</span> <code>Enum</code> Module<a class="anchor" aria-label="anchor" href="#enum-module"><i class="fas fa-link"></i></a>
 </h1>
-<div class="sourceCode" id="cb55"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb55-1"><a href="enum-module.html#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="cn">Enum</span><span class="op">.</span>each(</span>
-<span id="cb55-2"><a href="enum-module.html#cb55-2" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>],</span>
-<span id="cb55-3"><a href="enum-module.html#cb55-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">fn</span> (x) <span class="op">-&gt;</span> <span class="cn">IO</span><span class="op">.</span>puts(x) <span class="kw">end</span></span>
-<span id="cb55-4"><a href="enum-module.html#cb55-4" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb55-5"><a href="enum-module.html#cb55-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1</span></span>
-<span id="cb55-6"><a href="enum-module.html#cb55-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2</span></span>
-<span id="cb55-7"><a href="enum-module.html#cb55-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3</span></span>
-<span id="cb55-8"><a href="enum-module.html#cb55-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; :ok</span></span></code></pre></div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb59-1"><a href="enum-module.html#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="cn">Enum</span><span class="op">.</span>each(</span>
+<span id="cb59-2"><a href="enum-module.html#cb59-2" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>],</span>
+<span id="cb59-3"><a href="enum-module.html#cb59-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">fn</span> (x) <span class="op">-&gt;</span> <span class="cn">IO</span><span class="op">.</span>puts(x) <span class="kw">end</span></span>
+<span id="cb59-4"><a href="enum-module.html#cb59-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb59-5"><a href="enum-module.html#cb59-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1</span></span>
+<span id="cb59-6"><a href="enum-module.html#cb59-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2</span></span>
+<span id="cb59-7"><a href="enum-module.html#cb59-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3</span></span>
+<span id="cb59-8"><a href="enum-module.html#cb59-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; :ok</span></span></code></pre></div>
 <p>Use the <strong>capture operator</strong> <code>&amp;</code> as a shortcut, it takes the full function qualifier — a module name, a function name, and an arity — and turns that function into a lambda that can be assigned to a variable. You can use the capture operator to simplify the call to Enum.each:</p>
-<div class="sourceCode" id="cb56"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb56-1"><a href="enum-module.html#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="cn">Enum</span><span class="op">.</span>each(</span>
-<span id="cb56-2"><a href="enum-module.html#cb56-2" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>],</span>
-<span id="cb56-3"><a href="enum-module.html#cb56-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">&amp;</span><span class="cn">IO</span><span class="op">.</span>puts<span class="op">/</span><span class="dv">1</span></span>
-<span id="cb56-4"><a href="enum-module.html#cb56-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb60-1"><a href="enum-module.html#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="cn">Enum</span><span class="op">.</span>each(</span>
+<span id="cb60-2"><a href="enum-module.html#cb60-2" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>],</span>
+<span id="cb60-3"><a href="enum-module.html#cb60-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">&amp;</span><span class="cn">IO</span><span class="op">.</span>puts<span class="op">/</span><span class="dv">1</span></span>
+<span id="cb60-4"><a href="enum-module.html#cb60-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 
 </div>
   <div class="chapter-nav">

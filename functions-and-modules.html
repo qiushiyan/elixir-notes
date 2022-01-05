@@ -64,43 +64,43 @@
 <h2>
 <span class="header-section-number">4.1</span> Modules<a class="anchor" aria-label="anchor" href="#modules"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb43"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb43-1"><a href="functions-and-modules.html#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="kw">defmodule</span> <span class="cn">MyModule</span> <span class="kw">do</span></span>
-<span id="cb43-2"><a href="functions-and-modules.html#cb43-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> my_function(arg1, arg2) <span class="kw">do</span></span>
-<span id="cb43-3"><a href="functions-and-modules.html#cb43-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># ...</span></span>
-<span id="cb43-4"><a href="functions-and-modules.html#cb43-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">end</span></span>
-<span id="cb43-5"><a href="functions-and-modules.html#cb43-5" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb47-1"><a href="functions-and-modules.html#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="kw">defmodule</span> <span class="cn">MyModule</span> <span class="kw">do</span></span>
+<span id="cb47-2"><a href="functions-and-modules.html#cb47-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> my_function(arg1, arg2) <span class="kw">do</span></span>
+<span id="cb47-3"><a href="functions-and-modules.html#cb47-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># ...</span></span>
+<span id="cb47-4"><a href="functions-and-modules.html#cb47-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">end</span></span>
+<span id="cb47-5"><a href="functions-and-modules.html#cb47-5" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div>
 </div>
 <div id="struct" class="section level2" number="4.2">
 <h2>
 <span class="header-section-number">4.2</span> Struct<a class="anchor" aria-label="anchor" href="#struct"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb44"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb44-1"><a href="functions-and-modules.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="kw">defmodule</span> <span class="cn">Candidate</span> <span class="kw">do</span></span>
-<span id="cb44-2"><a href="functions-and-modules.html#cb44-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">defstruct</span> [<span class="va">name:</span> <span class="st">"qiushi"</span>, <span class="va">age:</span> <span class="dv">18</span>]</span>
-<span id="cb44-3"><a href="functions-and-modules.html#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
-<span id="cb44-4"><a href="functions-and-modules.html#cb44-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-5"><a href="functions-and-modules.html#cb44-5" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> %<span class="cn">Candidate</span>{<span class="va">name:</span> <span class="st">"tom"</span>}</span>
-<span id="cb44-6"><a href="functions-and-modules.html#cb44-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; %Candidate{name: "tom", age: 18}</span></span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb48-1"><a href="functions-and-modules.html#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="kw">defmodule</span> <span class="cn">Candidate</span> <span class="kw">do</span></span>
+<span id="cb48-2"><a href="functions-and-modules.html#cb48-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">defstruct</span> [<span class="va">name:</span> <span class="st">"qiushi"</span>, <span class="va">age:</span> <span class="dv">18</span>]</span>
+<span id="cb48-3"><a href="functions-and-modules.html#cb48-3" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb48-4"><a href="functions-and-modules.html#cb48-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-5"><a href="functions-and-modules.html#cb48-5" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> %<span class="cn">Candidate</span>{<span class="va">name:</span> <span class="st">"tom"</span>}</span>
+<span id="cb48-6"><a href="functions-and-modules.html#cb48-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; %Candidate{name: "tom", age: 18}</span></span></code></pre></div>
 </div>
 <div id="anoynmous-functions" class="section level2" number="4.3">
 <h2>
 <span class="header-section-number">4.3</span> Anoynmous Functions<a class="anchor" aria-label="anchor" href="#anoynmous-functions"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb45"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb45-1"><a href="functions-and-modules.html#cb45-1" aria-hidden="true" tabindex="-1"></a>square <span class="op">=</span> <span class="kw">fn</span> x <span class="op">-&gt;</span> x <span class="op">*</span> x <span class="kw">end</span></span>
-<span id="cb45-2"><a href="functions-and-modules.html#cb45-2" aria-hidden="true" tabindex="-1"></a>square<span class="op">.</span>(<span class="dv">5</span>)</span>
-<span id="cb45-3"><a href="functions-and-modules.html#cb45-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 25</span></span></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb49-1"><a href="functions-and-modules.html#cb49-1" aria-hidden="true" tabindex="-1"></a>square <span class="op">=</span> <span class="kw">fn</span> x <span class="op">-&gt;</span> x <span class="op">*</span> x <span class="kw">end</span></span>
+<span id="cb49-2"><a href="functions-and-modules.html#cb49-2" aria-hidden="true" tabindex="-1"></a>square<span class="op">.</span>(<span class="dv">5</span>)</span>
+<span id="cb49-3"><a href="functions-and-modules.html#cb49-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 25</span></span></code></pre></div>
 <div id="anoynmous-functions-with-pattern-matching" class="section level3" number="4.3.1">
 <h3>
 <span class="header-section-number">4.3.1</span> Anoynmous Functions with Pattern Matching<a class="anchor" aria-label="anchor" href="#anoynmous-functions-with-pattern-matching"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb46"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb46-1"><a href="functions-and-modules.html#cb46-1" aria-hidden="true" tabindex="-1"></a>logo_file <span class="op">=</span> <span class="kw">fn</span></span>
-<span id="cb46-2"><a href="functions-and-modules.html#cb46-2" aria-hidden="true" tabindex="-1"></a>  (<span class="va">:democratic</span>) <span class="op">-&gt;</span> <span class="st">"donkey.png"</span></span>
-<span id="cb46-3"><a href="functions-and-modules.html#cb46-3" aria-hidden="true" tabindex="-1"></a>  (<span class="va">:republican</span>) <span class="op">-&gt;</span> <span class="st">"elephant.png"</span></span>
-<span id="cb46-4"><a href="functions-and-modules.html#cb46-4" aria-hidden="true" tabindex="-1"></a>  (<span class="va">:green</span>) <span class="op">-&gt;</span> <span class="st">"flower.png"</span></span>
-<span id="cb46-5"><a href="functions-and-modules.html#cb46-5" aria-hidden="true" tabindex="-1"></a>  (<span class="va">:other</span>) <span class="op">-&gt;</span> <span class="st">"other.png"</span></span>
-<span id="cb46-6"><a href="functions-and-modules.html#cb46-6" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
-<span id="cb46-7"><a href="functions-and-modules.html#cb46-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-8"><a href="functions-and-modules.html#cb46-8" aria-hidden="true" tabindex="-1"></a>logo_file<span class="op">.</span>(<span class="va">:green</span>)</span>
-<span id="cb46-9"><a href="functions-and-modules.html#cb46-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; "flower.png"</span></span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb50-1"><a href="functions-and-modules.html#cb50-1" aria-hidden="true" tabindex="-1"></a>logo_file <span class="op">=</span> <span class="kw">fn</span></span>
+<span id="cb50-2"><a href="functions-and-modules.html#cb50-2" aria-hidden="true" tabindex="-1"></a>  (<span class="va">:democratic</span>) <span class="op">-&gt;</span> <span class="st">"donkey.png"</span></span>
+<span id="cb50-3"><a href="functions-and-modules.html#cb50-3" aria-hidden="true" tabindex="-1"></a>  (<span class="va">:republican</span>) <span class="op">-&gt;</span> <span class="st">"elephant.png"</span></span>
+<span id="cb50-4"><a href="functions-and-modules.html#cb50-4" aria-hidden="true" tabindex="-1"></a>  (<span class="va">:green</span>) <span class="op">-&gt;</span> <span class="st">"flower.png"</span></span>
+<span id="cb50-5"><a href="functions-and-modules.html#cb50-5" aria-hidden="true" tabindex="-1"></a>  (<span class="va">:other</span>) <span class="op">-&gt;</span> <span class="st">"other.png"</span></span>
+<span id="cb50-6"><a href="functions-and-modules.html#cb50-6" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb50-7"><a href="functions-and-modules.html#cb50-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-8"><a href="functions-and-modules.html#cb50-8" aria-hidden="true" tabindex="-1"></a>logo_file<span class="op">.</span>(<span class="va">:green</span>)</span>
+<span id="cb50-9"><a href="functions-and-modules.html#cb50-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; "flower.png"</span></span></code></pre></div>
 </div>
 </div>
 <div id="module-attributes" class="section level2" number="4.4">
@@ -108,35 +108,35 @@
 <span class="header-section-number">4.4</span> Module attributes<a class="anchor" aria-label="anchor" href="#module-attributes"><i class="fas fa-link"></i></a>
 </h2>
 <p>Module attributes are computed at compile time.</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb47-1"><a href="functions-and-modules.html#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="kw">defmodule</span> <span class="cn">Mascot</span> <span class="kw">do</span></span>
-<span id="cb47-2"><a href="functions-and-modules.html#cb47-2" aria-hidden="true" tabindex="-1"></a>  <span class="ot">@mascots</span> %{</span>
-<span id="cb47-3"><a href="functions-and-modules.html#cb47-3" aria-hidden="true" tabindex="-1"></a>    <span class="va">democratic:</span> <span class="st">"monkey"</span>,</span>
-<span id="cb47-4"><a href="functions-and-modules.html#cb47-4" aria-hidden="true" tabindex="-1"></a>    <span class="va">republican:</span> <span class="st">"elephant"</span>,</span>
-<span id="cb47-5"><a href="functions-and-modules.html#cb47-5" aria-hidden="true" tabindex="-1"></a>    <span class="va">green:</span> <span class="st">"plant"</span>,</span>
-<span id="cb47-6"><a href="functions-and-modules.html#cb47-6" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb47-7"><a href="functions-and-modules.html#cb47-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-8"><a href="functions-and-modules.html#cb47-8" aria-hidden="true" tabindex="-1"></a>  <span class="ot">@parties</span> <span class="cn">Map</span><span class="op">.</span>keys(<span class="ot">@mascots</span>)</span>
-<span id="cb47-9"><a href="functions-and-modules.html#cb47-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-10"><a href="functions-and-modules.html#cb47-10" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> mascot(party) <span class="kw">do</span></span>
-<span id="cb47-11"><a href="functions-and-modules.html#cb47-11" aria-hidden="true" tabindex="-1"></a>    <span class="ot">@mascots</span>[party]</span>
-<span id="cb47-12"><a href="functions-and-modules.html#cb47-12" aria-hidden="true" tabindex="-1"></a>  <span class="kw">end</span></span>
-<span id="cb47-13"><a href="functions-and-modules.html#cb47-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-14"><a href="functions-and-modules.html#cb47-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-15"><a href="functions-and-modules.html#cb47-15" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> logo(party, size) <span class="kw">when</span> party <span class="kw">in</span> <span class="ot">@parties</span> <span class="kw">do</span></span>
-<span id="cb47-16"><a href="functions-and-modules.html#cb47-16" aria-hidden="true" tabindex="-1"></a>    m <span class="op">=</span> mascot(party)</span>
-<span id="cb47-17"><a href="functions-and-modules.html#cb47-17" aria-hidden="true" tabindex="-1"></a>    do_logo_size(m, size)</span>
-<span id="cb47-18"><a href="functions-and-modules.html#cb47-18" aria-hidden="true" tabindex="-1"></a>  <span class="kw">end</span></span>
-<span id="cb47-19"><a href="functions-and-modules.html#cb47-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-20"><a href="functions-and-modules.html#cb47-20" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> logo(party, size) <span class="kw">do</span></span>
-<span id="cb47-21"><a href="functions-and-modules.html#cb47-21" aria-hidden="true" tabindex="-1"></a>    {<span class="va">:error</span>, <span class="va">:unknown_party</span>}</span>
-<span id="cb47-22"><a href="functions-and-modules.html#cb47-22" aria-hidden="true" tabindex="-1"></a>  <span class="kw">end</span></span>
-<span id="cb47-23"><a href="functions-and-modules.html#cb47-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-24"><a href="functions-and-modules.html#cb47-24" aria-hidden="true" tabindex="-1"></a>  <span class="kw">defp</span> do_logo_size(mascot, <span class="va">:small</span>), <span class="kw">do</span>: <span class="st">"</span><span class="ot">#{</span>mascot<span class="ot">}</span><span class="st">_small.png"</span></span>
-<span id="cb47-25"><a href="functions-and-modules.html#cb47-25" aria-hidden="true" tabindex="-1"></a>  <span class="kw">defp</span> do_logo_size(mascot, <span class="va">:normal</span>), <span class="kw">do</span>: <span class="st">"</span><span class="ot">#{</span>mascot<span class="ot">}</span><span class="st">_normal.png"</span></span>
-<span id="cb47-26"><a href="functions-and-modules.html#cb47-26" aria-hidden="true" tabindex="-1"></a>  <span class="kw">defp</span> do_logo_size(mascot, <span class="va">:large</span>), <span class="kw">do</span>: <span class="st">"</span><span class="ot">#{</span>mascot<span class="ot">}</span><span class="st">_large.png"</span></span>
-<span id="cb47-27"><a href="functions-and-modules.html#cb47-27" aria-hidden="true" tabindex="-1"></a>  <span class="kw">defp</span> do_logo_size(mascot, unknown), <span class="kw">do</span>: {<span class="va">:error</span>, <span class="va">:unknown_size</span>}</span>
-<span id="cb47-28"><a href="functions-and-modules.html#cb47-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-29"><a href="functions-and-modules.html#cb47-29" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb51-1"><a href="functions-and-modules.html#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="kw">defmodule</span> <span class="cn">Mascot</span> <span class="kw">do</span></span>
+<span id="cb51-2"><a href="functions-and-modules.html#cb51-2" aria-hidden="true" tabindex="-1"></a>  <span class="ot">@mascots</span> %{</span>
+<span id="cb51-3"><a href="functions-and-modules.html#cb51-3" aria-hidden="true" tabindex="-1"></a>    <span class="va">democratic:</span> <span class="st">"monkey"</span>,</span>
+<span id="cb51-4"><a href="functions-and-modules.html#cb51-4" aria-hidden="true" tabindex="-1"></a>    <span class="va">republican:</span> <span class="st">"elephant"</span>,</span>
+<span id="cb51-5"><a href="functions-and-modules.html#cb51-5" aria-hidden="true" tabindex="-1"></a>    <span class="va">green:</span> <span class="st">"plant"</span>,</span>
+<span id="cb51-6"><a href="functions-and-modules.html#cb51-6" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb51-7"><a href="functions-and-modules.html#cb51-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-8"><a href="functions-and-modules.html#cb51-8" aria-hidden="true" tabindex="-1"></a>  <span class="ot">@parties</span> <span class="cn">Map</span><span class="op">.</span>keys(<span class="ot">@mascots</span>)</span>
+<span id="cb51-9"><a href="functions-and-modules.html#cb51-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-10"><a href="functions-and-modules.html#cb51-10" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> mascot(party) <span class="kw">do</span></span>
+<span id="cb51-11"><a href="functions-and-modules.html#cb51-11" aria-hidden="true" tabindex="-1"></a>    <span class="ot">@mascots</span>[party]</span>
+<span id="cb51-12"><a href="functions-and-modules.html#cb51-12" aria-hidden="true" tabindex="-1"></a>  <span class="kw">end</span></span>
+<span id="cb51-13"><a href="functions-and-modules.html#cb51-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-14"><a href="functions-and-modules.html#cb51-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-15"><a href="functions-and-modules.html#cb51-15" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> logo(party, size) <span class="kw">when</span> party <span class="kw">in</span> <span class="ot">@parties</span> <span class="kw">do</span></span>
+<span id="cb51-16"><a href="functions-and-modules.html#cb51-16" aria-hidden="true" tabindex="-1"></a>    m <span class="op">=</span> mascot(party)</span>
+<span id="cb51-17"><a href="functions-and-modules.html#cb51-17" aria-hidden="true" tabindex="-1"></a>    do_logo_size(m, size)</span>
+<span id="cb51-18"><a href="functions-and-modules.html#cb51-18" aria-hidden="true" tabindex="-1"></a>  <span class="kw">end</span></span>
+<span id="cb51-19"><a href="functions-and-modules.html#cb51-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-20"><a href="functions-and-modules.html#cb51-20" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> logo(party, size) <span class="kw">do</span></span>
+<span id="cb51-21"><a href="functions-and-modules.html#cb51-21" aria-hidden="true" tabindex="-1"></a>    {<span class="va">:error</span>, <span class="va">:unknown_party</span>}</span>
+<span id="cb51-22"><a href="functions-and-modules.html#cb51-22" aria-hidden="true" tabindex="-1"></a>  <span class="kw">end</span></span>
+<span id="cb51-23"><a href="functions-and-modules.html#cb51-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-24"><a href="functions-and-modules.html#cb51-24" aria-hidden="true" tabindex="-1"></a>  <span class="kw">defp</span> do_logo_size(mascot, <span class="va">:small</span>), <span class="kw">do</span>: <span class="st">"</span><span class="ot">#{</span>mascot<span class="ot">}</span><span class="st">_small.png"</span></span>
+<span id="cb51-25"><a href="functions-and-modules.html#cb51-25" aria-hidden="true" tabindex="-1"></a>  <span class="kw">defp</span> do_logo_size(mascot, <span class="va">:normal</span>), <span class="kw">do</span>: <span class="st">"</span><span class="ot">#{</span>mascot<span class="ot">}</span><span class="st">_normal.png"</span></span>
+<span id="cb51-26"><a href="functions-and-modules.html#cb51-26" aria-hidden="true" tabindex="-1"></a>  <span class="kw">defp</span> do_logo_size(mascot, <span class="va">:large</span>), <span class="kw">do</span>: <span class="st">"</span><span class="ot">#{</span>mascot<span class="ot">}</span><span class="st">_large.png"</span></span>
+<span id="cb51-27"><a href="functions-and-modules.html#cb51-27" aria-hidden="true" tabindex="-1"></a>  <span class="kw">defp</span> do_logo_size(mascot, unknown), <span class="kw">do</span>: {<span class="va">:error</span>, <span class="va">:unknown_size</span>}</span>
+<span id="cb51-28"><a href="functions-and-modules.html#cb51-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-29"><a href="functions-and-modules.html#cb51-29" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div>
 </div>
 <div id="protocols" class="section level2" number="4.5">
 <h2>
@@ -152,23 +152,23 @@
 <span class="header-section-number">4.6.1</span> Import<a class="anchor" aria-label="anchor" href="#import"><i class="fas fa-link"></i></a>
 </h3>
 <p>If we want to import functions rather than aliasing the module we can use <code>import</code>:</p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb48-1"><a href="functions-and-modules.html#cb48-1" aria-hidden="true" tabindex="-1"></a>iex<span class="op">&gt;</span> <span class="im">import</span> <span class="cn">List</span></span>
-<span id="cb48-2"><a href="functions-and-modules.html#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; nil</span></span>
-<span id="cb48-3"><a href="functions-and-modules.html#cb48-3" aria-hidden="true" tabindex="-1"></a>iex<span class="op">&gt;</span> last([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>])</span>
-<span id="cb48-4"><a href="functions-and-modules.html#cb48-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3</span></span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb52-1"><a href="functions-and-modules.html#cb52-1" aria-hidden="true" tabindex="-1"></a>iex<span class="op">&gt;</span> <span class="im">import</span> <span class="cn">List</span></span>
+<span id="cb52-2"><a href="functions-and-modules.html#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; nil</span></span>
+<span id="cb52-3"><a href="functions-and-modules.html#cb52-3" aria-hidden="true" tabindex="-1"></a>iex<span class="op">&gt;</span> last([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>])</span>
+<span id="cb52-4"><a href="functions-and-modules.html#cb52-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3</span></span></code></pre></div>
 <p>By default all functions and macros are imported but we can filter them using the <code>:only</code> and <code>:except</code> options.</p>
 <p>To import specific functions and macros, we must provide the name/arity pairs to <code>:only</code> and <code>:except</code>. Let’s start by importing only the <code>last/1</code> function:</p>
-<div class="sourceCode" id="cb49"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb49-1"><a href="functions-and-modules.html#cb49-1" aria-hidden="true" tabindex="-1"></a>iex<span class="op">&gt;</span> <span class="im">import</span> <span class="cn">List</span>, <span class="va">only:</span> [<span class="va">last:</span> <span class="dv">1</span>]</span>
-<span id="cb49-2"><a href="functions-and-modules.html#cb49-2" aria-hidden="true" tabindex="-1"></a>iex<span class="op">&gt;</span> first([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>])</span>
-<span id="cb49-3"><a href="functions-and-modules.html#cb49-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ** (CompileError) iex:13: undefined function first/1</span></span>
-<span id="cb49-4"><a href="functions-and-modules.html#cb49-4" aria-hidden="true" tabindex="-1"></a>iex<span class="op">&gt;</span> last([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>])</span>
-<span id="cb49-5"><a href="functions-and-modules.html#cb49-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3</span></span></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb53-1"><a href="functions-and-modules.html#cb53-1" aria-hidden="true" tabindex="-1"></a>iex<span class="op">&gt;</span> <span class="im">import</span> <span class="cn">List</span>, <span class="va">only:</span> [<span class="va">last:</span> <span class="dv">1</span>]</span>
+<span id="cb53-2"><a href="functions-and-modules.html#cb53-2" aria-hidden="true" tabindex="-1"></a>iex<span class="op">&gt;</span> first([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>])</span>
+<span id="cb53-3"><a href="functions-and-modules.html#cb53-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ** (CompileError) iex:13: undefined function first/1</span></span>
+<span id="cb53-4"><a href="functions-and-modules.html#cb53-4" aria-hidden="true" tabindex="-1"></a>iex<span class="op">&gt;</span> last([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>])</span>
+<span id="cb53-5"><a href="functions-and-modules.html#cb53-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3</span></span></code></pre></div>
 <p>If we import everything except <code>last/1</code> and try the same functions as before:</p>
-<div class="sourceCode" id="cb50"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb50-1"><a href="functions-and-modules.html#cb50-1" aria-hidden="true" tabindex="-1"></a>iex<span class="op">&gt;</span> <span class="im">import</span> <span class="cn">List</span>, <span class="va">except:</span> [<span class="va">last:</span> <span class="dv">1</span>]</span>
-<span id="cb50-2"><a href="functions-and-modules.html#cb50-2" aria-hidden="true" tabindex="-1"></a>iex<span class="op">&gt;</span> first([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>])</span>
-<span id="cb50-3"><a href="functions-and-modules.html#cb50-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1</span></span>
-<span id="cb50-4"><a href="functions-and-modules.html#cb50-4" aria-hidden="true" tabindex="-1"></a>iex<span class="op">&gt;</span> last([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>])</span>
-<span id="cb50-5"><a href="functions-and-modules.html#cb50-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ** (CompileError) iex:3: undefined function last/1</span></span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb54-1"><a href="functions-and-modules.html#cb54-1" aria-hidden="true" tabindex="-1"></a>iex<span class="op">&gt;</span> <span class="im">import</span> <span class="cn">List</span>, <span class="va">except:</span> [<span class="va">last:</span> <span class="dv">1</span>]</span>
+<span id="cb54-2"><a href="functions-and-modules.html#cb54-2" aria-hidden="true" tabindex="-1"></a>iex<span class="op">&gt;</span> first([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>])</span>
+<span id="cb54-3"><a href="functions-and-modules.html#cb54-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1</span></span>
+<span id="cb54-4"><a href="functions-and-modules.html#cb54-4" aria-hidden="true" tabindex="-1"></a>iex<span class="op">&gt;</span> last([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>])</span>
+<span id="cb54-5"><a href="functions-and-modules.html#cb54-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ** (CompileError) iex:3: undefined function last/1</span></span></code></pre></div>
 <p>In addition to the name/arity pairs there are two special atoms, :functions and :macros, which import only functions and macros respectively:</p>
 <p>import List, only: :functions
 import List, only: :macros</p>
@@ -178,29 +178,29 @@ import List, only: :macros</p>
 <span class="header-section-number">4.6.2</span> Alias<a class="anchor" aria-label="anchor" href="#alias"><i class="fas fa-link"></i></a>
 </h3>
 <p>Allows us to alias module names; used quite frequently in Elixir code:</p>
-<div class="sourceCode" id="cb51"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb51-1"><a href="functions-and-modules.html#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="kw">defmodule</span> <span class="cn">Sayings</span><span class="op">.</span><span class="cn">Greetings</span> <span class="kw">do</span></span>
-<span id="cb51-2"><a href="functions-and-modules.html#cb51-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> basic(name), <span class="kw">do</span>: <span class="st">"Hi, </span><span class="ot">#{</span>name<span class="ot">}</span><span class="st">"</span></span>
-<span id="cb51-3"><a href="functions-and-modules.html#cb51-3" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
-<span id="cb51-4"><a href="functions-and-modules.html#cb51-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb51-5"><a href="functions-and-modules.html#cb51-5" aria-hidden="true" tabindex="-1"></a><span class="kw">defmodule</span> <span class="cn">Example</span> <span class="kw">do</span></span>
-<span id="cb51-6"><a href="functions-and-modules.html#cb51-6" aria-hidden="true" tabindex="-1"></a>  <span class="im">alias</span> <span class="cn">Sayings</span><span class="op">.</span><span class="cn">Greetings</span></span>
-<span id="cb51-7"><a href="functions-and-modules.html#cb51-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb51-8"><a href="functions-and-modules.html#cb51-8" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> greeting(name), <span class="kw">do</span>: <span class="cn">Greetings</span><span class="op">.</span>basic(name)</span>
-<span id="cb51-9"><a href="functions-and-modules.html#cb51-9" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb55-1"><a href="functions-and-modules.html#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="kw">defmodule</span> <span class="cn">Sayings</span><span class="op">.</span><span class="cn">Greetings</span> <span class="kw">do</span></span>
+<span id="cb55-2"><a href="functions-and-modules.html#cb55-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> basic(name), <span class="kw">do</span>: <span class="st">"Hi, </span><span class="ot">#{</span>name<span class="ot">}</span><span class="st">"</span></span>
+<span id="cb55-3"><a href="functions-and-modules.html#cb55-3" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb55-4"><a href="functions-and-modules.html#cb55-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-5"><a href="functions-and-modules.html#cb55-5" aria-hidden="true" tabindex="-1"></a><span class="kw">defmodule</span> <span class="cn">Example</span> <span class="kw">do</span></span>
+<span id="cb55-6"><a href="functions-and-modules.html#cb55-6" aria-hidden="true" tabindex="-1"></a>  <span class="im">alias</span> <span class="cn">Sayings</span><span class="op">.</span><span class="cn">Greetings</span></span>
+<span id="cb55-7"><a href="functions-and-modules.html#cb55-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-8"><a href="functions-and-modules.html#cb55-8" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> greeting(name), <span class="kw">do</span>: <span class="cn">Greetings</span><span class="op">.</span>basic(name)</span>
+<span id="cb55-9"><a href="functions-and-modules.html#cb55-9" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div>
 <p>Without alias</p>
-<div class="sourceCode" id="cb52"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb52-1"><a href="functions-and-modules.html#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="kw">defmodule</span> <span class="cn">Example</span> <span class="kw">do</span></span>
-<span id="cb52-2"><a href="functions-and-modules.html#cb52-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> greeting(name), <span class="kw">do</span>: <span class="cn">Sayings</span><span class="op">.</span><span class="cn">Greetings</span><span class="op">.</span>basic(name)</span>
-<span id="cb52-3"><a href="functions-and-modules.html#cb52-3" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb56-1"><a href="functions-and-modules.html#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="kw">defmodule</span> <span class="cn">Example</span> <span class="kw">do</span></span>
+<span id="cb56-2"><a href="functions-and-modules.html#cb56-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> greeting(name), <span class="kw">do</span>: <span class="cn">Sayings</span><span class="op">.</span><span class="cn">Greetings</span><span class="op">.</span>basic(name)</span>
+<span id="cb56-3"><a href="functions-and-modules.html#cb56-3" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div>
 <p>If there’s a conflict between two aliases or we just wish to alias to a different name entirely, we can use the <code>:as</code> option:</p>
-<div class="sourceCode" id="cb53"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb53-1"><a href="functions-and-modules.html#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="kw">defmodule</span> <span class="cn">Example</span> <span class="kw">do</span></span>
-<span id="cb53-2"><a href="functions-and-modules.html#cb53-2" aria-hidden="true" tabindex="-1"></a>  <span class="im">alias</span> <span class="cn">Sayings</span><span class="op">.</span><span class="cn">Greetings</span>, <span class="va">as:</span> <span class="cn">Hi</span></span>
-<span id="cb53-3"><a href="functions-and-modules.html#cb53-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-4"><a href="functions-and-modules.html#cb53-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> print_message(name), <span class="kw">do</span>: <span class="cn">Hi</span><span class="op">.</span>basic(name)</span>
-<span id="cb53-5"><a href="functions-and-modules.html#cb53-5" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb57-1"><a href="functions-and-modules.html#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="kw">defmodule</span> <span class="cn">Example</span> <span class="kw">do</span></span>
+<span id="cb57-2"><a href="functions-and-modules.html#cb57-2" aria-hidden="true" tabindex="-1"></a>  <span class="im">alias</span> <span class="cn">Sayings</span><span class="op">.</span><span class="cn">Greetings</span>, <span class="va">as:</span> <span class="cn">Hi</span></span>
+<span id="cb57-3"><a href="functions-and-modules.html#cb57-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-4"><a href="functions-and-modules.html#cb57-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> print_message(name), <span class="kw">do</span>: <span class="cn">Hi</span><span class="op">.</span>basic(name)</span>
+<span id="cb57-5"><a href="functions-and-modules.html#cb57-5" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div>
 <p>It’s even possible to alias multiple modules at once:</p>
-<div class="sourceCode" id="cb54"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb54-1"><a href="functions-and-modules.html#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="kw">defmodule</span> <span class="cn">Example</span> <span class="kw">do</span></span>
-<span id="cb54-2"><a href="functions-and-modules.html#cb54-2" aria-hidden="true" tabindex="-1"></a>  <span class="im">alias</span> <span class="cn">Sayings</span><span class="op">.</span>{<span class="cn">Greetings</span>, <span class="cn">Farewells</span>}</span>
-<span id="cb54-3"><a href="functions-and-modules.html#cb54-3" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb58-1"><a href="functions-and-modules.html#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="kw">defmodule</span> <span class="cn">Example</span> <span class="kw">do</span></span>
+<span id="cb58-2"><a href="functions-and-modules.html#cb58-2" aria-hidden="true" tabindex="-1"></a>  <span class="im">alias</span> <span class="cn">Sayings</span><span class="op">.</span>{<span class="cn">Greetings</span>, <span class="cn">Farewells</span>}</span>
+<span id="cb58-3"><a href="functions-and-modules.html#cb58-3" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div>
 
 </div>
 </div>
