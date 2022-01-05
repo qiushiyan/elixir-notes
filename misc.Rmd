@@ -1,0 +1,100 @@
+# Miscellaneous Features
+
+## Sigils
+
+### ~r: regular expressions
+
+
+```elixir
+iex > regex <- ~ r/foo|bar/
+iex > "foo" <- ~regex
+#> true
+iex > "bat" <- ~regex
+#> false
+```
+
+### Strings, char lists and word list sigils
+
+#### Strings
+
+The `~s` sigil is used to generate strings, like double quotes are. The ~s sigil is useful when a string contains double quotes:
+
+```elixir
+iex> ~s(this is a string with "double" quotes, not 'single' ones)
+#> "this is a string with \"double\" quotes, not 'single' ones"
+```
+
+#### Char lists
+
+The `~c` sigil is useful for generating char lists that contain single quotes:
+
+```elixir
+iex> ~c(this is a char list containing 'single quotes')
+#> 'this is a char list containing \'single quotes\''
+```
+
+#### Word lists
+
+The `~w` sigil is used to generate lists of words (words are just regular strings). Inside the `~w` sigil, words are separated by whitespace.
+
+```elixir
+iex> ~w(foo bar bat)
+#> ["foo", "bar", "bat"]
+```
+
+The `~w` sigil also accepts the c, s and a modifiers (for char lists, strings, and atoms, respectively), which specify the data type of the elements of the resulting list:
+
+```elixir
+iex> ~w(foo bar bat)a
+#> [:foo, :bar, :bat]
+```
+
+### Calendar Sigils
+
+#### Date
+
+A `%Date{}` struct contains the fields year, month, day, and calendar. You can create one using the `~D` sigil:
+
+```elixir
+iex> d = ~D[2019-10-31]
+#> ~D[2019-10-31]
+iex> d.day
+#> 31
+```
+
+#### Time
+
+The `%Time{}` struct contains the fields hour, minute, second, microsecond, and calendar. You can create one using the `~T` sigil:
+
+
+```elixir
+iex> t = ~T[23:00:07.0]
+#> ~T[23:00:07.0]
+iex> t.second
+#> 7
+```
+
+### Custom Sigiils
+
+As hinted at the beginning of this chapter, sigils in Elixir are extensible. In fact, using the sigil `~r/foo/i` is equivalent to calling `sigil_r` with a binary and a char list as the argument:
+
+```elixir
+iex> sigil_r(<<"foo">>, 'i')
+#> ~r"foo"i
+```
+We can also provide our own sigils by implementing functions that follow the `sigil_{character}` pattern. For example, let’s implement the `~i` sigil that returns an integer (with the optional `n` modifier to make it negative):
+
+```elixir
+iex> defmodule MySigils do
+...>   def sigil_i(string, []), do: String.to_integer(string)
+...>   def sigil_i(string, [?n]), do: -String.to_integer(string)
+...> end
+
+iex> import MySigils
+iex> ~i(13)
+#> 13
+iex> ~i(42)n
+#> -42
+```
+
+Sigils can also be used to do compile-time work with the help of macros. For example, regular expressions in Elixir are compiled into an efficient representation during compilation of the source code, therefore skipping this step at runtime. If you’re interested in the subject, we recommend you learn more about macros and check out how sigils are implemented in the Kernel module (where the sigil_* functions are defined).

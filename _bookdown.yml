@@ -19,5 +19,9 @@ rmd_files: [
 
   "control-flow.Rmd",
 
+  "misc.Rmd",
+
   "mix.Rmd",
+
+  "phoenix-basics.Rmd"
 ]
