@@ -23,5 +23,7 @@ rmd_files: [
 
   "mix.Rmd",
 
+  "concurrency-basics.Rmd",
+
   "phoenix-basics.Rmd"
 ]

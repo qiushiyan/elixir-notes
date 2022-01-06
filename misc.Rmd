@@ -1,11 +1,78 @@
 # Miscellaneous Features
 
-## Sigils
+## Error Handling
 
-### ~r: regular expressions
+Before we can handle errors we need to create them and the simplest way to do so is with **`raise/1`**:
+
+```elixir
+iex> raise "Oh no!"
+#> ** (RuntimeError) Oh no!
+```
+
+If we want to specify the type and message, we need to use **`raise/2`**:
+
+```elixir
+iex> raise ArgumentError, message: "the argument value is invalid"
+#> ** (ArgumentError) the argument value is invalid
+```
+
+When we know an error may occur, we can handle it using `try/rescue` and pattern matching:
+
+```elixir
+try do
+  raise "Oh no!"
+rescue
+  e in RuntimeError -> IO.puts("An error occurred: " <> e.message)
+end
+#> An error occurred: Oh no!
+#> :ok
+```
+
+It’s possible to match multiple errors in a single rescue:
+
+```elixir
+try do
+  opts
+  |> Keyword.fetch!(:source_file)
+  |> File.read!()
+rescue
+  e in KeyError -> IO.puts("missing :source_file option")
+  e in File.Error -> IO.puts("unable to read source file")
+end
+```
+
+At times it may be necessary to perform some action after our `try/rescue` regardless of error. For this we have `try/after`.
+
+```elixir
+try do
+  raise "Oh no!"
+rescue
+  e in RuntimeError -> IO.puts("An error occurred: " <> e.message)
+after
+  IO.puts "The end!"
+end
+# An error occurred: Oh no!
+# The end!
+# :ok
+```
+
+This is most commonly used with files or connections that should be closed:
 
 
 ```elixir
+{:ok, file} = File.open("example.json")
+try do
+  # Do hazardous work
+after
+  File.close(file)
+end
+```
+
+## Sigils
+
+### \~r: regular expressions
+
+``` elixir
 iex > regex <- ~ r/foo|bar/
 iex > "foo" <- ~regex
 #> true
@@ -17,9 +84,9 @@ iex > "bat" <- ~regex
 
 #### Strings
 
-The `~s` sigil is used to generate strings, like double quotes are. The ~s sigil is useful when a string contains double quotes:
+The `~s` sigil is used to generate strings, like double quotes are. The \~s sigil is useful when a string contains double quotes:
 
-```elixir
+``` elixir
 iex> ~s(this is a string with "double" quotes, not 'single' ones)
 #> "this is a string with \"double\" quotes, not 'single' ones"
 ```
@@ -28,7 +95,7 @@ iex> ~s(this is a string with "double" quotes, not 'single' ones)
 
 The `~c` sigil is useful for generating char lists that contain single quotes:
 
-```elixir
+``` elixir
 iex> ~c(this is a char list containing 'single quotes')
 #> 'this is a char list containing \'single quotes\''
 ```
@@ -37,14 +104,14 @@ iex> ~c(this is a char list containing 'single quotes')
 
 The `~w` sigil is used to generate lists of words (words are just regular strings). Inside the `~w` sigil, words are separated by whitespace.
 
-```elixir
+``` elixir
 iex> ~w(foo bar bat)
 #> ["foo", "bar", "bat"]
 ```
 
 The `~w` sigil also accepts the c, s and a modifiers (for char lists, strings, and atoms, respectively), which specify the data type of the elements of the resulting list:
 
-```elixir
+``` elixir
 iex> ~w(foo bar bat)a
 #> [:foo, :bar, :bat]
 ```
@@ -55,7 +122,7 @@ iex> ~w(foo bar bat)a
 
 A `%Date{}` struct contains the fields year, month, day, and calendar. You can create one using the `~D` sigil:
 
-```elixir
+``` elixir
 iex> d = ~D[2019-10-31]
 #> ~D[2019-10-31]
 iex> d.day
@@ -66,8 +133,7 @@ iex> d.day
 
 The `%Time{}` struct contains the fields hour, minute, second, microsecond, and calendar. You can create one using the `~T` sigil:
 
-
-```elixir
+``` elixir
 iex> t = ~T[23:00:07.0]
 #> ~T[23:00:07.0]
 iex> t.second
@@ -78,13 +144,14 @@ iex> t.second
 
 As hinted at the beginning of this chapter, sigils in Elixir are extensible. In fact, using the sigil `~r/foo/i` is equivalent to calling `sigil_r` with a binary and a char list as the argument:
 
-```elixir
+``` elixir
 iex> sigil_r(<<"foo">>, 'i')
 #> ~r"foo"i
 ```
-We can also provide our own sigils by implementing functions that follow the `sigil_{character}` pattern. For example, let’s implement the `~i` sigil that returns an integer (with the optional `n` modifier to make it negative):
 
-```elixir
+We can also provide our own sigils by implementing functions that follow the `sigil_{character}` pattern. For example, let's implement the `~i` sigil that returns an integer (with the optional `n` modifier to make it negative):
+
+``` elixir
 iex> defmodule MySigils do
 ...>   def sigil_i(string, []), do: String.to_integer(string)
 ...>   def sigil_i(string, [?n]), do: -String.to_integer(string)
@@ -97,4 +164,4 @@ iex> ~i(42)n
 #> -42
 ```
 
-Sigils can also be used to do compile-time work with the help of macros. For example, regular expressions in Elixir are compiled into an efficient representation during compilation of the source code, therefore skipping this step at runtime. If you’re interested in the subject, we recommend you learn more about macros and check out how sigils are implemented in the Kernel module (where the sigil_* functions are defined).
+Sigils can also be used to do compile-time work with the help of macros. For example, regular expressions in Elixir are compiled into an efficient representation during compilation of the source code, therefore skipping this step at runtime. If you're interested in the subject, we recommend you learn more about macros and check out how sigils are implemented in the Kernel module (where the sigil\_\* functions are defined).
