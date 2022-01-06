@@ -4,13 +4,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>8 Project Management with Mix | elixir-notes</title>
+<title>9 Concurrency Basics | elixir-notes</title>
 <meta name="author" content="Qiushi">
 <meta name="generator" content="bookdown 0.24 with bs4_book()">
-<meta property="og:title" content="8 Project Management with Mix | elixir-notes">
+<meta property="og:title" content="9 Concurrency Basics | elixir-notes">
 <meta property="og:type" content="book">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="8 Project Management with Mix | elixir-notes">
+<meta name="twitter:title" content="9 Concurrency Basics | elixir-notes">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -46,9 +46,9 @@
 <li><a class="" href="enum-module.html"><span class="header-section-number">5</span> Enum Module</a></li>
 <li><a class="" href="control-flow.html"><span class="header-section-number">6</span> Control Flow</a></li>
 <li><a class="" href="miscellaneous-features.html"><span class="header-section-number">7</span> Miscellaneous Features</a></li>
-<li><a class="active" href="project-management-with-mix.html"><span class="header-section-number">8</span> Project Management with Mix</a></li>
+<li><a class="" href="project-management-with-mix.html"><span class="header-section-number">8</span> Project Management with Mix</a></li>
 <li class="book-part">Concurrency in Elixir</li>
-<li><a class="" href="concurrency-basics.html"><span class="header-section-number">9</span> Concurrency Basics</a></li>
+<li><a class="active" href="concurrency-basics.html"><span class="header-section-number">9</span> Concurrency Basics</a></li>
 <li class="book-part">Phoenix</li>
 <li><a class="" href="phoenix-basics.html"><span class="header-section-number">10</span> Phoenix Basics</a></li>
 </ul>
@@ -58,9 +58,9 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="project-management-with-mix" class="section level1" number="8">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="concurrency-basics" class="section level1" number="9">
 <h1>
-<span class="header-section-number">8</span> Project Management with Mix<a class="anchor" aria-label="anchor" href="#project-management-with-mix"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9</span> Concurrency Basics<a class="anchor" aria-label="anchor" href="#concurrency-basics"><i class="fas fa-link"></i></a>
 </h1>
 
 </div>
@@ -68,16 +68,16 @@
 
 
   <div class="chapter-nav">
-<div class="prev"><a href="miscellaneous-features.html"><span class="header-section-number">7</span> Miscellaneous Features</a></div>
-<div class="next"><a href="concurrency-basics.html"><span class="header-section-number">9</span> Concurrency Basics</a></div>
+<div class="prev"><a href="project-management-with-mix.html"><span class="header-section-number">8</span> Project Management with Mix</a></div>
+<div class="next"><a href="phoenix-basics.html"><span class="header-section-number">10</span> Phoenix Basics</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav"><li><a class="nav-link" href="#project-management-with-mix"><span class="header-section-number">8</span> Project Management with Mix</a></li></ul>
+      <ul class="nav navbar-nav"><li><a class="nav-link" href="#concurrency-basics"><span class="header-section-number">9</span> Concurrency Basics</a></li></ul>
 
       <div class="book-extra">
         <ul class="list-unstyled">
-<li><a id="book-source" href="https://github.com/qiushiyan/elixir-notes/blob/master/mix.Rmd">View source <i class="fab fa-github"></i></a></li>
-          <li><a id="book-edit" href="https://github.com/qiushiyan/elixir-notes/edit/master/mix.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+<li><a id="book-source" href="https://github.com/qiushiyan/elixir-notes/blob/master/concurrency-basics.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/qiushiyan/elixir-notes/edit/master/concurrency-basics.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
         </ul>
 </div>
     </nav>

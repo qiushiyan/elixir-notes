@@ -1,6 +1,6 @@
 preface
+elixir-and-erlang
 the-beam-virtual-machine
-concurrency-in-elixir
 data-types
 strings
 tuples
@@ -22,9 +22,13 @@ anoynmous-functions-with-pattern-matching
 module-attributes
 protocols
 use-import-and-alias
+use
 import
 alias
 enum-module
+looping
+counting
+using-stream
 control-flow
 if-else-block
 cond-multiple-if-else-blocks
@@ -32,6 +36,7 @@ case-case-when-with-pattern-matching
 with-combine-multiple-clauses
 comprehensions
 miscellaneous-features
+error-handling
 sigils
 r-regular-expressions
 strings-char-lists-and-word-list-sigils
@@ -43,4 +48,5 @@ date
 time
 custom-sigiils
 project-management-with-mix
+concurrency-basics
 phoenix-basics

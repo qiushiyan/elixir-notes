@@ -15,9 +15,9 @@
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="style.css">
-<meta name="description" content="Enum.each(   [1, 2, 3],   fn (x) -&gt; IO.puts(x) end ) #&gt; 1 #&gt; 2 #&gt; 3 #&gt; :ok Use the capture operator &amp; as a shortcut, it takes the full function qualifier — a module name, a function name, and an...">
-<meta property="og:description" content="Enum.each(   [1, 2, 3],   fn (x) -&gt; IO.puts(x) end ) #&gt; 1 #&gt; 2 #&gt; 3 #&gt; :ok Use the capture operator &amp; as a shortcut, it takes the full function qualifier — a module name, a function name, and an...">
-<meta name="twitter:description" content="Enum.each(   [1, 2, 3],   fn (x) -&gt; IO.puts(x) end ) #&gt; 1 #&gt; 2 #&gt; 3 #&gt; :ok Use the capture operator &amp; as a shortcut, it takes the full function qualifier — a module name, a function name, and an...">
+<meta name="description" content="5.1 Looping Enum.each(   [1, 2, 3],   fn (x) -&gt; IO.puts(x) end ) #&gt; 1 #&gt; 2 #&gt; 3 #&gt; :ok Use the capture operator &amp; as a shortcut, it takes the full function qualifier — a module name, a function...">
+<meta property="og:description" content="5.1 Looping Enum.each(   [1, 2, 3],   fn (x) -&gt; IO.puts(x) end ) #&gt; 1 #&gt; 2 #&gt; 3 #&gt; :ok Use the capture operator &amp; as a shortcut, it takes the full function qualifier — a module name, a function...">
+<meta name="twitter:description" content="5.1 Looping Enum.each(   [1, 2, 3],   fn (x) -&gt; IO.puts(x) end ) #&gt; 1 #&gt; 2 #&gt; 3 #&gt; :ok Use the capture operator &amp; as a shortcut, it takes the full function qualifier — a module name, a function...">
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -47,8 +47,10 @@
 <li><a class="" href="control-flow.html"><span class="header-section-number">6</span> Control Flow</a></li>
 <li><a class="" href="miscellaneous-features.html"><span class="header-section-number">7</span> Miscellaneous Features</a></li>
 <li><a class="" href="project-management-with-mix.html"><span class="header-section-number">8</span> Project Management with Mix</a></li>
+<li class="book-part">Concurrency in Elixir</li>
+<li><a class="" href="concurrency-basics.html"><span class="header-section-number">9</span> Concurrency Basics</a></li>
 <li class="book-part">Phoenix</li>
-<li><a class="" href="phoenix-basics.html"><span class="header-section-number">9</span> Phoenix Basics</a></li>
+<li><a class="" href="phoenix-basics.html"><span class="header-section-number">10</span> Phoenix Basics</a></li>
 </ul>
 
         <div class="book-extra">
@@ -60,27 +62,52 @@
 <h1>
 <span class="header-section-number">5</span> <code>Enum</code> Module<a class="anchor" aria-label="anchor" href="#enum-module"><i class="fas fa-link"></i></a>
 </h1>
-<div class="sourceCode" id="cb59"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb59-1"><a href="enum-module.html#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="cn">Enum</span><span class="op">.</span>each(</span>
-<span id="cb59-2"><a href="enum-module.html#cb59-2" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>],</span>
-<span id="cb59-3"><a href="enum-module.html#cb59-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">fn</span> (x) <span class="op">-&gt;</span> <span class="cn">IO</span><span class="op">.</span>puts(x) <span class="kw">end</span></span>
-<span id="cb59-4"><a href="enum-module.html#cb59-4" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb59-5"><a href="enum-module.html#cb59-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1</span></span>
-<span id="cb59-6"><a href="enum-module.html#cb59-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2</span></span>
-<span id="cb59-7"><a href="enum-module.html#cb59-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3</span></span>
-<span id="cb59-8"><a href="enum-module.html#cb59-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; :ok</span></span></code></pre></div>
+<div id="looping" class="section level2" number="5.1">
+<h2>
+<span class="header-section-number">5.1</span> Looping<a class="anchor" aria-label="anchor" href="#looping"><i class="fas fa-link"></i></a>
+</h2>
+<div class="sourceCode" id="cb62"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb62-1"><a href="enum-module.html#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="cn">Enum</span><span class="op">.</span>each(</span>
+<span id="cb62-2"><a href="enum-module.html#cb62-2" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>],</span>
+<span id="cb62-3"><a href="enum-module.html#cb62-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">fn</span> (x) <span class="op">-&gt;</span> <span class="cn">IO</span><span class="op">.</span>puts(x) <span class="kw">end</span></span>
+<span id="cb62-4"><a href="enum-module.html#cb62-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb62-5"><a href="enum-module.html#cb62-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1</span></span>
+<span id="cb62-6"><a href="enum-module.html#cb62-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2</span></span>
+<span id="cb62-7"><a href="enum-module.html#cb62-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3</span></span>
+<span id="cb62-8"><a href="enum-module.html#cb62-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; :ok</span></span></code></pre></div>
 <p>Use the <strong>capture operator</strong> <code>&amp;</code> as a shortcut, it takes the full function qualifier — a module name, a function name, and an arity — and turns that function into a lambda that can be assigned to a variable. You can use the capture operator to simplify the call to Enum.each:</p>
-<div class="sourceCode" id="cb60"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb60-1"><a href="enum-module.html#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="cn">Enum</span><span class="op">.</span>each(</span>
-<span id="cb60-2"><a href="enum-module.html#cb60-2" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>],</span>
-<span id="cb60-3"><a href="enum-module.html#cb60-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">&amp;</span><span class="cn">IO</span><span class="op">.</span>puts<span class="op">/</span><span class="dv">1</span></span>
-<span id="cb60-4"><a href="enum-module.html#cb60-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb63-1"><a href="enum-module.html#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="cn">Enum</span><span class="op">.</span>each(</span>
+<span id="cb63-2"><a href="enum-module.html#cb63-2" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>],</span>
+<span id="cb63-3"><a href="enum-module.html#cb63-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">&amp;</span><span class="cn">IO</span><span class="op">.</span>puts<span class="op">/</span><span class="dv">1</span></span>
+<span id="cb63-4"><a href="enum-module.html#cb63-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+</div>
+<div id="counting" class="section level2" number="5.2">
+<h2>
+<span class="header-section-number">5.2</span> Counting<a class="anchor" aria-label="anchor" href="#counting"><i class="fas fa-link"></i></a>
+</h2>
+<p><code>Enum.count</code></p>
+<div class="sourceCode" id="cb64"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb64-1"><a href="enum-module.html#cb64-1" aria-hidden="true" tabindex="-1"></a>iex(<span class="dv">6</span>)<span class="op">&gt;</span> <span class="cn">Enum</span><span class="op">.</span>count([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>])</span>
+<span id="cb64-2"><a href="enum-module.html#cb64-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3</span></span>
+<span id="cb64-3"><a href="enum-module.html#cb64-3" aria-hidden="true" tabindex="-1"></a>iex(<span class="dv">7</span>)<span class="op">&gt;</span> <span class="cn">Enum</span><span class="op">.</span>count({<span class="va">a:</span> <span class="dv">1</span>, <span class="va">b:</span> <span class="dv">2</span>})</span>
+<span id="cb64-4"><a href="enum-module.html#cb64-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2</span></span></code></pre></div>
+</div>
+<div id="using-stream" class="section level2" number="5.3">
+<h2>
+<span class="header-section-number">5.3</span> Using <code>Stream</code><a class="anchor" aria-label="anchor" href="#using-stream"><i class="fas fa-link"></i></a>
+</h2>
 
+</div>
 </div>
   <div class="chapter-nav">
 <div class="prev"><a href="functions-and-modules.html"><span class="header-section-number">4</span> Functions and Modules</a></div>
 <div class="next"><a href="control-flow.html"><span class="header-section-number">6</span> Control Flow</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav"><li><a class="nav-link" href="#enum-module"><span class="header-section-number">5</span> Enum Module</a></li></ul>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#enum-module"><span class="header-section-number">5</span> Enum Module</a></li>
+<li><a class="nav-link" href="#looping"><span class="header-section-number">5.1</span> Looping</a></li>
+<li><a class="nav-link" href="#counting"><span class="header-section-number">5.2</span> Counting</a></li>
+<li><a class="nav-link" href="#using-stream"><span class="header-section-number">5.3</span> Using Stream</a></li>
+</ul>
 
       <div class="book-extra">
         <ul class="list-unstyled">
@@ -97,7 +124,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>elixir-notes</strong>" was written by Qiushi. It was last built on 2022-01-05.</p>
+    <p>"<strong>elixir-notes</strong>" was written by Qiushi. It was last built on 2022-01-06.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
