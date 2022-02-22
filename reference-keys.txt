@@ -49,4 +49,13 @@ time
 custom-sigiils
 project-management-with-mix
 concurrency-basics
+processes
+managing-state-with-long-lived-processes
+supervisor
+basic-http-server
 phoenix-basics
+routes-plugs-controllers
+views
+manage-databases-with-ecto
+ecto-orm
+relationships

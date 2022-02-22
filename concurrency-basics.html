@@ -15,9 +15,9 @@
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="style.css">
-<meta name="description" content="A book created with bookdown.">
-<meta property="og:description" content="A book created with bookdown.">
-<meta name="twitter:description" content="A book created with bookdown.">
+<meta name="description" content="9.1 Processes How can processes communicate with each other to share data? We can use send to send data to a specific process, and receive to retrieve data from a a specific process.  9.2 Managing...">
+<meta property="og:description" content="9.1 Processes How can processes communicate with each other to share data? We can use send to send data to a specific process, and receive to retrieve data from a a specific process.  9.2 Managing...">
+<meta name="twitter:description" content="9.1 Processes How can processes communicate with each other to share data? We can use send to send data to a specific process, and receive to retrieve data from a a specific process.  9.2 Managing...">
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -51,6 +51,7 @@
 <li><a class="active" href="concurrency-basics.html"><span class="header-section-number">9</span> Concurrency Basics</a></li>
 <li class="book-part">Phoenix</li>
 <li><a class="" href="phoenix-basics.html"><span class="header-section-number">10</span> Phoenix Basics</a></li>
+<li><a class="" href="ecto-orm.html"><span class="header-section-number">11</span> Ecto ORM</a></li>
 </ul>
 
         <div class="book-extra">
@@ -62,7 +63,77 @@
 <h1>
 <span class="header-section-number">9</span> Concurrency Basics<a class="anchor" aria-label="anchor" href="#concurrency-basics"><i class="fas fa-link"></i></a>
 </h1>
+<div id="processes" class="section level2" number="9.1">
+<h2>
+<span class="header-section-number">9.1</span> Processes<a class="anchor" aria-label="anchor" href="#processes"><i class="fas fa-link"></i></a>
+</h2>
+<p>How can processes communicate with each other to share data? We can use <code>send</code> to send data to a specific process, and <code>receive</code> to retrieve data from a a specific process.</p>
+</div>
+<div id="managing-state-with-long-lived-processes" class="section level2" number="9.2">
+<h2>
+<span class="header-section-number">9.2</span> Managing State with Long-lived Processes<a class="anchor" aria-label="anchor" href="#managing-state-with-long-lived-processes"><i class="fas fa-link"></i></a>
+</h2>
+<div class="sourceCode" id="cb95"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb95-1"><a href="concurrency-basics.html#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="kw">defmodule</span> <span class="cn">Counter</span> <span class="kw">do</span></span>
+<span id="cb95-2"><a href="concurrency-basics.html#cb95-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># public API</span></span>
+<span id="cb95-3"><a href="concurrency-basics.html#cb95-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> start_link(initial_count \\ <span class="dv">0</span>) <span class="kw">do</span></span>
+<span id="cb95-4"><a href="concurrency-basics.html#cb95-4" aria-hidden="true" tabindex="-1"></a>    spawn_link(<span class="cn">Counter</span>, <span class="va">:run</span>, [initial_count])</span>
+<span id="cb95-5"><a href="concurrency-basics.html#cb95-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">end</span></span>
+<span id="cb95-6"><a href="concurrency-basics.html#cb95-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-7"><a href="concurrency-basics.html#cb95-7" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> increment(pid) <span class="kw">when</span> is_pid(pid) <span class="kw">do</span></span>
+<span id="cb95-8"><a href="concurrency-basics.html#cb95-8" aria-hidden="true" tabindex="-1"></a>    send(pid, <span class="va">:increment</span>)</span>
+<span id="cb95-9"><a href="concurrency-basics.html#cb95-9" aria-hidden="true" tabindex="-1"></a>  <span class="kw">end</span></span>
+<span id="cb95-10"><a href="concurrency-basics.html#cb95-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-11"><a href="concurrency-basics.html#cb95-11" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> decrement(pid) <span class="kw">when</span> is_pid(pid) <span class="kw">do</span></span>
+<span id="cb95-12"><a href="concurrency-basics.html#cb95-12" aria-hidden="true" tabindex="-1"></a>    send(pid, <span class="va">:decrement</span>)</span>
+<span id="cb95-13"><a href="concurrency-basics.html#cb95-13" aria-hidden="true" tabindex="-1"></a>  <span class="kw">end</span></span>
+<span id="cb95-14"><a href="concurrency-basics.html#cb95-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-15"><a href="concurrency-basics.html#cb95-15" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> count(pid) <span class="kw">when</span> is_pid(pid) <span class="kw">do</span></span>
+<span id="cb95-16"><a href="concurrency-basics.html#cb95-16" aria-hidden="true" tabindex="-1"></a>    send(pid, {<span class="va">:count</span>, self()})</span>
+<span id="cb95-17"><a href="concurrency-basics.html#cb95-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-18"><a href="concurrency-basics.html#cb95-18" aria-hidden="true" tabindex="-1"></a>    <span class="kw">receive</span> <span class="kw">do</span></span>
+<span id="cb95-19"><a href="concurrency-basics.html#cb95-19" aria-hidden="true" tabindex="-1"></a>      {<span class="op">^</span>pid, count} <span class="op">-&gt;</span> count</span>
+<span id="cb95-20"><a href="concurrency-basics.html#cb95-20" aria-hidden="true" tabindex="-1"></a>    <span class="kw">end</span></span>
+<span id="cb95-21"><a href="concurrency-basics.html#cb95-21" aria-hidden="true" tabindex="-1"></a>  <span class="kw">end</span></span>
+<span id="cb95-22"><a href="concurrency-basics.html#cb95-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-23"><a href="concurrency-basics.html#cb95-23" aria-hidden="true" tabindex="-1"></a>  <span class="co"># implementation</span></span>
+<span id="cb95-24"><a href="concurrency-basics.html#cb95-24" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> run(count) <span class="kw">do</span></span>
+<span id="cb95-25"><a href="concurrency-basics.html#cb95-25" aria-hidden="true" tabindex="-1"></a>    <span class="kw">receive</span> <span class="kw">do</span></span>
+<span id="cb95-26"><a href="concurrency-basics.html#cb95-26" aria-hidden="true" tabindex="-1"></a>      msg <span class="op">-&gt;</span> handler(msg, count)</span>
+<span id="cb95-27"><a href="concurrency-basics.html#cb95-27" aria-hidden="true" tabindex="-1"></a>    <span class="kw">end</span></span>
+<span id="cb95-28"><a href="concurrency-basics.html#cb95-28" aria-hidden="true" tabindex="-1"></a>    <span class="op">|&gt;</span> run()</span>
+<span id="cb95-29"><a href="concurrency-basics.html#cb95-29" aria-hidden="true" tabindex="-1"></a>  <span class="kw">end</span></span>
+<span id="cb95-30"><a href="concurrency-basics.html#cb95-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-31"><a href="concurrency-basics.html#cb95-31" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> handler(<span class="va">:increment</span>, count), <span class="kw">do</span>: count <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb95-32"><a href="concurrency-basics.html#cb95-32" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> handler(<span class="va">:decrement</span>, count), <span class="kw">do</span>: count <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb95-33"><a href="concurrency-basics.html#cb95-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-34"><a href="concurrency-basics.html#cb95-34" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> handler({<span class="va">:count</span>, pid}, count) <span class="kw">do</span></span>
+<span id="cb95-35"><a href="concurrency-basics.html#cb95-35" aria-hidden="true" tabindex="-1"></a>    send(pid, {self(), count})</span>
+<span id="cb95-36"><a href="concurrency-basics.html#cb95-36" aria-hidden="true" tabindex="-1"></a>    count</span>
+<span id="cb95-37"><a href="concurrency-basics.html#cb95-37" aria-hidden="true" tabindex="-1"></a>  <span class="kw">end</span></span>
+<span id="cb95-38"><a href="concurrency-basics.html#cb95-38" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div>
+<div class="sourceCode" id="cb96"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb96-1"><a href="concurrency-basics.html#cb96-1" aria-hidden="true" tabindex="-1"></a>iex(<span class="dv">1</span>)<span class="op">&gt;</span> <span class="im">import</span> <span class="cn">Counter</span></span>
+<span id="cb96-2"><a href="concurrency-basics.html#cb96-2" aria-hidden="true" tabindex="-1"></a>iex(<span class="dv">2</span>)<span class="op">&gt;</span> p <span class="op">=</span> start_link()</span>
+<span id="cb96-3"><a href="concurrency-basics.html#cb96-3" aria-hidden="true" tabindex="-1"></a><span class="co">#PID&lt;0.112.0&gt;</span></span>
+<span id="cb96-4"><a href="concurrency-basics.html#cb96-4" aria-hidden="true" tabindex="-1"></a>iex(<span class="dv">3</span>)<span class="op">&gt;</span> increment(p)</span>
+<span id="cb96-5"><a href="concurrency-basics.html#cb96-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; :increment</span></span>
+<span id="cb96-6"><a href="concurrency-basics.html#cb96-6" aria-hidden="true" tabindex="-1"></a>iex(<span class="dv">4</span>)<span class="op">&gt;</span> increment(p)</span>
+<span id="cb96-7"><a href="concurrency-basics.html#cb96-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; :increment</span></span>
+<span id="cb96-8"><a href="concurrency-basics.html#cb96-8" aria-hidden="true" tabindex="-1"></a>iex(<span class="dv">5</span>)<span class="op">&gt;</span> increment(p)</span>
+<span id="cb96-9"><a href="concurrency-basics.html#cb96-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; :increment</span></span>
+<span id="cb96-10"><a href="concurrency-basics.html#cb96-10" aria-hidden="true" tabindex="-1"></a>iex(<span class="dv">6</span>)<span class="op">&gt;</span> count(p)</span>
+<span id="cb96-11"><a href="concurrency-basics.html#cb96-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3</span></span></code></pre></div>
+</div>
+<div id="supervisor" class="section level2" number="9.3">
+<h2>
+<span class="header-section-number">9.3</span> Supervisor<a class="anchor" aria-label="anchor" href="#supervisor"><i class="fas fa-link"></i></a>
+</h2>
+</div>
+<div id="basic-http-server" class="section level2" number="9.4">
+<h2>
+<span class="header-section-number">9.4</span> Basic HTTP Server<a class="anchor" aria-label="anchor" href="#basic-http-server"><i class="fas fa-link"></i></a>
+</h2>
 
+</div>
 </div>
 
 
@@ -72,7 +143,13 @@
 <div class="next"><a href="phoenix-basics.html"><span class="header-section-number">10</span> Phoenix Basics</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav"><li><a class="nav-link" href="#concurrency-basics"><span class="header-section-number">9</span> Concurrency Basics</a></li></ul>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#concurrency-basics"><span class="header-section-number">9</span> Concurrency Basics</a></li>
+<li><a class="nav-link" href="#processes"><span class="header-section-number">9.1</span> Processes</a></li>
+<li><a class="nav-link" href="#managing-state-with-long-lived-processes"><span class="header-section-number">9.2</span> Managing State with Long-lived Processes</a></li>
+<li><a class="nav-link" href="#supervisor"><span class="header-section-number">9.3</span> Supervisor</a></li>
+<li><a class="nav-link" href="#basic-http-server"><span class="header-section-number">9.4</span> Basic HTTP Server</a></li>
+</ul>
 
       <div class="book-extra">
         <ul class="list-unstyled">
@@ -89,7 +166,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>elixir-notes</strong>" was written by Qiushi. It was last built on 2022-01-06.</p>
+    <p>"<strong>elixir-notes</strong>" was written by Qiushi. It was last built on 2022-02-22.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
