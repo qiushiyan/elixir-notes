@@ -25,5 +25,7 @@ rmd_files: [
 
   "concurrency-basics.Rmd",
 
-  "phoenix-basics.Rmd"
+  "phoenix-basics.Rmd",
+
+  "ecto.Rmd",
 ]

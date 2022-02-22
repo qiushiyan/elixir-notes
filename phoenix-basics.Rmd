@@ -1,3 +1,9 @@
 # (PART) Phoenix {-}
 
 # Phoenix Basics
+
+## Routes, Plugs, Controllers
+
+## Views
+
+## Manage Databases with Ecto

@@ -1,21 +1,7 @@
-# (PART) Concurrency in Elixir {-}
-
-# Concurrency Basics
-
-## Processes
-
-
-How can processes communicate with each other to share data? We can use `send` to send data to a specific process, and `receive` to retrieve data from a a specific process.
-
-
-## Managing State with Long-lived Processes
-
-
-```elixir
 defmodule Counter do
   # public API
   def start_link(initial_count \\ 0) do
-    spawn_link(Counter, :run, [initial_count])
+    spawn_link(__MODULE__, :run, [initial_count])
   end
 
   def increment(pid) when is_pid(pid) do
@@ -50,23 +36,3 @@ defmodule Counter do
     count
   end
 end
-```
-
-```elixir
-iex(1)> import Counter
-iex(2)> p = start_link()
-#PID<0.112.0>
-iex(3)> increment(p)
-#> :increment
-iex(4)> increment(p)
-#> :increment
-iex(5)> increment(p)
-#> :increment
-iex(6)> count(p)
-#> 3
-```
-
-
-## Supervisor
-
-## Basic HTTP Server
